@@ -1,0 +1,177 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+
+const NAV_LINKS = [
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Our Standards", href: "#our-standards" },
+  { label: "Reviews", href: "#reviews" },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  return (
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "border-b border-border bg-cream/80 backdrop-blur-lg"
+            : "bg-transparent"
+        }`}
+      >
+        <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
+          {/* ── Logo ── */}
+          <Link href="/" className="relative z-10">
+            <span className="font-heading text-xl font-bold uppercase tracking-[0.15em] text-primary">
+              ButcherBox
+            </span>
+          </Link>
+
+          {/* ── Desktop center links ── */}
+          <ul className="hidden items-center gap-10 md:flex">
+            {NAV_LINKS.map(({ label, href }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="group relative py-1 text-sm font-medium text-text-dark transition-colors hover:text-primary"
+                >
+                  {label}
+                  <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 rounded-full bg-accent transition-transform duration-300 group-hover:scale-x-100" />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* ── Desktop right actions ── */}
+          <div className="hidden items-center gap-6 md:flex">
+            <a
+              href="#"
+              className="text-sm font-medium text-text-dark transition-colors hover:text-primary"
+            >
+              Sign In
+            </a>
+            <a
+              href="#get-started"
+              className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-secondary"
+            >
+              Get Started
+            </a>
+          </div>
+
+          {/* ── Mobile hamburger ── */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="relative z-10 flex h-10 w-10 items-center justify-center md:hidden"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={24} className="text-primary" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={24} className="text-primary" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </nav>
+      </header>
+
+      {/* ── Mobile drawer ── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 z-40 bg-black/40 md:hidden"
+            />
+
+            {/* Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed right-0 top-0 z-40 flex h-full w-[280px] flex-col bg-cream shadow-2xl md:hidden"
+            >
+              {/* Spacer for header height */}
+              <div className="h-[72px] shrink-0" />
+
+              <div className="flex flex-1 flex-col gap-2 px-6 py-4">
+                {NAV_LINKS.map(({ label, href }, i) => (
+                  <motion.a
+                    key={href}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + i * 0.05 }}
+                    className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary"
+                  >
+                    {label}
+                  </motion.a>
+                ))}
+
+                <hr className="my-3 border-border" />
+
+                <a
+                  href="#"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary"
+                >
+                  Sign In
+                </a>
+
+                <a
+                  href="#get-started"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 block rounded-full bg-primary py-3 text-center text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-secondary"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
