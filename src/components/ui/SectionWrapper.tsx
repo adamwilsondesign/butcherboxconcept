@@ -20,7 +20,7 @@ export default function SectionWrapper({
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       className={`mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-12 ${className}`}
     >
       {children}
