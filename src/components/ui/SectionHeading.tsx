@@ -16,7 +16,7 @@ export default function SectionHeading({
       <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
         {eyebrow}
       </p>
-      <h2 className="font-heading text-4xl font-bold leading-tight text-text-dark sm:text-5xl">
+      <h2 className="font-serif text-4xl font-bold leading-tight text-text-dark sm:text-5xl">
         {heading}
       </h2>
       {subtitle && (

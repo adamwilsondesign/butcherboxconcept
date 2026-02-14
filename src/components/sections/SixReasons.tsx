@@ -58,7 +58,7 @@ const cardReveal = {
 
 export default function SixReasons() {
   return (
-    <section className="bg-warm-white">
+    <section className="bg-surface">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -86,7 +86,6 @@ export default function SixReasons() {
               variants={cardReveal}
               className="group relative overflow-hidden rounded-2xl"
             >
-              {/* Image placeholder */}
               <div
                 className="relative aspect-[4/3] w-full overflow-hidden"
                 style={{ backgroundColor: reason.color }}
@@ -97,7 +96,6 @@ export default function SixReasons() {
                   </p>
                 </div>
 
-                {/* Hover zoom on the image area */}
                 <motion.div
                   className="absolute inset-0"
                   style={{ backgroundColor: reason.color }}
@@ -118,7 +116,7 @@ export default function SixReasons() {
 
                 {/* Bottom gradient + title */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent px-5 pb-5 pt-12">
-                  <h3 className="font-heading text-xl font-bold leading-snug text-white sm:text-2xl">
+                  <h3 className="font-serif text-xl font-bold leading-snug text-white sm:text-2xl">
                     {reason.title}
                   </h3>
                 </div>

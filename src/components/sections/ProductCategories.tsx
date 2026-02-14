@@ -69,7 +69,7 @@ export default function ProductCategories() {
         <motion.button
           variants={cardReveal}
           onClick={() => console.log("Navigate: Beef & Bison")}
-          className="group relative flex flex-col overflow-hidden rounded-3xl bg-warm-white text-left lg:col-span-7"
+          className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-7"
         >
           <CategoryCard category={CATEGORIES[0]} size="large" />
         </motion.button>
@@ -78,7 +78,7 @@ export default function ProductCategories() {
         <motion.button
           variants={cardReveal}
           onClick={() => console.log("Navigate: Chicken & Pork")}
-          className="group relative flex flex-col overflow-hidden rounded-3xl bg-warm-white text-left lg:col-span-5"
+          className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-5"
         >
           <CategoryCard category={CATEGORIES[1]} size="tall" />
         </motion.button>
@@ -87,7 +87,7 @@ export default function ProductCategories() {
         <motion.button
           variants={cardReveal}
           onClick={() => console.log("Navigate: Wild Seafood")}
-          className="group relative flex flex-col overflow-hidden rounded-3xl bg-warm-white text-left lg:col-span-5"
+          className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-5"
         >
           <CategoryCard category={CATEGORIES[2]} size="tall" />
         </motion.button>
@@ -96,7 +96,7 @@ export default function ProductCategories() {
         <motion.button
           variants={cardReveal}
           onClick={() => console.log("Navigate: Ready to Cook")}
-          className="group relative flex flex-col overflow-hidden rounded-3xl bg-warm-white text-left lg:col-span-7"
+          className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-7"
         >
           <CategoryCard category={CATEGORIES[3]} size="large" />
         </motion.button>
@@ -136,12 +136,12 @@ function CategoryCard({ category, size }: CategoryCardProps) {
       {/* Text content */}
       <div className="flex flex-1 items-center justify-between px-6 py-5 sm:px-8 sm:py-6">
         <div>
-          <h3 className="font-heading text-2xl font-bold text-text-dark sm:text-3xl">
+          <h3 className="font-serif text-2xl font-bold text-text-dark sm:text-3xl">
             {category.name}
           </h3>
           <p className="mt-1 text-sm text-text-muted">{category.description}</p>
         </div>
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/20 text-primary transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/20 text-primary transition-all duration-300 group-hover:border-primary-light group-hover:bg-primary-light group-hover:text-white">
           <ArrowRight size={18} />
         </span>
       </div>

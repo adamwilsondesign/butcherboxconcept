@@ -1,15 +1,18 @@
 export const colors = {
-  primary: "#1B3C34",
-  secondary: "#2D5E4A",
-  accent: "#C75B2C",
-  cream: "#FFF8F0",
-  warmWhite: "#FFFDFB",
-  textDark: "#1A1A1A",
+  primary: "#243B35",
+  primaryLight: "#3D7B5F",
+  primaryDark: "#1A2E29",
+  accent: "#C8512B",
+  background: "#FAF7F2",
+  surface: "#FFFFFF",
+  surfaceWarm: "#F5F0EB",
+  text: "#1A1A1A",
   textMuted: "#6B6B6B",
-  border: "#E8E0D8",
+  border: "#E5DDD4",
+  starGold: "#D4A84B",
 } as const;
 
 export const fonts = {
-  heading: "'Playfair Display', serif",
+  heading: "'Libre Baskerville', serif",
   body: "'Inter', sans-serif",
 } as const;

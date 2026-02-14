@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { useSignup } from "@/components/signup/SignupFlow";
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
@@ -12,6 +13,7 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
+  const { open } = useSignup();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -30,18 +32,24 @@ export default function Navbar() {
 
   return (
     <>
+      {/* ── Promo banner ── */}
+      <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-primary-dark text-center text-xs font-medium tracking-wide text-white sm:text-sm">
+        Free Steak or Salmon For A Year!&nbsp;&nbsp;·&nbsp;&nbsp;Free Shipping Always
+      </div>
+
+      {/* ── Main nav ── */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-9 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-border bg-cream/80 backdrop-blur-lg"
-            : "bg-transparent"
+            ? "border-b border-border bg-white/90 backdrop-blur-lg"
+            : "bg-white"
         }`}
       >
         <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
           {/* ── Logo ── */}
           <Link href="/" className="relative z-10">
-            <span className="font-heading text-xl font-bold uppercase tracking-[0.15em] text-primary">
-              ButcherBox
+            <span className="text-xl font-extrabold uppercase tracking-[0.18em] text-primary">
+              BUTCHERBOX
             </span>
           </Link>
 
@@ -51,10 +59,10 @@ export default function Navbar() {
               <li key={href}>
                 <a
                   href={href}
-                  className="group relative py-1 text-sm font-medium text-text-dark transition-colors hover:text-primary"
+                  className="group relative py-1 text-sm font-medium text-text-dark transition-colors hover:text-primary-light"
                 >
                   {label}
-                  <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 rounded-full bg-accent transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 rounded-full bg-primary-light transition-transform duration-300 group-hover:scale-x-100" />
                 </a>
               </li>
             ))}
@@ -64,16 +72,16 @@ export default function Navbar() {
           <div className="hidden items-center gap-6 md:flex">
             <a
               href="#"
-              className="text-sm font-medium text-text-dark transition-colors hover:text-primary"
+              className="text-sm font-medium text-text-dark transition-colors hover:text-primary-light"
             >
               Sign In
             </a>
-            <a
-              href="#get-started"
-              className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-secondary"
+            <button
+              onClick={() => open()}
+              className="rounded-md bg-primary-light px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary"
             >
-              Get Started
-            </a>
+              Choose Your Plan
+            </button>
           </div>
 
           {/* ── Mobile hamburger ── */}
@@ -130,10 +138,10 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 z-40 flex h-full w-[280px] flex-col bg-cream shadow-2xl md:hidden"
+              className="fixed right-0 top-0 z-40 flex h-full w-[280px] flex-col bg-white shadow-2xl md:hidden"
             >
-              {/* Spacer for header height */}
-              <div className="h-[72px] shrink-0" />
+              {/* Spacer for promo banner + header height */}
+              <div className="h-[108px] shrink-0" />
 
               <div className="flex flex-1 flex-col gap-2 px-6 py-4">
                 {NAV_LINKS.map(({ label, href }, i) => (
@@ -144,7 +152,7 @@ export default function Navbar() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 + i * 0.05 }}
-                    className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary"
+                    className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary-light"
                   >
                     {label}
                   </motion.a>
@@ -155,18 +163,17 @@ export default function Navbar() {
                 <a
                   href="#"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary"
+                  className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-primary/5 hover:text-primary-light"
                 >
                   Sign In
                 </a>
 
-                <a
-                  href="#get-started"
-                  onClick={() => setMobileOpen(false)}
-                  className="mt-2 block rounded-full bg-primary py-3 text-center text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-secondary"
+                <button
+                  onClick={() => { setMobileOpen(false); open(); }}
+                  className="mt-2 rounded-md bg-primary-light py-3 text-center text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary"
                 >
-                  Get Started
-                </a>
+                  Choose Your Plan
+                </button>
               </div>
             </motion.div>
           </>

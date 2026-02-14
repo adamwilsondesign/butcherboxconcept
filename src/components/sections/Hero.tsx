@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { useSignup } from "@/components/signup/SignupFlow";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,12 +15,12 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const { open } = useSignup();
   return (
-    <section className="relative min-h-[calc(100vh-72px)] overflow-hidden">
+    <section className="relative min-h-[calc(100vh-108px)] overflow-hidden">
       {/* ── Background image area (right / behind on mobile) ── */}
       <div className="absolute inset-0">
         <div className="h-full w-full bg-[#D6CEC5]">
-          {/* Placeholder for lifestyle photo */}
           <div className="flex h-full w-full items-center justify-center">
             <p className="text-sm font-medium tracking-wide text-text-muted/60">
               Family dinner lifestyle photo
@@ -28,14 +29,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Gradient overlay: cream fading to transparent ── */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/95 via-40% to-cream/20 lg:via-cream/90 lg:via-35% lg:to-transparent" />
+      {/* ── Gradient overlay ── */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-background/20 lg:via-background/90 lg:via-35% lg:to-transparent" />
 
       {/* Mobile extra overlay for readability */}
-      <div className="absolute inset-0 bg-cream/60 sm:bg-transparent" />
+      <div className="absolute inset-0 bg-background/60 sm:bg-transparent" />
 
       {/* ── Content ── */}
-      <div className="relative mx-auto flex h-full min-h-[calc(100vh-72px)] max-w-7xl items-center px-6 sm:px-8 lg:px-12">
+      <div className="relative mx-auto flex h-full min-h-[calc(100vh-108px)] max-w-7xl items-center px-6 sm:px-8 lg:px-12">
         <div className="w-full max-w-xl py-16 lg:py-24">
           {/* Trust badge */}
           <motion.div
@@ -44,13 +45,13 @@ export default function Hero() {
             animate="visible"
             custom={0}
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-warm-white/80 px-4 py-2 text-sm font-medium text-text-dark shadow-sm backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-text-dark shadow-sm backdrop-blur-sm">
               <span className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     size={14}
-                    className="fill-accent text-accent"
+                    className="fill-star-gold text-star-gold"
                   />
                 ))}
               </span>
@@ -64,11 +65,11 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="mt-8 font-heading text-5xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-6xl lg:text-7xl"
+            className="mt-8 font-serif text-5xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-6xl lg:text-7xl"
           >
             Better Meat,
             <br />
-            <span className="text-primary">Served Your Way</span>
+            <span className="text-primary-light">Served Your Way</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -92,10 +93,10 @@ export default function Hero() {
             custom={3}
             className="mt-10 flex flex-col gap-4 sm:flex-row"
           >
-            <Button variant="primary" className="px-10 py-4 text-base">
+            <Button variant="primary" className="px-10 py-4 text-base" onClick={() => open()}>
               Build Your Box
             </Button>
-            <Button variant="secondary" className="px-10 py-4 text-base">
+            <Button variant="secondary" className="px-10 py-4 text-base" onClick={() => open("onetime")}>
               Try a One-Time Box
             </Button>
           </motion.div>

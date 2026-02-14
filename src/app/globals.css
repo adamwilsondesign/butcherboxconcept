@@ -10,11 +10,11 @@
   }
 
   body {
-    @apply bg-cream text-text-dark;
+    @apply bg-background text-text-dark;
   }
 
   ::selection {
-    background-color: #C75B2C;
-    color: #FFFDFB;
+    background-color: #C8512B;
+    color: #FFFFFF;
   }
 }
