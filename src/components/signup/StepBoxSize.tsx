@@ -126,6 +126,7 @@ export default function StepBoxSize({ orderType, onSelect, onBack }: Props) {
       >
         <button
           onClick={onBack}
+          aria-label="Go back to path selection"
           className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
         >
           ← Back to path selection

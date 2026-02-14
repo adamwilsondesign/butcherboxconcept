@@ -33,8 +33,13 @@ export default function Navbar() {
   return (
     <>
       {/* ── Promo banner ── */}
-      <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-primary-dark text-center text-xs font-medium tracking-wide text-white sm:text-sm">
-        Free Steak or Salmon For A Year!&nbsp;&nbsp;·&nbsp;&nbsp;Free Shipping Always
+      <div
+        className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-primary-dark text-center text-[11px] font-medium tracking-wide text-white sm:text-sm"
+        role="banner"
+      >
+        <span className="truncate px-4">
+          Free Steak or Salmon For A Year!&nbsp;&nbsp;·&nbsp;&nbsp;Free Shipping Always
+        </span>
       </div>
 
       {/* ── Main nav ── */}
@@ -45,10 +50,13 @@ export default function Navbar() {
             : "bg-white"
         }`}
       >
-        <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
+        <nav
+          className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12"
+          aria-label="Main navigation"
+        >
           {/* ── Logo ── */}
-          <Link href="/" className="relative z-10">
-            <span className="text-xl font-extrabold uppercase tracking-[0.18em] text-primary">
+          <Link href="/" className="relative z-10" aria-label="ButcherBox home">
+            <span className="text-lg font-extrabold uppercase tracking-[0.18em] text-primary sm:text-xl">
               BUTCHERBOX
             </span>
           </Link>
@@ -78,7 +86,7 @@ export default function Navbar() {
             </a>
             <button
               onClick={() => open()}
-              className="rounded-md bg-primary-light px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary"
+              className="rounded-md bg-primary-light px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary"
             >
               Choose Your Plan
             </button>
@@ -88,8 +96,9 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-10 flex h-10 w-10 items-center justify-center md:hidden"
+            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-primary/5 md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen ? (
@@ -130,6 +139,7 @@ export default function Navbar() {
               transition={{ duration: 0.25 }}
               onClick={() => setMobileOpen(false)}
               className="fixed inset-0 z-40 bg-black/40 md:hidden"
+              aria-hidden="true"
             />
 
             {/* Panel */}
@@ -139,11 +149,14 @@ export default function Navbar() {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed right-0 top-0 z-40 flex h-full w-[280px] flex-col bg-white shadow-2xl md:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
             >
               {/* Spacer for promo banner + header height */}
               <div className="h-[108px] shrink-0" />
 
-              <div className="flex flex-1 flex-col gap-2 px-6 py-4">
+              <nav className="flex flex-1 flex-col gap-2 px-6 py-4" aria-label="Mobile navigation links">
                 {NAV_LINKS.map(({ label, href }, i) => (
                   <motion.a
                     key={href}
@@ -174,7 +187,7 @@ export default function Navbar() {
                 >
                   Choose Your Plan
                 </button>
-              </div>
+              </nav>
             </motion.div>
           </>
         )}

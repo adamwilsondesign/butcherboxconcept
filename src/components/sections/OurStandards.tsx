@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Recycle } from "lucide-react";
+import { IMAGES } from "@/lib/images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,16 +19,12 @@ const stagger = {
 
 const BADGES = [
   {
-    icon: Award,
     label: "B Corp Certified",
-    placeholder: "B Corp badge",
-    color: "#8EA88A",
+    image: IMAGES.chickensField,
   },
   {
-    icon: Recycle,
     label: "100% Recyclable Packaging",
-    placeholder: "Recyclable badge",
-    color: "#A8BEC0",
+    image: IMAGES.fishingBoat,
   },
 ] as const;
 
@@ -77,11 +73,13 @@ export default function OurStandards() {
               >
                 {BADGES.map((badge) => (
                   <div key={badge.label} className="flex items-center gap-3.5">
-                    <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full"
-                      style={{ backgroundColor: badge.color }}
-                    >
-                      <badge.icon size={22} className="text-white" />
+                    <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full">
+                      <img
+                        src={badge.image}
+                        alt={badge.label}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                     <span className="text-sm font-semibold leading-snug text-text-dark">
                       {badge.label}
@@ -91,7 +89,7 @@ export default function OurStandards() {
               </motion.div>
             </motion.div>
 
-            {/* ── Right: image placeholder ── */}
+            {/* ── Right: image ── */}
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -99,14 +97,12 @@ export default function OurStandards() {
               transition={{ duration: 0.7, ease: "easeOut" as const }}
               className="relative min-h-[320px] lg:min-h-0"
             >
-              <div className="absolute inset-0 bg-[#C4A882]">
-                <div className="flex h-full w-full items-center justify-center px-6">
-                  <p className="max-w-[260px] text-center text-sm font-medium tracking-wide text-white/50">
-                    Close-up of marbled grass-fed steak on wooden cutting board
-                    with herbs
-                  </p>
-                </div>
-              </div>
+              <img
+                src={IMAGES.steakRosemary}
+                alt="Close-up of marbled grass-fed steak with fresh herbs"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             </motion.div>
           </div>
         </div>

@@ -3,14 +3,14 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
 
 /* ── Types ── */
 
 interface Product {
   id: number;
   name: string;
-  placeholder: string;
-  color: string;
+  image: string;
   price: number;
   originalPrice: number;
 }
@@ -31,12 +31,12 @@ const FILTERS: FilterCategory[] = [
     description:
       "Our full selection of premium proteins — from everyday essentials to showstopper cuts.",
     products: [
-      { id: 1, name: "Grass-Fed NY Strip", placeholder: "NY strip steak seared", color: "#C4A282", price: 16, originalPrice: 20 },
-      { id: 2, name: "Free-Range Drumsticks", placeholder: "Crispy drumsticks", color: "#D4C4A8", price: 9, originalPrice: 12 },
-      { id: 3, name: "Wild Sockeye Salmon", placeholder: "Salmon with lemon", color: "#C2A8A0", price: 14, originalPrice: 17 },
-      { id: 4, name: "Heritage Pork Tenderloin", placeholder: "Sliced pork tenderloin", color: "#CAAE90", price: 13, originalPrice: 16 },
-      { id: 5, name: "Wagyu Burger Blend", placeholder: "Juicy burger patties", color: "#B8A090", price: 15, originalPrice: 18 },
-      { id: 6, name: "Organic Chicken Thighs", placeholder: "Herb chicken thighs", color: "#C9B8A8", price: 11, originalPrice: 14 },
+      { id: 1, name: "Grass-Fed NY Strip", image: IMAGES.nyStrip, price: 16, originalPrice: 20 },
+      { id: 2, name: "Free-Range Drumsticks", image: IMAGES.bonelessThighs, price: 9, originalPrice: 12 },
+      { id: 3, name: "Wild Sockeye Salmon", image: IMAGES.salmon, price: 14, originalPrice: 17 },
+      { id: 4, name: "Heritage Pork Tenderloin", image: IMAGES.porkTenderloin, price: 13, originalPrice: 16 },
+      { id: 5, name: "Wagyu Burger Blend", image: IMAGES.smashBurger, price: 15, originalPrice: 18 },
+      { id: 6, name: "Organic Chicken Thighs", image: IMAGES.chickenThighs, price: 11, originalPrice: 14 },
     ],
   },
   {
@@ -45,11 +45,11 @@ const FILTERS: FilterCategory[] = [
     description:
       "High-fat, zero-carb cuts perfect for ketogenic lifestyles. Rich marbling and healthy fats.",
     products: [
-      { id: 10, name: "Ribeye Steak", placeholder: "Thick-cut ribeye", color: "#C4A282", price: 18, originalPrice: 22 },
-      { id: 11, name: "Bacon-Wrapped Filet", placeholder: "Bacon-wrapped filet", color: "#CAAE90", price: 21, originalPrice: 26 },
-      { id: 12, name: "Salmon Belly Strips", placeholder: "Rich salmon belly", color: "#C2A8A0", price: 16, originalPrice: 19 },
-      { id: 13, name: "Pork Belly Slices", placeholder: "Crispy pork belly", color: "#B8A090", price: 14, originalPrice: 17 },
-      { id: 14, name: "Lamb Shoulder Chops", placeholder: "Lamb chops plated", color: "#D4C4A8", price: 17, originalPrice: 21 },
+      { id: 10, name: "Ribeye Steak", image: IMAGES.ribeye, price: 18, originalPrice: 22 },
+      { id: 11, name: "Bacon-Wrapped Filet", image: IMAGES.bacon, price: 21, originalPrice: 26 },
+      { id: 12, name: "Salmon Belly Strips", image: IMAGES.salmon, price: 16, originalPrice: 19 },
+      { id: 13, name: "Pork Belly Slices", image: IMAGES.porkRoast, price: 14, originalPrice: 17 },
+      { id: 14, name: "Lamb Shoulder Chops", image: IMAGES.sirloin, price: 17, originalPrice: 21 },
     ],
   },
   {
@@ -58,10 +58,10 @@ const FILTERS: FilterCategory[] = [
     description:
       "Clean proteins with no additives. Grass-fed, pasture-raised, and wild-caught — as nature intended.",
     products: [
-      { id: 20, name: "Grass-Fed Flank Steak", placeholder: "Sliced flank steak", color: "#C4A282", price: 14, originalPrice: 18 },
-      { id: 21, name: "Organic Whole Chicken", placeholder: "Roasted whole chicken", color: "#D4C4A8", price: 16, originalPrice: 20 },
-      { id: 22, name: "Wild Cod Fillets", placeholder: "Baked cod fillet", color: "#A8BEC0", price: 13, originalPrice: 16 },
-      { id: 23, name: "Bison Ground Blend", placeholder: "Ground bison patty", color: "#B8A090", price: 15, originalPrice: 18 },
+      { id: 20, name: "Grass-Fed Flank Steak", image: IMAGES.groundSirloin, price: 14, originalPrice: 18 },
+      { id: 21, name: "Organic Whole Chicken", image: IMAGES.wholeChicken, price: 16, originalPrice: 20 },
+      { id: 22, name: "Wild Cod Fillets", image: IMAGES.cod, price: 13, originalPrice: 16 },
+      { id: 23, name: "Bison Ground Blend", image: IMAGES.bison, price: 15, originalPrice: 18 },
     ],
   },
   {
@@ -70,11 +70,11 @@ const FILTERS: FilterCategory[] = [
     description:
       "Whole30-approved proteins with zero sugar, additives, or fillers. Clean eating made easy.",
     products: [
-      { id: 30, name: "Chicken Breast Tenders", placeholder: "Sliced chicken tenders", color: "#D4C4A8", price: 12, originalPrice: 15 },
-      { id: 31, name: "Ground Turkey", placeholder: "Seasoned ground turkey", color: "#C9B8A8", price: 10, originalPrice: 13 },
-      { id: 32, name: "Wild Shrimp", placeholder: "Grilled shrimp skewers", color: "#A8BEC0", price: 14, originalPrice: 17 },
-      { id: 33, name: "Sirloin Steak Tips", placeholder: "Seared steak tips", color: "#C4A282", price: 15, originalPrice: 19 },
-      { id: 34, name: "Pork Chops", placeholder: "Pan-seared pork chops", color: "#CAAE90", price: 13, originalPrice: 16 },
+      { id: 30, name: "Chicken Breast Tenders", image: IMAGES.chickenBreast, price: 12, originalPrice: 15 },
+      { id: 31, name: "Ground Turkey", image: IMAGES.groundTurkey, price: 10, originalPrice: 13 },
+      { id: 32, name: "Wild Shrimp", image: IMAGES.lobster, price: 14, originalPrice: 17 },
+      { id: 33, name: "Sirloin Steak Tips", image: IMAGES.sirloin, price: 15, originalPrice: 19 },
+      { id: 34, name: "Pork Chops", image: IMAGES.porkChops, price: 13, originalPrice: 16 },
     ],
   },
   {
@@ -83,10 +83,10 @@ const FILTERS: FilterCategory[] = [
     description:
       "Bigger portions, better value. Crowd-pleasing packs that make weeknight dinners effortless.",
     products: [
-      { id: 40, name: "Chicken Breast 4-Pack", placeholder: "Stacked chicken breasts", color: "#D4C4A8", price: 22, originalPrice: 28 },
-      { id: 41, name: "Burger Night Bundle", placeholder: "Burger patty stack", color: "#B8A090", price: 24, originalPrice: 30 },
-      { id: 42, name: "Taco Tuesday Pack", placeholder: "Taco meat platter", color: "#CAAE90", price: 19, originalPrice: 24 },
-      { id: 43, name: "Salmon Family Box", placeholder: "Salmon fillet tray", color: "#C2A8A0", price: 28, originalPrice: 34 },
+      { id: 40, name: "Chicken Breast 4-Pack", image: IMAGES.chickenBreast, price: 22, originalPrice: 28 },
+      { id: 41, name: "Burger Night Bundle", image: IMAGES.smashBurger, price: 24, originalPrice: 30 },
+      { id: 42, name: "Taco Tuesday Pack", image: IMAGES.barbacoa, price: 19, originalPrice: 24 },
+      { id: 43, name: "Salmon Family Box", image: IMAGES.salmon, price: 28, originalPrice: 34 },
     ],
   },
   {
@@ -95,12 +95,12 @@ const FILTERS: FilterCategory[] = [
     description:
       "Pre-marinated and ready in under 15 minutes. Perfect for busy weeknights.",
     products: [
-      { id: 50, name: "Teriyaki Chicken", placeholder: "Glazed teriyaki chicken", color: "#D4C4A8", price: 13, originalPrice: 16 },
-      { id: 51, name: "Herb-Crusted Salmon", placeholder: "Herb salmon on plate", color: "#C2A8A0", price: 15, originalPrice: 18 },
-      { id: 52, name: "Garlic Steak Strips", placeholder: "Garlic steak stir-fry", color: "#C4A282", price: 14, originalPrice: 17 },
-      { id: 53, name: "BBQ Pork Chops", placeholder: "Glazed BBQ pork chops", color: "#CAAE90", price: 13, originalPrice: 16 },
-      { id: 54, name: "Lemon Butter Shrimp", placeholder: "Shrimp in butter sauce", color: "#A8BEC0", price: 14, originalPrice: 17 },
-      { id: 55, name: "Italian Sausage Links", placeholder: "Grilled sausage links", color: "#B8A090", price: 11, originalPrice: 14 },
+      { id: 50, name: "Teriyaki Chicken", image: IMAGES.dicedChicken, price: 13, originalPrice: 16 },
+      { id: 51, name: "Herb-Crusted Salmon", image: IMAGES.salmon, price: 15, originalPrice: 18 },
+      { id: 52, name: "Garlic Steak Strips", image: IMAGES.barbacoa, price: 14, originalPrice: 17 },
+      { id: 53, name: "BBQ Pork Chops", image: IMAGES.porkChops, price: 13, originalPrice: 16 },
+      { id: 54, name: "Lemon Butter Shrimp", image: IMAGES.scallops, price: 14, originalPrice: 17 },
+      { id: 55, name: "Italian Sausage Links", image: IMAGES.bacon, price: 11, originalPrice: 14 },
     ],
   },
 ];
@@ -131,7 +131,7 @@ export default function ForEveryTable() {
   const active = FILTERS.find((f) => f.key === activeFilter) ?? FILTERS[0];
 
   return (
-    <section className="bg-background">
+    <section className="bg-background" id="products">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           variants={fadeUp}
@@ -227,15 +227,13 @@ export default function ForEveryTable() {
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       className="group cursor-pointer overflow-hidden rounded-2xl bg-surface shadow-sm"
                     >
-                      <div
-                        className="aspect-[4/3] w-full"
-                        style={{ backgroundColor: product.color }}
-                      >
-                        <div className="flex h-full w-full items-center justify-center px-3">
-                          <p className="text-center text-xs font-medium tracking-wide text-white/45">
-                            {product.placeholder}
-                          </p>
-                        </div>
+                      <div className="aspect-[4/3] w-full overflow-hidden">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
                       </div>
 
                       <div className="px-4 py-3.5 sm:px-5 sm:py-4">

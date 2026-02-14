@@ -37,7 +37,7 @@ const logoReveal = {
 
 export default function TrustBar() {
   return (
-    <section className="bg-surface">
+    <section className="bg-surface" id="press">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           variants={fadeUp}

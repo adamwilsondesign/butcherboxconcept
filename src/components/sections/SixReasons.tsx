@@ -2,43 +2,38 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
 
 const REASONS = [
   {
     number: 1,
     title: "Freezer to Table in 20 Minutes",
-    placeholder: "Seared steak on plate",
-    color: "#C4A882",
+    image: IMAGES.sirloin,
   },
   {
     number: 2,
     title: "400,000+ Happy Members",
-    placeholder: "Person unboxing ButcherBox",
-    color: "#B8A99A",
+    image: IMAGES.whatsInBox,
   },
   {
     number: 3,
     title: "100% Grass-Fed, No Exceptions",
-    placeholder: "Cattle on open pasture",
-    color: "#8EA88A",
+    image: IMAGES.chickensField,
   },
   {
     number: 4,
     title: "Free Shipping, Always",
-    placeholder: "ButcherBox on doorstep",
-    color: "#A8BEC0",
+    image: IMAGES.whatsInBox,
   },
   {
     number: 5,
     title: "Certified B Corporation",
-    placeholder: "B Corp badge / team photo",
-    color: "#C9B8A8",
+    image: IMAGES.fishingBoat,
   },
   {
     number: 6,
     title: "2M+ Meals Donated",
-    placeholder: "Community giving back",
-    color: "#D4B896",
+    image: IMAGES.steakRosemary,
   },
 ] as const;
 
@@ -58,7 +53,7 @@ const cardReveal = {
 
 export default function SixReasons() {
   return (
-    <section className="bg-surface">
+    <section className="bg-surface" id="why-butcherbox">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -88,26 +83,15 @@ export default function SixReasons() {
             >
               <div
                 className="relative aspect-[4/3] w-full overflow-hidden"
-                style={{ backgroundColor: reason.color }}
               >
-                <div className="flex h-full w-full items-center justify-center">
-                  <p className="text-sm font-medium tracking-wide text-white/50">
-                    {reason.placeholder}
-                  </p>
-                </div>
-
-                <motion.div
-                  className="absolute inset-0"
-                  style={{ backgroundColor: reason.color }}
+                <motion.img
+                  src={reason.image}
+                  alt={reason.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                >
-                  <div className="flex h-full w-full items-center justify-center">
-                    <p className="text-sm font-medium tracking-wide text-white/50">
-                      {reason.placeholder}
-                    </p>
-                  </div>
-                </motion.div>
+                />
 
                 {/* Number badge */}
                 <span className="absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-white shadow-md">

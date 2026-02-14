@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { useSignup } from "@/components/signup/SignupFlow";
+import { IMAGES } from "@/lib/images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -50,15 +51,21 @@ export default function FinalCTA() {
             transition={{ duration: 0.6, ease: "easeOut" as const }}
             className="hidden flex-col gap-4 lg:col-span-3 lg:flex"
           >
-            <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-2xl bg-[#C4A882]">
-              <p className="text-xs font-medium tracking-wide text-white/45">
-                Raw steaks on butcher paper
-              </p>
+            <div className="aspect-[3/4] overflow-hidden rounded-2xl">
+              <img
+                src={IMAGES.hero}
+                alt="Raw steaks on butcher paper"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-[#A8BEC0]">
-              <p className="text-xs font-medium tracking-wide text-white/45">
-                Salmon fillets close-up
-              </p>
+            <div className="aspect-square overflow-hidden rounded-2xl">
+              <img
+                src={IMAGES.whatsInBox}
+                alt="ButcherBox delivery contents"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
           </motion.div>
 
@@ -115,15 +122,21 @@ export default function FinalCTA() {
             transition={{ duration: 0.6, ease: "easeOut" as const }}
             className="hidden flex-col gap-4 lg:col-span-3 lg:flex"
           >
-            <div className="flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-[#D4B896]">
-              <p className="text-xs font-medium tracking-wide text-white/45">
-                Grilled chicken platter
-              </p>
+            <div className="aspect-square overflow-hidden rounded-2xl">
+              <img
+                src={IMAGES.chickenBreast}
+                alt="Organic chicken breast"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="flex aspect-[3/4] items-center justify-center overflow-hidden rounded-2xl bg-[#C9B8A8]">
-              <p className="text-xs font-medium tracking-wide text-white/45">
-                Family cooking together
-              </p>
+            <div className="aspect-[3/4] overflow-hidden rounded-2xl">
+              <img
+                src={IMAGES.porkChops}
+                alt="Heritage pork chops"
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
           </motion.div>
         </div>

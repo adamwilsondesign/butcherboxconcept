@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { useSignup } from "@/components/signup/SignupFlow";
+import { IMAGES } from "@/lib/images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -17,16 +18,15 @@ const fadeUp = {
 export default function Hero() {
   const { open } = useSignup();
   return (
-    <section className="relative min-h-[calc(100vh-108px)] overflow-hidden">
+    <section className="relative min-h-[calc(100vh-108px)] overflow-hidden" id="hero" aria-label="Hero">
       {/* ── Background image area (right / behind on mobile) ── */}
       <div className="absolute inset-0">
-        <div className="h-full w-full bg-[#D6CEC5]">
-          <div className="flex h-full w-full items-center justify-center">
-            <p className="text-sm font-medium tracking-wide text-text-muted/60">
-              Family dinner lifestyle photo
-            </p>
-          </div>
-        </div>
+        <img
+          src={IMAGES.hero}
+          alt="ButcherBox premium meat spread"
+          loading="eager"
+          className="h-full w-full object-cover"
+        />
       </div>
 
       {/* ── Gradient overlay ── */}
@@ -65,7 +65,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="mt-8 font-serif text-5xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-6xl lg:text-7xl"
+            className="mt-8 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-5xl md:text-6xl lg:text-7xl"
           >
             Better Meat,
             <br />

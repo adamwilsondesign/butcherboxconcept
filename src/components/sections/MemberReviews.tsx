@@ -4,13 +4,14 @@ import { useRef, useState } from "react";
 import { motion, useAnimationFrame } from "framer-motion";
 import { Star } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
 
 const REVIEWS = [
-  { id: 1, name: "Sarah M.", quote: "The ribeye alone is worth it. Restaurant quality, every single time.", placeholder: "Seared steak dinner photo", color: "#C4A882", rotate: -2 },
-  { id: 2, name: "Jason K.", quote: "My family looks forward to ButcherBox night. The salmon is unreal.", placeholder: "Salmon dinner with family", color: "#A8BEC0", rotate: 1.5 },
-  { id: 3, name: "Emily R.", quote: "I cancelled three other subscriptions. This is the only one I need.", placeholder: "Unboxing ButcherBox delivery", color: "#B8A99A", rotate: -1 },
-  { id: 4, name: "Marcus T.", quote: "Knowing exactly where my meat comes from gives me real peace of mind.", placeholder: "Grilled chicken plated", color: "#D4C4A8", rotate: 2 },
-  { id: 5, name: "Ana L.", quote: "Free shipping and no commitment? Honestly, there's no reason not to try.", placeholder: "Colorful meal prep spread", color: "#C9B8A8", rotate: -1.5 },
+  { id: 1, name: "Sarah M.", quote: "The ribeye alone is worth it. Restaurant quality, every single time.", image: IMAGES.ribeye, rotate: -2 },
+  { id: 2, name: "Jason K.", quote: "My family looks forward to ButcherBox night. The salmon is unreal.", image: IMAGES.salmon, rotate: 1.5 },
+  { id: 3, name: "Emily R.", quote: "I cancelled three other subscriptions. This is the only one I need.", image: IMAGES.scallops, rotate: -1 },
+  { id: 4, name: "Marcus T.", quote: "Knowing exactly where my meat comes from gives me real peace of mind.", image: IMAGES.lobster, rotate: 2 },
+  { id: 5, name: "Ana L.", quote: "Free shipping and no commitment? Honestly, there's no reason not to try.", image: IMAGES.sirloin, rotate: -1.5 },
 ] as const;
 
 const MARQUEE_ITEMS = [...REVIEWS, ...REVIEWS];
@@ -73,15 +74,13 @@ export default function MemberReviews() {
                 }}
               >
                 <div className="overflow-hidden rounded-2xl bg-surface shadow-md transition-shadow duration-300 hover:shadow-xl">
-                  <div
-                    className="relative aspect-square w-full"
-                    style={{ backgroundColor: review.color }}
-                  >
-                    <div className="flex h-full w-full items-center justify-center px-4">
-                      <p className="text-center text-xs font-medium tracking-wide text-white/45">
-                        {review.placeholder}
-                      </p>
-                    </div>
+                  <div className="relative aspect-square w-full overflow-hidden">
+                    <img
+                      src={review.image}
+                      alt={review.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-4 pb-4 pt-10">
                       <p className="text-sm font-medium leading-snug text-white/90">
                         &ldquo;{review.quote}&rdquo;

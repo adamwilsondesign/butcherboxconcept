@@ -27,6 +27,8 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="flex flex-col items-center justify-center px-4 py-20 text-center"
+        role="status"
+        aria-live="polite"
       >
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary-light/10">
           <Check size={40} className="text-primary-light" />
@@ -80,7 +82,7 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
             </div>
           )}
 
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-4 space-y-2" aria-label="Order items">
             {items.map((item) => (
               <li key={item.id} className="flex justify-between text-sm">
                 <span className="text-text-dark">{item.name} <span className="text-text-muted">×{item.qty}</span></span>
@@ -121,36 +123,68 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
           <form
             onSubmit={(e) => { e.preventDefault(); setPlaced(true); }}
             className="space-y-3"
+            aria-label="Checkout form"
           >
-            <input placeholder="Email address" type="email" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none transition-colors focus:border-primary-light" />
+            <label className="sr-only" htmlFor="checkout-email">Email address</label>
+            <input id="checkout-email" placeholder="Email address" type="email" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none transition-colors focus:border-primary-light" />
+
             <div className="grid grid-cols-2 gap-3">
-              <input placeholder="First name" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
-              <input placeholder="Last name" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
+              <div>
+                <label className="sr-only" htmlFor="checkout-fname">First name</label>
+                <input id="checkout-fname" placeholder="First name" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="checkout-lname">Last name</label>
+                <input id="checkout-lname" placeholder="Last name" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+              </div>
             </div>
-            <input placeholder="Street address" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
-            <div className="grid grid-cols-3 gap-3">
-              <input placeholder="City" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
-              <input placeholder="State" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
-              <input placeholder="ZIP" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
+
+            <label className="sr-only" htmlFor="checkout-address">Street address</label>
+            <input id="checkout-address" placeholder="Street address" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <div>
+                <label className="sr-only" htmlFor="checkout-city">City</label>
+                <input id="checkout-city" placeholder="City" className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light sm:px-4" />
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="checkout-state">State</label>
+                <input id="checkout-state" placeholder="State" className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light sm:px-4" />
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="checkout-zip">ZIP</label>
+                <input id="checkout-zip" placeholder="ZIP" className="w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light sm:px-4" />
+              </div>
             </div>
+
             <hr className="!my-4 border-border" />
-            <input placeholder="Card number" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
+
+            <label className="sr-only" htmlFor="checkout-card">Card number</label>
+            <input id="checkout-card" placeholder="Card number" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+
             <div className="grid grid-cols-2 gap-3">
-              <input placeholder="MM / YY" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
-              <input placeholder="CVC" className="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm outline-none focus:border-primary-light" />
+              <div>
+                <label className="sr-only" htmlFor="checkout-exp">Expiration</label>
+                <input id="checkout-exp" placeholder="MM / YY" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="checkout-cvc">CVC</label>
+                <input id="checkout-cvc" placeholder="CVC" className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-dark outline-none focus:border-primary-light" />
+              </div>
             </div>
 
             <div className="flex items-center justify-between gap-4 pt-3">
               <button
                 type="button"
                 onClick={onBack}
-                className="text-sm font-medium text-text-muted hover:text-text-dark"
+                className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
+                aria-label="Go back"
               >
                 ← Back
               </button>
               <button
                 type="submit"
-                className="rounded-md bg-primary-light px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary"
+                className="rounded-md bg-primary-light px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary sm:px-8"
               >
                 Place Order — ${total}
               </button>

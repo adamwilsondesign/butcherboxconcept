@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
 
 const STEPS = [
   {
@@ -83,7 +84,7 @@ export default function HowItWorks() {
   const stepsInView = useInView(stepsRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-surface-warm" id="how-it-works-steps">
+    <section className="bg-surface-warm" id="how-it-works">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           variants={fadeUp}
@@ -105,11 +106,12 @@ export default function HowItWorks() {
           transition={{ duration: 0.6, ease: "easeOut" as const, delay: 0.1 }}
           className="mt-14 overflow-hidden rounded-2xl"
         >
-          <div className="flex aspect-[21/9] w-full items-center justify-center bg-[#C9B8A8]">
-            <p className="text-sm font-medium tracking-wide text-white/50">
-              Spread of plated proteins on dinner table
-            </p>
-          </div>
+          <img
+            src={IMAGES.whatsInBox}
+            alt="What's in a ButcherBox"
+            loading="lazy"
+            className="aspect-[21/9] w-full object-cover"
+          />
         </motion.div>
 
         <motion.div

@@ -4,31 +4,28 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
 
 const CATEGORIES = [
   {
     name: "Beef & Bison",
     description: "100% grass-fed, grass-finished",
-    placeholder: "Grilled ribeye plated photo",
-    color: "#C4A882",
+    image: IMAGES.ribeye,
   },
   {
     name: "Chicken & Pork",
     description: "Heritage breed, free-range",
-    placeholder: "Roasted whole chicken photo",
-    color: "#D4B896",
+    image: IMAGES.chickenBreast,
   },
   {
     name: "Wild Seafood",
     description: "Sustainably caught, never farmed",
-    placeholder: "Wild salmon fillet photo",
-    color: "#A8BEC0",
+    image: IMAGES.salmon,
   },
   {
     name: "Ready to Cook",
     description: "Marinated, seasoned & ready",
-    placeholder: "Seasoned skewers photo",
-    color: "#C9B8A8",
+    image: IMAGES.barbacoa,
   },
 ] as const;
 
@@ -50,7 +47,7 @@ const cardReveal = {
 
 export default function ProductCategories() {
   return (
-    <SectionWrapper id="how-it-works">
+    <SectionWrapper id="categories">
       <SectionHeading
         eyebrow="What We Offer"
         heading="Premium Proteins, Your&nbsp;Way"
@@ -68,7 +65,7 @@ export default function ProductCategories() {
         {/* Card 1 — Beef & Bison: large, spans 7 cols */}
         <motion.button
           variants={cardReveal}
-          onClick={() => console.log("Navigate: Beef & Bison")}
+          aria-label={`Explore ${CATEGORIES[0].name}`}
           className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-7"
         >
           <CategoryCard category={CATEGORIES[0]} size="large" />
@@ -77,7 +74,7 @@ export default function ProductCategories() {
         {/* Card 2 — Chicken & Pork: tall, spans 5 cols */}
         <motion.button
           variants={cardReveal}
-          onClick={() => console.log("Navigate: Chicken & Pork")}
+          aria-label={`Explore ${CATEGORIES[1].name}`}
           className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-5"
         >
           <CategoryCard category={CATEGORIES[1]} size="tall" />
@@ -86,7 +83,7 @@ export default function ProductCategories() {
         {/* Card 3 — Wild Seafood: spans 5 cols */}
         <motion.button
           variants={cardReveal}
-          onClick={() => console.log("Navigate: Wild Seafood")}
+          aria-label={`Explore ${CATEGORIES[2].name}`}
           className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-5"
         >
           <CategoryCard category={CATEGORIES[2]} size="tall" />
@@ -95,7 +92,7 @@ export default function ProductCategories() {
         {/* Card 4 — Ready to Cook: wide, spans 7 cols */}
         <motion.button
           variants={cardReveal}
-          onClick={() => console.log("Navigate: Ready to Cook")}
+          aria-label={`Explore ${CATEGORIES[3].name}`}
           className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left lg:col-span-7"
         >
           <CategoryCard category={CATEGORIES[3]} size="large" />
@@ -117,19 +114,19 @@ function CategoryCard({ category, size }: CategoryCardProps) {
 
   return (
     <>
-      {/* Image placeholder */}
+      {/* Image */}
       <div className="relative w-full overflow-hidden">
         <motion.div
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           className={`${imageHeight} w-full`}
-          style={{ backgroundColor: category.color }}
         >
-          <div className="flex h-full w-full items-center justify-center">
-            <p className="text-sm font-medium tracking-wide text-white/50">
-              {category.placeholder}
-            </p>
-          </div>
+          <img
+            src={category.image}
+            alt={category.name}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
         </motion.div>
       </div>
 

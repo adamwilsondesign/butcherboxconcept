@@ -73,9 +73,11 @@ export default function StepPath({ onSelect }: Props) {
             </p>
             <div className="flex flex-wrap gap-2">
               {FREQS.map((f) => (
-                <span
+                <button
+                  type="button"
                   key={f}
                   onClick={(e) => { e.stopPropagation(); setFreq(f); }}
+                  aria-pressed={freq === f}
                   className={`cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
                     freq === f
                       ? "bg-primary text-white"
@@ -83,7 +85,7 @@ export default function StepPath({ onSelect }: Props) {
                   }`}
                 >
                   {f}
-                </span>
+                </button>
               ))}
             </div>
           </div>

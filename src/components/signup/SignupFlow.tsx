@@ -47,17 +47,31 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
     return () => { document.body.style.overflow = ""; };
   }, [show]);
 
-  const reset = () => {
+  // Close on Escape
+  useEffect(() => {
+    if (!show) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShow(false);
+        setStep(1);
+        setOrderType(null);
+        setBoxSize(null);
+        setBoxStyle("custom");
+        setItems([]);
+        setFrequency("Every 4 weeks");
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [show]);
+
+  const open = useCallback((preset?: "subscribe" | "onetime") => {
     setStep(1);
     setOrderType(null);
     setBoxSize(null);
     setBoxStyle("custom");
     setItems([]);
     setFrequency("Every 4 weeks");
-  };
-
-  const open = useCallback((preset?: "subscribe" | "onetime") => {
-    reset();
     if (preset === "onetime") {
       setOrderType("onetime");
       setStep(2);
@@ -67,7 +81,12 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
 
   const close = () => {
     setShow(false);
-    reset();
+    setStep(1);
+    setOrderType(null);
+    setBoxSize(null);
+    setBoxStyle("custom");
+    setItems([]);
+    setFrequency("Every 4 weeks");
   };
 
   return (
@@ -82,16 +101,19 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[100] flex flex-col bg-background"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Build your ButcherBox"
           >
             {/* ── Top bar ── */}
-            <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4 sm:px-8">
+            <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4 sm:h-16 sm:px-8">
               {/* Logo */}
-              <span className="text-lg font-extrabold uppercase tracking-[0.12em] text-primary">
+              <span className="text-base font-extrabold uppercase tracking-[0.12em] text-primary sm:text-lg">
                 BUTCHERBOX
               </span>
 
               {/* Progress */}
-              <div className="hidden items-center gap-1 sm:flex">
+              <div className="hidden items-center gap-1 sm:flex" aria-label="Progress">
                 {STEP_LABELS.map((label, i) => {
                   const n = i + 1;
                   const done = step > n;
@@ -110,6 +132,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                                 ? "bg-primary-light text-white"
                                 : "bg-border text-text-muted"
                           }`}
+                          aria-current={active ? "step" : undefined}
                         >
                           {done ? <Check size={12} /> : n}
                         </span>
@@ -134,15 +157,15 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
               {/* Close */}
               <button
                 onClick={close}
-                className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-primary/5"
-                aria-label="Close"
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-primary/5"
+                aria-label="Close signup"
               >
                 <X size={20} className="text-text-muted" />
               </button>
             </div>
 
             {/* ── Step content ── */}
-            <div className="flex-1 overflow-y-auto py-8 sm:py-12">
+            <div className="flex-1 overflow-y-auto py-6 sm:py-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={step}

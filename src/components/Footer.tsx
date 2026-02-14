@@ -39,12 +39,13 @@ export default function Footer() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log("Subscribe:", email);
                 setEmail("");
               }}
               className="mt-5 flex"
             >
+              <label className="sr-only" htmlFor="footer-email">Email address</label>
               <input
+                id="footer-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

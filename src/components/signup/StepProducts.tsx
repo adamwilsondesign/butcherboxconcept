@@ -91,15 +91,13 @@ export default function StepProducts({ items, onUpdate, onContinue, onBack }: Pr
                 }`}
               >
                 {/* Image */}
-                <div
-                  className="aspect-[4/3] w-full"
-                  style={{ backgroundColor: p.color }}
-                >
-                  <div className="flex h-full w-full items-center justify-center px-2">
-                    <span className="text-center text-[10px] font-medium text-white/40">
-                      {p.placeholder}
-                    </span>
-                  </div>
+                <div className="aspect-[4/3] w-full overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
 
                 <div className="px-3 py-3">
@@ -115,15 +113,17 @@ export default function StepProducts({ items, onUpdate, onContinue, onBack }: Pr
                     <button
                       onClick={() => setQty(p.id, qty - 1)}
                       disabled={qty === 0}
+                      aria-label={`Remove one ${p.name}`}
                       className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted transition-colors hover:bg-primary/10 disabled:opacity-30"
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="w-5 text-center text-sm font-bold text-text-dark">
+                    <span className="w-5 text-center text-sm font-bold text-text-dark" aria-label={`${qty} in cart`}>
                       {qty}
                     </span>
                     <button
                       onClick={() => setQty(p.id, qty + 1)}
+                      aria-label={`Add one ${p.name}`}
                       className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-light text-white transition-colors hover:bg-primary"
                     >
                       <Plus size={14} />
@@ -145,19 +145,23 @@ export default function StepProducts({ items, onUpdate, onContinue, onBack }: Pr
       >
         <button
           onClick={onBack}
-          className="text-sm font-medium text-text-muted hover:text-text-dark"
+          aria-label="Go back"
+          className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
         >
           ← Back
         </button>
 
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-text-muted">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <span className="hidden text-sm text-text-muted sm:inline">
             {totalItems} items · {totalLbs.toFixed(1)} lbs · <span className="font-bold text-primary">${totalPrice}</span>
+          </span>
+          <span className="text-xs text-text-muted sm:hidden">
+            {totalItems} items · <span className="font-bold text-primary">${totalPrice}</span>
           </span>
           <button
             onClick={onContinue}
             disabled={totalItems === 0}
-            className="rounded-md bg-primary-light px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary disabled:opacity-40"
+            className="rounded-md bg-primary-light px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary disabled:opacity-40 sm:px-6"
           >
             Continue
           </button>
