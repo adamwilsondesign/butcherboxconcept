@@ -65,6 +65,7 @@ export default function SixReasons() {
             eyebrow="On The Fence?"
             heading="6 Reasons to Try ButcherBox"
             subtitle="Premium proteins, humanely raised and delivered frozen — ready when you are."
+            eyebrowColor="blue"
           />
         </motion.div>
 

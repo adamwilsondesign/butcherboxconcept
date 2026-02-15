@@ -13,6 +13,7 @@ const config: Config = {
         "primary-light": "#3D7B5F",
         "primary-dark": "#1A2E29",
         accent: "#C8512B",
+        "brand-blue": "#1B365D",
         background: "#FAF7F2",
         surface: "#FFFFFF",
         "surface-warm": "#F5F0EB",

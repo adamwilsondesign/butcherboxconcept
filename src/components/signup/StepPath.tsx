@@ -29,7 +29,7 @@ export default function StepPath({ onSelect }: Props) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center font-serif text-3xl font-bold text-text-dark sm:text-4xl"
       >
-        Choose Your Path
+        Choose Your Plan
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }}
@@ -41,7 +41,7 @@ export default function StepPath({ onSelect }: Props) {
       </motion.p>
 
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
-        {/* Subscribe card */}
+        {/* Subscribe card — auto-advances on click */}
         <motion.button
           custom={0}
           variants={fadeUp}
@@ -90,12 +90,17 @@ export default function StepPath({ onSelect }: Props) {
             </div>
           </div>
 
-          <div className="mt-6 rounded-md bg-primary-light py-2.5 text-center text-sm font-semibold text-white transition-colors group-hover:bg-primary">
-            Select &amp; Continue
+          {/* Savings callout */}
+          <div className="mt-4 rounded-lg bg-primary-light/10 px-3 py-2 text-xs font-semibold text-primary-light">
+            Save up to $40/box vs. one-time pricing
+          </div>
+
+          <div className="mt-4 rounded-md bg-primary-light py-2.5 text-center text-sm font-semibold text-white transition-colors group-hover:bg-primary">
+            Select &amp; Continue →
           </div>
         </motion.button>
 
-        {/* One-time card */}
+        {/* One-time card — auto-advances on click */}
         <motion.button
           custom={1}
           variants={fadeUp}
@@ -118,10 +123,25 @@ export default function StepPath({ onSelect }: Props) {
           </ul>
 
           <div className="mt-auto pt-6 rounded-md border-2 border-primary py-2.5 text-center text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-            Select &amp; Continue
+            Select &amp; Continue →
           </div>
         </motion.button>
       </div>
+
+      {/* Skip link */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="mt-6 text-center"
+      >
+        <button
+          onClick={() => onSelect("subscribe", freq)}
+          className="text-sm text-text-muted transition-colors hover:text-text-dark underline underline-offset-2"
+        >
+          Skip — I&apos;ll decide later
+        </button>
+      </motion.div>
     </div>
   );
 }

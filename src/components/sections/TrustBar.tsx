@@ -3,15 +3,6 @@
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-const PRESS = [
-  { name: "Good Housekeeping", width: "w-40" },
-  { name: "Forbes", width: "w-28" },
-  { name: "USA Today", width: "w-32" },
-  { name: "NYT Cooking", width: "w-32" },
-  { name: "TIME", width: "w-24" },
-  { name: "Food & Wine", width: "w-32" },
-] as const;
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -35,6 +26,78 @@ const logoReveal = {
   },
 };
 
+/* ── Inline SVG logos styled as publication wordmarks ── */
+
+function GoodHousekeepingSVG() {
+  return (
+    <svg viewBox="0 0 200 28" className="h-6 w-auto sm:h-7">
+      <text x="100" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontSize="18" fill="currentColor">
+        Good Housekeeping
+      </text>
+    </svg>
+  );
+}
+
+function ForbesSVG() {
+  return (
+    <svg viewBox="0 0 100 28" className="h-6 w-auto sm:h-7">
+      <text x="50" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontStyle="italic" fontSize="22" fill="currentColor">
+        Forbes
+      </text>
+    </svg>
+  );
+}
+
+function USATodaySVG() {
+  return (
+    <svg viewBox="0 0 130 28" className="h-6 w-auto sm:h-7">
+      <text x="65" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="800" fontSize="20" fill="currentColor" textDecoration="none" letterSpacing="1">
+        USA TODAY
+      </text>
+    </svg>
+  );
+}
+
+function TimeSVG() {
+  return (
+    <svg viewBox="0 0 80 30" className="h-6 w-auto sm:h-7">
+      <rect x="2" y="2" width="76" height="26" rx="3" fill="none" stroke="#E4002B" strokeWidth="2" />
+      <text x="40" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontSize="20" fill="#E4002B">
+        TIME
+      </text>
+    </svg>
+  );
+}
+
+function FoodAndWineSVG() {
+  return (
+    <svg viewBox="0 0 140 28" className="h-6 w-auto sm:h-7">
+      <text x="70" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="600" fontSize="16" fill="currentColor" letterSpacing="3">
+        FOOD &amp; WINE
+      </text>
+    </svg>
+  );
+}
+
+function ModernRetailSVG() {
+  return (
+    <svg viewBox="0 0 150 28" className="h-6 w-auto sm:h-7">
+      <text x="75" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="500" fontSize="18" fill="currentColor">
+        Modern Retail
+      </text>
+    </svg>
+  );
+}
+
+const PRESS = [
+  { name: "Good Housekeeping", Logo: GoodHousekeepingSVG },
+  { name: "Forbes", Logo: ForbesSVG },
+  { name: "USA Today", Logo: USATodaySVG },
+  { name: "TIME", Logo: TimeSVG },
+  { name: "Food & Wine", Logo: FoodAndWineSVG },
+  { name: "Modern Retail", Logo: ModernRetailSVG },
+] as const;
+
 export default function TrustBar() {
   return (
     <section className="bg-surface" id="press">
@@ -45,8 +108,11 @@ export default function TrustBar() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
+          <p className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-brand-blue">
+            As Seen In
+          </p>
           <SectionHeading
-            eyebrow="Loved By The Press"
+            eyebrow=""
             heading="Trusted & Recognized"
             subtitle="Ranked among the best food subscription services by leading publications."
           />
@@ -63,13 +129,28 @@ export default function TrustBar() {
             <motion.div
               key={pub.name}
               variants={logoReveal}
-              className="group flex items-center justify-center rounded-xl bg-surface-warm px-6 py-8 transition-opacity duration-200 hover:opacity-70"
+              className="group flex items-center justify-center rounded-xl bg-surface-warm px-4 py-6 text-[#9CA3AF] transition-colors duration-200 hover:text-[#4B5563] sm:px-6 sm:py-8"
             >
-              <span className="text-center font-serif text-sm font-bold tracking-wide text-text-muted/60 transition-colors duration-200 group-hover:text-text-muted sm:text-base">
-                {pub.name}
-              </span>
+              <pub.Logo />
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* B Corp badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="mt-10 flex justify-center"
+        >
+          <div className="inline-flex items-center gap-2.5 rounded-full bg-brand-blue/5 border border-brand-blue/15 px-5 py-2.5">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-brand-blue" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <text x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="700" fill="currentColor" stroke="none">B</text>
+            </svg>
+            <span className="text-sm font-semibold text-brand-blue">Certified B Corporation&reg;</span>
+          </div>
         </motion.div>
       </div>
     </section>

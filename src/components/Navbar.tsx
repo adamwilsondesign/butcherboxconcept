@@ -34,7 +34,7 @@ export default function Navbar() {
     <>
       {/* ── Promo banner ── */}
       <div
-        className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-primary-dark text-center text-[11px] font-medium tracking-wide text-white sm:text-sm"
+        className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-center bg-brand-blue text-center text-[11px] font-medium tracking-wide text-white sm:text-sm"
         role="banner"
       >
         <span className="truncate px-4">

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Plus, ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { useSignup } from "@/components/signup/SignupFlow";
 import { IMAGES } from "@/lib/images";
 
 const PRODUCTS = [
@@ -37,6 +38,8 @@ const rowReveal = {
 };
 
 export default function FeaturedCuts() {
+  const { openSignup } = useSignup();
+
   return (
     <section className="bg-surface" id="featured-cuts">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
@@ -81,6 +84,7 @@ export default function FeaturedCuts() {
                   <motion.button
                     whileHover={{ x: 6 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    onClick={() => openSignup()}
                     aria-label={`Add ${product.name} to box`}
                     className="group flex w-full items-center gap-4 border-b border-border py-5 text-left first:pt-0 sm:gap-5"
                   >
@@ -118,8 +122,8 @@ export default function FeaturedCuts() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-8"
             >
-              <a
-                href="#"
+              <button
+                onClick={() => openSignup()}
                 className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary transition-colors hover:text-primary-light"
               >
                 Explore all products
@@ -127,7 +131,7 @@ export default function FeaturedCuts() {
                   size={16}
                   className="transition-transform duration-200 group-hover:translate-x-1"
                 />
-              </a>
+              </button>
             </motion.div>
           </div>
         </div>

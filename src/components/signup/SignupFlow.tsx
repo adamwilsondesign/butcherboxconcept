@@ -5,22 +5,35 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
 import type { CartItem } from "@/lib/products";
 import StepPath from "./StepPath";
-import StepBoxSize from "./StepBoxSize";
 import StepProducts from "./StepProducts";
 import StepReview from "./StepReview";
 
 /* ── Context to trigger the modal from anywhere ── */
 
-interface SignupCtx {
-  open: (preset?: "subscribe" | "onetime") => void;
+interface SignupOptions {
+  orderType?: "subscribe" | "onetime";
+  skipToStep?: number;
+  prefilterCategory?: string;
 }
 
-const SignupContext = createContext<SignupCtx>({ open: () => {} });
+interface SignupCtx {
+  open: (preset?: "subscribe" | "onetime") => void;
+  openSignup: (options?: SignupOptions) => void;
+  closeSignup: () => void;
+  isOpen: boolean;
+}
+
+const SignupContext = createContext<SignupCtx>({
+  open: () => {},
+  openSignup: () => {},
+  closeSignup: () => {},
+  isOpen: false,
+});
 export const useSignup = () => useContext(SignupContext);
 
-/* ── Progress steps ── */
+/* ── Progress steps (now 3) ── */
 
-const STEP_LABELS = ["Your Path", "Box Size", "Pick Proteins", "Review"];
+const STEP_LABELS = ["Choose Plan", "Pick Favorites", "Review & Checkout"];
 
 /* ── Slide animation ── */
 
@@ -36,10 +49,10 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(false);
   const [step, setStep] = useState(1);
   const [orderType, setOrderType] = useState<"subscribe" | "onetime" | null>(null);
-  const [boxSize, setBoxSize] = useState<"classic" | "big" | null>(null);
-  const [boxStyle, setBoxStyle] = useState<"custom" | "curated">("custom");
+  const [boxSize, setBoxSize] = useState<"classic" | "big">("classic");
   const [items, setItems] = useState<CartItem[]>([]);
   const [frequency, setFrequency] = useState("Every 4 weeks");
+  const [prefilterCategory, setPrefilterCategory] = useState<string | undefined>();
 
   // Lock scroll
   useEffect(() => {
@@ -55,42 +68,57 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
         setShow(false);
         setStep(1);
         setOrderType(null);
-        setBoxSize(null);
-        setBoxStyle("custom");
+        setBoxSize("classic");
         setItems([]);
         setFrequency("Every 4 weeks");
+        setPrefilterCategory(undefined);
       }
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, [show]);
 
-  const open = useCallback((preset?: "subscribe" | "onetime") => {
+  const resetState = useCallback(() => {
     setStep(1);
     setOrderType(null);
-    setBoxSize(null);
-    setBoxStyle("custom");
+    setBoxSize("classic");
     setItems([]);
     setFrequency("Every 4 weeks");
-    if (preset === "onetime") {
-      setOrderType("onetime");
-      setStep(2);
-    }
-    setShow(true);
+    setPrefilterCategory(undefined);
   }, []);
 
-  const close = () => {
+  const open = useCallback((preset?: "subscribe" | "onetime") => {
+    resetState();
+    if (preset === "onetime") {
+      setOrderType("onetime");
+    }
+    setShow(true);
+  }, [resetState]);
+
+  const openSignup = useCallback((options?: SignupOptions) => {
+    resetState();
+    if (options?.orderType) {
+      setOrderType(options.orderType);
+    }
+    if (options?.prefilterCategory) {
+      setPrefilterCategory(options.prefilterCategory);
+    }
+    if (options?.skipToStep) {
+      if (options.skipToStep >= 2 && !options?.orderType) {
+        setOrderType("subscribe");
+      }
+      setStep(options.skipToStep);
+    }
+    setShow(true);
+  }, [resetState]);
+
+  const close = useCallback(() => {
     setShow(false);
-    setStep(1);
-    setOrderType(null);
-    setBoxSize(null);
-    setBoxStyle("custom");
-    setItems([]);
-    setFrequency("Every 4 weeks");
-  };
+    resetState();
+  }, [resetState]);
 
   return (
-    <SignupContext.Provider value={{ open }}>
+    <SignupContext.Provider value={{ open, openSignup, closeSignup: close, isOpen: show }}>
       {children}
 
       <AnimatePresence>
@@ -107,7 +135,6 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
           >
             {/* ── Top bar ── */}
             <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4 sm:h-16 sm:px-8">
-              {/* Logo */}
               <span className="text-base font-extrabold uppercase tracking-[0.12em] text-primary sm:text-lg">
                 BUTCHERBOX
               </span>
@@ -121,13 +148,13 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                   return (
                     <div key={label} className="flex items-center">
                       {i > 0 && (
-                        <div className={`mx-1 h-px w-6 ${done ? "bg-primary" : "bg-border"}`} />
+                        <div className={`mx-1 h-px w-6 ${done ? "bg-brand-blue" : "bg-border"}`} />
                       )}
                       <div className="flex items-center gap-1.5">
                         <span
                           className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
                             done
-                              ? "bg-primary text-white"
+                              ? "bg-brand-blue text-white"
                               : active
                                 ? "bg-primary-light text-white"
                                 : "bg-border text-text-muted"
@@ -138,7 +165,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                         </span>
                         <span
                           className={`text-xs font-medium ${
-                            active ? "text-primary-light" : done ? "text-primary" : "text-text-muted"
+                            active ? "text-primary-light" : done ? "text-brand-blue" : "text-text-muted"
                           }`}
                         >
                           {label}
@@ -149,9 +176,9 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                 })}
               </div>
 
-              {/* Mobile progress: simple "Step X of 4" */}
+              {/* Mobile progress */}
               <span className="text-xs font-medium text-text-muted sm:hidden">
-                Step {step} of 4
+                Step {step} of 3
               </span>
 
               {/* Close */}
@@ -185,34 +212,27 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                     />
                   )}
 
-                  {step === 2 && orderType && (
-                    <StepBoxSize
-                      orderType={orderType}
-                      onSelect={(size, style) => {
-                        setBoxSize(size);
-                        setBoxStyle(style);
-                        setStep(style === "curated" ? 4 : 3);
-                      }}
-                      onBack={() => setStep(1)}
-                    />
-                  )}
-
-                  {step === 3 && (
+                  {step === 2 && (
                     <StepProducts
+                      orderType={orderType ?? "subscribe"}
                       items={items}
+                      boxSize={boxSize}
+                      onBoxSizeChange={setBoxSize}
                       onUpdate={setItems}
-                      onContinue={() => setStep(4)}
-                      onBack={() => setStep(2)}
+                      onContinue={() => setStep(3)}
+                      onBack={() => setStep(1)}
+                      initialCategory={prefilterCategory}
                     />
                   )}
 
-                  {step === 4 && orderType && boxSize && (
+                  {step === 3 && orderType && (
                     <StepReview
                       orderType={orderType}
                       boxSize={boxSize}
                       frequency={frequency}
                       items={items}
-                      onBack={() => setStep(boxStyle === "curated" ? 2 : 3)}
+                      onUpdateItems={setItems}
+                      onBack={() => setStep(2)}
                       onClose={close}
                     />
                   )}

@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { useSignup } from "@/components/signup/SignupFlow";
 import { IMAGES } from "@/lib/images";
 
 /* ── Types ── */
@@ -125,6 +126,7 @@ const cardVariant = {
 /* ── Section component ── */
 
 export default function ForEveryTable() {
+  const { openSignup } = useSignup();
   const [activeFilter, setActiveFilter] = useState("all");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -143,6 +145,7 @@ export default function ForEveryTable() {
             eyebrow="Something For Everyone"
             heading="For Every Table"
             subtitle="Over 400,000 members cook with us. Premium proteins that fit every diet and every lifestyle."
+            eyebrowColor="blue"
           />
         </motion.div>
 
@@ -225,6 +228,7 @@ export default function ForEveryTable() {
                     <motion.div
                       whileHover={{ y: -4, boxShadow: "0 8px 30px rgba(36,59,53,0.12)" }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      onClick={() => openSignup()}
                       className="group cursor-pointer overflow-hidden rounded-2xl bg-surface shadow-sm"
                     >
                       <div className="aspect-[4/3] w-full overflow-hidden">

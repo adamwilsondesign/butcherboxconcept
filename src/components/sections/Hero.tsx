@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { useSignup } from "@/components/signup/SignupFlow";
-import { IMAGES } from "@/lib/images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -20,12 +19,13 @@ export default function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-108px)] overflow-hidden" id="hero" aria-label="Hero">
       {/* ── Background image area (right / behind on mobile) ── */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <img
-          src={IMAGES.hero}
+          src="https://images.ctfassets.net/1yr7azz9gqt1/382W88cbfXXjJSvHF6Hqog/0f286ffefd26e6ef5c4fabbce2180064/26_Q1_NYNY_Web_UnauthenticatedHomepage_Mobile_770x1100.jpg?q=50&fm=jpg"
           alt="ButcherBox premium meat spread"
           loading="eager"
           className="h-full w-full object-cover"
+          style={{ transform: "scaleX(-1)" }}
         />
       </div>
 

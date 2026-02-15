@@ -47,6 +47,14 @@ export default function MemberReviews() {
               eyebrow="Loved By Members"
               heading="Join 400,000+ Happy Members"
             />
+            <div className="mt-4 flex items-center justify-center gap-2">
+              <span className="flex gap-0.5">
+                {[...Array(5)].map((_, s) => (
+                  <Star key={s} size={16} className="fill-star-gold text-star-gold" />
+                ))}
+              </span>
+              <span className="text-sm font-semibold text-brand-blue">70K+ Reviews</span>
+            </div>
           </motion.div>
         </div>
 

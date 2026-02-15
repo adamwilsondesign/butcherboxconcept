@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, PartyPopper } from "lucide-react";
+import { Check, PartyPopper, Minus, Plus, Trash2 } from "lucide-react";
 import type { CartItem } from "@/lib/products";
 
 interface Props {
@@ -10,16 +10,25 @@ interface Props {
   boxSize: "classic" | "big";
   frequency: string;
   items: CartItem[];
+  onUpdateItems: (items: CartItem[]) => void;
   onBack: () => void;
   onClose: () => void;
 }
 
-export default function StepReview({ orderType, boxSize, frequency, items, onBack, onClose }: Props) {
+export default function StepReview({ orderType, boxSize, frequency, items, onUpdateItems, onBack, onClose }: Props) {
   const [placed, setPlaced] = useState(false);
 
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
   const discount = orderType === "subscribe" ? Math.round(subtotal * 0.15) : 0;
   const total = subtotal - discount;
+
+  const updateItemQty = (id: number, qty: number) => {
+    if (qty <= 0) {
+      onUpdateItems(items.filter((i) => i.id !== id));
+    } else {
+      onUpdateItems(items.map((i) => (i.id === id ? { ...i, qty } : i)));
+    }
+  };
 
   if (placed) {
     return (
@@ -48,25 +57,27 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-4">
+    <div className="mx-auto w-full max-w-5xl px-4">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center font-serif text-3xl font-bold text-text-dark sm:text-4xl"
       >
-        Review Your Order
+        Review &amp; Checkout
       </motion.h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-5">
-        {/* Order summary */}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-5">
+        {/* ── Left column: Order summary (60%) ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="rounded-2xl border border-border bg-surface p-5 lg:col-span-2"
+          className="rounded-2xl border border-border bg-surface p-5 sm:p-6 lg:col-span-3"
         >
-          <div className="flex items-center gap-2">
-            <span className={`rounded-full px-2.5 py-1 text-xs font-bold text-white ${orderType === "subscribe" ? "bg-primary" : "bg-accent"}`}>
+          <h3 className="text-lg font-bold text-text-dark">Order Summary</h3>
+
+          <div className="mt-4 flex items-center gap-2">
+            <span className={`rounded-full px-2.5 py-1 text-xs font-bold text-white ${orderType === "subscribe" ? "bg-brand-blue" : "bg-accent"}`}>
               {orderType === "subscribe" ? "Subscription" : "One-Time"}
             </span>
             <span className="text-xs text-text-muted capitalize">{boxSize} box</span>
@@ -82,11 +93,37 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
             </div>
           )}
 
-          <ul className="mt-4 space-y-2" aria-label="Order items">
+          {/* Item list with edit/remove */}
+          <ul className="mt-5 divide-y divide-border" aria-label="Order items">
             {items.map((item) => (
-              <li key={item.id} className="flex justify-between text-sm">
-                <span className="text-text-dark">{item.name} <span className="text-text-muted">×{item.qty}</span></span>
-                <span className="font-medium text-text-dark">${item.price * item.qty}</span>
+              <li key={item.id} className="flex items-center gap-3 py-3">
+                <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg">
+                  <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-text-dark truncate">{item.name}</p>
+                  <p className="text-xs text-text-muted">{item.weight}</p>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => updateItemQty(item.id, item.qty - 1)}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-primary/10"
+                    aria-label={`Reduce ${item.name}`}
+                  >
+                    {item.qty === 1 ? <Trash2 size={11} /> : <Minus size={11} />}
+                  </button>
+                  <span className="w-5 text-center text-xs font-bold">{item.qty}</span>
+                  <button
+                    onClick={() => updateItemQty(item.id, item.qty + 1)}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-light text-white hover:bg-primary"
+                    aria-label={`Add ${item.name}`}
+                  >
+                    <Plus size={11} />
+                  </button>
+                </div>
+                <span className="w-12 text-right text-sm font-medium text-text-dark">
+                  ${item.price * item.qty}
+                </span>
               </li>
             ))}
           </ul>
@@ -111,14 +148,21 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
             <span className="text-text-dark">Total</span>
             <span className="text-primary">${total}</span>
           </div>
+
+          {/* Promo banner */}
+          {orderType === "subscribe" && (
+            <div className="mt-4 rounded-lg bg-brand-blue/5 border border-brand-blue/20 px-4 py-3 text-center text-xs font-semibold text-brand-blue">
+              Subscribers get free shipping + exclusive member deals every month
+            </div>
+          )}
         </motion.div>
 
-        {/* Checkout form */}
+        {/* ── Right column: Checkout form (40%) ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="lg:col-span-3"
+          className="lg:col-span-2"
         >
           <form
             onSubmit={(e) => { e.preventDefault(); setPlaced(true); }}
@@ -173,22 +217,21 @@ export default function StepReview({ orderType, boxSize, frequency, items, onBac
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-4 pt-3">
-              <button
-                type="button"
-                onClick={onBack}
-                className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
-                aria-label="Go back"
-              >
-                ← Back
-              </button>
-              <button
-                type="submit"
-                className="rounded-md bg-primary-light px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary sm:px-8"
-              >
-                Place Order — ${total}
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="mt-2 w-full rounded-md bg-primary-light px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary"
+            >
+              Place Order — ${total}
+            </button>
+
+            <button
+              type="button"
+              onClick={onBack}
+              className="w-full py-2 text-center text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
+              aria-label="Go back"
+            >
+              ← Back to product selection
+            </button>
           </form>
         </motion.div>
       </div>

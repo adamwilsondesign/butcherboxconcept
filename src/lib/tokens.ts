@@ -3,6 +3,7 @@ export const colors = {
   primaryLight: "#3D7B5F",
   primaryDark: "#1A2E29",
   accent: "#C8512B",
+  brandBlue: "#1B365D",
   background: "#FAF7F2",
   surface: "#FFFFFF",
   surfaceWarm: "#F5F0EB",

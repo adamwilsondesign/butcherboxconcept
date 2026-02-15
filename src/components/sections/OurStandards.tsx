@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Recycle } from "lucide-react";
 import { IMAGES } from "@/lib/images";
 
 const fadeUp = {
@@ -17,16 +18,17 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-const BADGES = [
-  {
-    label: "B Corp Certified",
-    image: IMAGES.chickensField,
-  },
-  {
-    label: "100% Recyclable Packaging",
-    image: IMAGES.fishingBoat,
-  },
-] as const;
+/* B Corp inline SVG icon */
+function BCorpIcon() {
+  return (
+    <svg viewBox="0 0 32 32" className="h-8 w-8 shrink-0" aria-hidden="true">
+      <circle cx="16" cy="16" r="15" fill="#1B365D" />
+      <text x="16" y="21" textAnchor="middle" fontSize="16" fontWeight="700" fill="white" fontFamily="'Libre Baskerville', serif">
+        B
+      </text>
+    </svg>
+  );
+}
 
 export default function OurStandards() {
   return (
@@ -45,7 +47,7 @@ export default function OurStandards() {
             >
               <motion.p
                 variants={fadeUp}
-                className="text-sm font-semibold uppercase tracking-widest text-accent"
+                className="text-sm font-semibold uppercase tracking-widest text-brand-blue"
               >
                 More Than Just Meat
               </motion.p>
@@ -66,26 +68,22 @@ export default function OurStandards() {
                 and exceptional taste.
               </motion.p>
 
-              {/* Trust badges */}
+              {/* Trust badges — icon pills */}
               <motion.div
                 variants={fadeUp}
-                className="mt-10 flex flex-wrap gap-6"
+                className="mt-10 flex flex-wrap gap-4"
               >
-                {BADGES.map((badge) => (
-                  <div key={badge.label} className="flex items-center gap-3.5">
-                    <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full">
-                      <img
-                        src={badge.image}
-                        alt={badge.label}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm font-semibold leading-snug text-text-dark">
-                      {badge.label}
-                    </span>
-                  </div>
-                ))}
+                {/* B Corp badge */}
+                <div className="inline-flex items-center gap-3 rounded-full bg-[#F5F0EB] border border-border px-4 py-2.5">
+                  <BCorpIcon />
+                  <span className="text-sm font-semibold text-brand-blue">Certified B Corp&reg;</span>
+                </div>
+
+                {/* Recycling badge */}
+                <div className="inline-flex items-center gap-3 rounded-full bg-[#F5F0EB] border border-border px-4 py-2.5">
+                  <Recycle size={24} className="shrink-0 text-primary-light" />
+                  <span className="text-sm font-semibold text-primary-light">100% Recyclable Packaging</span>
+                </div>
               </motion.div>
             </motion.div>
 
