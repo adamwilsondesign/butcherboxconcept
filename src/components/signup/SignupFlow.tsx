@@ -3,15 +3,14 @@
 import { useState, useEffect, createContext, useContext, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
-import type { CartItem } from "@/lib/products";
+import type { CartItem, Plan } from "@/lib/products";
 import StepPath from "./StepPath";
 import StepProducts from "./StepProducts";
 import StepReview from "./StepReview";
 
-/* ── Context to trigger the modal from anywhere ── */
+/* ── Context ── */
 
 interface SignupOptions {
-  orderType?: "subscribe" | "onetime";
   skipToStep?: number;
   prefilterCategory?: string;
 }
@@ -31,9 +30,9 @@ const SignupContext = createContext<SignupCtx>({
 });
 export const useSignup = () => useContext(SignupContext);
 
-/* ── Progress steps (now 3) ── */
+/* ── Step labels ── */
 
-const STEP_LABELS = ["Choose Plan", "Pick Favorites", "Review & Checkout"];
+const STEP_LABELS = ["Select Plan", "Choose Proteins", "Review & Checkout"];
 
 /* ── Slide animation ── */
 
@@ -48,29 +47,25 @@ const slideVariants = {
 export function SignupProvider({ children }: { children: React.ReactNode }) {
   const [show, setShow] = useState(false);
   const [step, setStep] = useState(1);
-  const [orderType, setOrderType] = useState<"subscribe" | "onetime" | null>(null);
-  const [boxSize, setBoxSize] = useState<"classic" | "big">("classic");
+  const [plan, setPlan] = useState<Plan | null>(null);
   const [items, setItems] = useState<CartItem[]>([]);
-  const [frequency, setFrequency] = useState("Every 4 weeks");
+  const [frequency, setFrequency] = useState("Every Four Weeks");
   const [prefilterCategory, setPrefilterCategory] = useState<string | undefined>();
 
-  // Lock scroll
   useEffect(() => {
     document.body.style.overflow = show ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [show]);
 
-  // Close on Escape
   useEffect(() => {
     if (!show) return;
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setShow(false);
         setStep(1);
-        setOrderType(null);
-        setBoxSize("classic");
+        setPlan(null);
         setItems([]);
-        setFrequency("Every 4 weeks");
+        setFrequency("Every Four Weeks");
         setPrefilterCategory(undefined);
       }
     };
@@ -80,33 +75,23 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
 
   const resetState = useCallback(() => {
     setStep(1);
-    setOrderType(null);
-    setBoxSize("classic");
+    setPlan(null);
     setItems([]);
-    setFrequency("Every 4 weeks");
+    setFrequency("Every Four Weeks");
     setPrefilterCategory(undefined);
   }, []);
 
-  const open = useCallback((preset?: "subscribe" | "onetime") => {
+  const open = useCallback(() => {
     resetState();
-    if (preset === "onetime") {
-      setOrderType("onetime");
-    }
     setShow(true);
   }, [resetState]);
 
   const openSignup = useCallback((options?: SignupOptions) => {
     resetState();
-    if (options?.orderType) {
-      setOrderType(options.orderType);
-    }
     if (options?.prefilterCategory) {
       setPrefilterCategory(options.prefilterCategory);
     }
     if (options?.skipToStep) {
-      if (options.skipToStep >= 2 && !options?.orderType) {
-        setOrderType("subscribe");
-      }
       setStep(options.skipToStep);
     }
     setShow(true);
@@ -148,15 +133,15 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                   return (
                     <div key={label} className="flex items-center">
                       {i > 0 && (
-                        <div className={`mx-1 h-px w-6 ${done ? "bg-brand-blue" : "bg-border"}`} />
+                        <div className={`mx-1 h-px w-6 ${done ? "bg-[#2D5E4A]" : "bg-border"}`} />
                       )}
                       <div className="flex items-center gap-1.5">
                         <span
                           className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
                             done
-                              ? "bg-brand-blue text-white"
+                              ? "bg-[#2D5E4A] text-white"
                               : active
-                                ? "bg-primary-light text-white"
+                                ? "bg-[#3A7D64] text-white"
                                 : "bg-border text-text-muted"
                           }`}
                           aria-current={active ? "step" : undefined}
@@ -165,7 +150,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                         </span>
                         <span
                           className={`text-xs font-medium ${
-                            active ? "text-primary-light" : done ? "text-brand-blue" : "text-text-muted"
+                            active ? "text-[#2D5E4A]" : done ? "text-[#2D5E4A]" : "text-text-muted"
                           }`}
                         >
                           {label}
@@ -184,7 +169,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
               {/* Close */}
               <button
                 onClick={close}
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-primary/5"
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#2D5E4A]/5"
                 aria-label="Close signup"
               >
                 <X size={20} className="text-text-muted" />
@@ -204,31 +189,29 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                 >
                   {step === 1 && (
                     <StepPath
-                      onSelect={(type, freq) => {
-                        setOrderType(type);
-                        if (freq) setFrequency(freq);
-                        setStep(2);
-                      }}
+                      selectedPlan={plan}
+                      frequency={frequency}
+                      onSelectPlan={setPlan}
+                      onSelectFrequency={setFrequency}
+                      onContinue={() => setStep(2)}
                     />
                   )}
 
-                  {step === 2 && (
+                  {step === 2 && plan && (
                     <StepProducts
-                      orderType={orderType ?? "subscribe"}
+                      plan={plan}
                       items={items}
-                      boxSize={boxSize}
-                      onBoxSizeChange={setBoxSize}
                       onUpdate={setItems}
                       onContinue={() => setStep(3)}
                       onBack={() => setStep(1)}
+                      onUpgrade={() => setStep(1)}
                       initialCategory={prefilterCategory}
                     />
                   )}
 
-                  {step === 3 && orderType && (
+                  {step === 3 && plan && (
                     <StepReview
-                      orderType={orderType}
-                      boxSize={boxSize}
+                      plan={plan}
                       frequency={frequency}
                       items={items}
                       onUpdateItems={setItems}

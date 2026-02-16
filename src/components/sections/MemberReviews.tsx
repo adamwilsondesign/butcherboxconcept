@@ -27,9 +27,7 @@ export default function MemberReviews() {
   useAnimationFrame((_, delta) => {
     if (paused || !marqueeRef.current) return;
     xRef.current -= (delta / 1000) * 30;
-    if (xRef.current <= -TOTAL_WIDTH) {
-      xRef.current += TOTAL_WIDTH;
-    }
+    if (xRef.current <= -TOTAL_WIDTH) xRef.current += TOTAL_WIDTH;
     marqueeRef.current.style.transform = `translateX(${xRef.current}px)`;
   });
 
@@ -37,77 +35,33 @@ export default function MemberReviews() {
     <section className="bg-background overflow-hidden" id="reviews">
       <div className="py-24">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: "easeOut" as const }}
-          >
-            <SectionHeading
-              eyebrow="Loved By Members"
-              heading="Join 400,000+ Happy Members"
-            />
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, ease: "easeOut" as const }}>
+            <SectionHeading eyebrow="Loved By Members" heading="Join 400,000+ Happy Members" />
             <div className="mt-4 flex items-center justify-center gap-2">
               <span className="flex gap-0.5">
-                {[...Array(5)].map((_, s) => (
-                  <Star key={s} size={16} className="fill-star-gold text-star-gold" />
-                ))}
+                {[...Array(5)].map((_, s) => (<Star key={s} size={16} className="fill-star-gold text-star-gold" />))}
               </span>
-              <span className="text-sm font-semibold text-brand-blue">70K+ Reviews</span>
+              <span className="text-sm font-semibold text-[#2D5E4A]">70K+ Reviews</span>
             </div>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-14"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <div
-            ref={marqueeRef}
-            className="flex will-change-transform"
-            style={{ gap: GAP }}
-          >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-14" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+          <div ref={marqueeRef} className="flex will-change-transform" style={{ gap: GAP }}>
             {MARQUEE_ITEMS.map((review, i) => (
-              <div
-                key={`${review.id}-${i}`}
-                className="shrink-0"
-                style={{
-                  width: CARD_WIDTH,
-                  transform: `rotate(${review.rotate}deg)`,
-                }}
-              >
+              <div key={`${review.id}-${i}`} className="shrink-0" style={{ width: CARD_WIDTH, transform: `rotate(${review.rotate}deg)` }}>
                 <div className="overflow-hidden rounded-2xl bg-surface shadow-md transition-shadow duration-300 hover:shadow-xl">
                   <div className="relative aspect-square w-full overflow-hidden">
-                    <img
-                      src={review.image}
-                      alt={review.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                    />
+                    <img src={review.image} alt={review.name} loading="lazy" className="h-full w-full object-cover" />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-4 pb-4 pt-10">
-                      <p className="text-sm font-medium leading-snug text-white/90">
-                        &ldquo;{review.quote}&rdquo;
-                      </p>
+                      <p className="text-sm font-medium leading-snug text-white/90">&ldquo;{review.quote}&rdquo;</p>
                     </div>
                   </div>
                   <div className="px-4 py-3.5">
                     <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, s) => (
-                        <Star
-                          key={s}
-                          size={14}
-                          className="fill-star-gold text-star-gold"
-                        />
-                      ))}
+                      {[...Array(5)].map((_, s) => (<Star key={s} size={14} className="fill-star-gold text-star-gold" />))}
                     </div>
-                    <p className="mt-1.5 text-sm font-semibold text-text-dark">
-                      {review.name}
-                    </p>
+                    <p className="mt-1.5 text-sm font-semibold text-text-dark">{review.name}</p>
                   </div>
                 </div>
               </div>

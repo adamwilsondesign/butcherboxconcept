@@ -1,9 +1,8 @@
 export const colors = {
-  primary: "#243B35",
-  primaryLight: "#3D7B5F",
-  primaryDark: "#1A2E29",
+  brandTeal: "#2D5E4A",
+  brandTealDark: "#243B35",
+  brandTealLight: "#3A7D64",
   accent: "#C8512B",
-  brandBlue: "#1B365D",
   background: "#FAF7F2",
   surface: "#FFFFFF",
   surfaceWarm: "#F5F0EB",

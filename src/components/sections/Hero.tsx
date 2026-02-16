@@ -15,10 +15,9 @@ const fadeUp = {
 };
 
 export default function Hero() {
-  const { open } = useSignup();
+  const { openSignup } = useSignup();
   return (
     <section className="relative min-h-[calc(100vh-108px)] overflow-hidden" id="hero" aria-label="Hero">
-      {/* ── Background image area (right / behind on mobile) ── */}
       <div className="absolute inset-0 overflow-hidden">
         <img
           src="https://images.ctfassets.net/1yr7azz9gqt1/382W88cbfXXjJSvHF6Hqog/0f286ffefd26e6ef5c4fabbce2180064/26_Q1_NYNY_Web_UnauthenticatedHomepage_Mobile_770x1100.jpg?q=50&fm=jpg"
@@ -29,86 +28,43 @@ export default function Hero() {
         />
       </div>
 
-      {/* ── Gradient overlay ── */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-background/20 lg:via-background/90 lg:via-35% lg:to-transparent" />
-
-      {/* Mobile extra overlay for readability */}
       <div className="absolute inset-0 bg-background/60 sm:bg-transparent" />
 
-      {/* ── Content ── */}
       <div className="relative mx-auto flex h-full min-h-[calc(100vh-108px)] max-w-7xl items-center px-6 sm:px-8 lg:px-12">
         <div className="w-full max-w-xl py-16 lg:py-24">
-          {/* Trust badge */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-          >
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-text-dark shadow-sm backdrop-blur-sm">
               <span className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={14}
-                    className="fill-star-gold text-star-gold"
-                  />
+                  <Star key={i} size={14} className="fill-star-gold text-star-gold" />
                 ))}
               </span>
               Trusted by 2M+ households
             </span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-            className="mt-8 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-5xl md:text-6xl lg:text-7xl"
-          >
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-8 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-5xl md:text-6xl lg:text-7xl">
             Better Meat,
             <br />
-            <span className="text-primary-light">Served Your Way</span>
+            <span className="text-[#2D5E4A]">Served Your Way</span>
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            className="mt-6 max-w-md text-lg leading-relaxed text-text-muted"
-          >
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="mt-6 max-w-md text-lg leading-relaxed text-text-muted">
             100% grass-fed beef, free-range chicken, wild-caught seafood
-            &amp;&nbsp;more&nbsp;— delivered to your door. Subscribe for
-            savings, or order once. No commitment required.
+            &amp;&nbsp;more&nbsp;— delivered to your door.
           </motion.p>
 
-          {/* Dual CTAs */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={3}
-            className="mt-10 flex flex-col gap-4 sm:flex-row"
-          >
-            <Button variant="primary" className="px-10 py-4 text-base" onClick={() => open()}>
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
               Build Your Box
             </Button>
-            <Button variant="secondary" className="px-10 py-4 text-base" onClick={() => open("onetime")}>
+            <Button variant="secondary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
               Try a One-Time Box
             </Button>
           </motion.div>
 
-          {/* Trust line */}
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={4}
-            className="mt-6 text-sm text-text-muted"
-          >
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-6 text-sm text-text-muted">
             Free shipping always&nbsp;&nbsp;·&nbsp;&nbsp;Cancel anytime
           </motion.p>
         </div>

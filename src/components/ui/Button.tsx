@@ -12,9 +12,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary-light text-white border-2 border-primary-light hover:bg-primary hover:border-primary",
+    "bg-[#2D5E4A] text-white border-2 border-[#2D5E4A] hover:bg-[#243B35] hover:border-[#243B35]",
   secondary:
-    "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white",
+    "bg-transparent text-[#2D5E4A] border-2 border-[#2D5E4A] hover:bg-[#2D5E4A] hover:text-white",
 };
 
 export default function Button({
@@ -25,7 +25,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <motion.button
-      whileHover={{ scale: 1.02, boxShadow: "0 4px 20px rgba(36,59,53,0.2)" }}
+      whileHover={{ scale: 1.02, boxShadow: "0 4px 20px rgba(45,94,74,0.2)" }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       className={`rounded-md px-8 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors duration-200 ${variantStyles[variant]} ${className}`}

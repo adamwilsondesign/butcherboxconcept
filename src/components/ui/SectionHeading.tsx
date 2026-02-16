@@ -3,7 +3,7 @@ interface SectionHeadingProps {
   heading: string;
   subtitle?: string;
   className?: string;
-  eyebrowColor?: "green" | "blue";
+  eyebrowColor?: "teal" | "accent";
 }
 
 export default function SectionHeading({
@@ -11,9 +11,9 @@ export default function SectionHeading({
   heading,
   subtitle,
   className = "",
-  eyebrowColor = "green",
+  eyebrowColor = "teal",
 }: SectionHeadingProps) {
-  const eyebrowColorClass = eyebrowColor === "blue" ? "text-brand-blue" : "text-accent";
+  const eyebrowColorClass = eyebrowColor === "accent" ? "text-[#C8512B]" : "text-[#2D5E4A]";
 
   return (
     <div className={`mx-auto max-w-2xl text-center ${className}`}>
