@@ -9,7 +9,7 @@ const logoReveal = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0,
 
 function GoodHousekeepingSVG() {
   return (
-    <svg viewBox="0 0 200 28" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 200 28" className="h-7 w-auto sm:h-8">
       <text x="100" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontSize="18" fill="currentColor">Good Housekeeping</text>
     </svg>
   );
@@ -17,7 +17,7 @@ function GoodHousekeepingSVG() {
 
 function ForbesSVG() {
   return (
-    <svg viewBox="0 0 100 28" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 100 28" className="h-7 w-auto sm:h-8">
       <text x="50" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontStyle="italic" fontSize="22" fill="currentColor">Forbes</text>
     </svg>
   );
@@ -25,7 +25,7 @@ function ForbesSVG() {
 
 function USATodaySVG() {
   return (
-    <svg viewBox="0 0 130 28" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 130 28" className="h-7 w-auto sm:h-8">
       <text x="65" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="800" fontSize="20" fill="currentColor" letterSpacing="1">USA TODAY</text>
     </svg>
   );
@@ -33,7 +33,7 @@ function USATodaySVG() {
 
 function TimeSVG() {
   return (
-    <svg viewBox="0 0 80 30" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 80 30" className="h-7 w-auto sm:h-8">
       <rect x="2" y="2" width="76" height="26" rx="3" fill="none" stroke="#E4002B" strokeWidth="2" />
       <text x="40" y="22" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fontWeight="700" fontSize="20" fill="#E4002B">TIME</text>
     </svg>
@@ -42,7 +42,7 @@ function TimeSVG() {
 
 function FoodAndWineSVG() {
   return (
-    <svg viewBox="0 0 140 28" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 140 28" className="h-7 w-auto sm:h-8">
       <text x="70" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="600" fontSize="16" fill="currentColor" letterSpacing="3">FOOD &amp; WINE</text>
     </svg>
   );
@@ -50,7 +50,7 @@ function FoodAndWineSVG() {
 
 function ModernRetailSVG() {
   return (
-    <svg viewBox="0 0 150 28" className="h-6 w-auto sm:h-7">
+    <svg viewBox="0 0 150 28" className="h-7 w-auto sm:h-8">
       <text x="75" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="500" fontSize="18" fill="currentColor">Modern Retail</text>
     </svg>
   );
@@ -67,16 +67,16 @@ const PRESS = [
 
 export default function TrustBar() {
   return (
-    <section className="bg-surface" id="press">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-[#FAF7F2]" id="press">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <p className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-[#2D5E4A]">As Seen In</p>
           <SectionHeading eyebrow="" heading="Trusted & Recognized" subtitle="Ranked among the best food subscription services by leading publications." />
         </motion.div>
 
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6 lg:gap-6">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {PRESS.map((pub) => (
-            <motion.div key={pub.name} variants={logoReveal} className="group flex items-center justify-center rounded-xl bg-surface-warm px-4 py-6 text-[#9CA3AF] transition-colors duration-200 hover:text-[#4B5563] sm:px-6 sm:py-8">
+            <motion.div key={pub.name} variants={logoReveal} className="group flex items-center justify-center rounded-lg border border-[#E5DDD4] bg-white px-8 py-4 text-[#9CA3AF] transition-all duration-200 hover:border-[#2D5E4A] hover:text-[#4B5563] hover:shadow-md hover:-translate-y-0.5">
               <pub.Logo />
             </motion.div>
           ))}

@@ -18,8 +18,8 @@ function BCorpIcon() {
 
 export default function OurStandards() {
   return (
-    <section className="bg-surface-warm" id="our-standards">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-white" id="our-standards">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <div className="overflow-hidden rounded-[2rem] bg-[#F0E8DD]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="flex flex-col justify-center px-8 py-14 sm:px-12 sm:py-16 lg:px-16 lg:py-20">

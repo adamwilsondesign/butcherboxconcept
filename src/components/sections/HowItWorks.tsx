@@ -11,11 +11,15 @@ const STEPS = [
   { number: 4, title: "Cook & Enjoy", description: "Thaw, cook, and serve restaurant-quality meals at home. Recipes included." },
 ] as const;
 
-function CountUpNumber({ target, inView }: { target: number; inView: boolean }) {
+function CountUpNumber({ target }: { target: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+
   useEffect(() => {
-    if (!inView) return;
-    let frame: number;
+    if (!inView || hasAnimated.current) return;
+    hasAnimated.current = true;
     const duration = 600;
     const start = performance.now();
     function tick(now: number) {
@@ -23,12 +27,12 @@ function CountUpNumber({ target, inView }: { target: number; inView: boolean }) 
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) frame = requestAnimationFrame(tick);
+      if (progress < 1) requestAnimationFrame(tick);
     }
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    requestAnimationFrame(tick);
   }, [inView, target]);
-  return <>{count}</>;
+
+  return <span ref={ref}>{inView ? count || target : target}</span>;
 }
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } } };
@@ -36,25 +40,22 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } }
 const stepReveal = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } } };
 
 export default function HowItWorks() {
-  const stepsRef = useRef<HTMLDivElement>(null);
-  const stepsInView = useInView(stepsRef, { once: true, margin: "-100px" });
-
   return (
-    <section className="bg-surface-warm" id="how-it-works">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-[#F5F0EB]" id="how-it-works">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <SectionHeading eyebrow="How It Works" heading="Delivered Frozen, Served Incredible" subtitle="We partner with trusted ranchers and fisheries to bring you the best proteins, made simple." />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, ease: "easeOut" as const, delay: 0.1 }} className="mt-14 overflow-hidden rounded-2xl">
-          <img src="https://shapinup.com/wp-content/uploads/2019/02/BBmeatbox1.jpg" alt="What's in a ButcherBox" loading="lazy" className="aspect-[21/9] w-full object-cover" />
+          <img src="https://images.ctfassets.net/1yr7azz9gqt1/7AEaPBe34XdJyyQW4XvibD/6870bf8f751f0b50b8e09e1e7f94d76c/WhatsInTheBox-Mobile.jpg?q=50&fm=jpg" alt="What's in a ButcherBox" loading="lazy" className="aspect-[21/9] w-full object-cover" />
         </motion.div>
 
-        <motion.div ref={stepsRef} variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {STEPS.map((step) => (
             <motion.div key={step.number} variants={stepReveal}>
               <span className="font-serif text-6xl font-bold leading-none text-[#2D5E4A] sm:text-7xl">
-                <CountUpNumber target={step.number} inView={stepsInView} />
+                <CountUpNumber target={step.number} />
               </span>
               <div className="mt-4 mb-5 h-[3px] w-12 rounded-full bg-[#2D5E4A]/30" />
               <h3 className="text-lg font-bold text-text-dark">{step.title}</h3>

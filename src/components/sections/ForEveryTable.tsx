@@ -64,8 +64,8 @@ export default function ForEveryTable() {
   const active = FILTERS.find((f) => f.key === activeFilter) ?? FILTERS[0];
 
   return (
-    <section className="bg-background" id="products">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-[#FAF7F2]" id="products">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <SectionHeading eyebrow="Something For Everyone" heading="For Every Table" subtitle="Over 400,000 members cook with us. Premium proteins that fit every diet and every lifestyle." />
         </motion.div>

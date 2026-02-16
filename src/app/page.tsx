@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero";
+import StatsBar from "@/components/sections/StatsBar";
 import ProductCategories from "@/components/sections/ProductCategories";
 import HowItWorks from "@/components/sections/HowItWorks";
 import FeaturedCuts from "@/components/sections/FeaturedCuts";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <StatsBar />
       <ProductCategories />
       <SixReasons />
       <HowItWorks />

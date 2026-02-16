@@ -28,8 +28,9 @@ export default function Hero() {
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-background/20 lg:via-background/90 lg:via-35% lg:to-transparent" />
-      <div className="absolute inset-0 bg-background/60 sm:bg-transparent" />
+      {/* Gradient overlay — cream to transparent for readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/95 via-40% to-[#FAF7F2]/10 lg:via-[#FAF7F2]/90 lg:via-35% lg:to-transparent" />
+      <div className="absolute inset-0 bg-[#FAF7F2]/60 sm:bg-transparent" />
 
       <div className="relative mx-auto flex h-full min-h-[calc(100vh-108px)] max-w-7xl items-center px-6 sm:px-8 lg:px-12">
         <div className="w-full max-w-xl py-16 lg:py-24">
@@ -37,7 +38,7 @@ export default function Hero() {
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-text-dark shadow-sm backdrop-blur-sm">
               <span className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-star-gold text-star-gold" />
+                  <Star key={i} size={14} className="fill-[#D4A84B] text-[#D4A84B]" />
                 ))}
               </span>
               Trusted by 2M+ households
@@ -45,27 +46,28 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-8 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-5xl md:text-6xl lg:text-7xl">
-            Better Meat,
+            Restaurant-Quality
             <br />
-            <span className="text-[#2D5E4A]">Served Your Way</span>
+            <span className="text-[#2D5E4A]">Meat &amp; Seafood,</span>
+            <br />
+            Delivered
           </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="mt-6 max-w-md text-lg leading-relaxed text-text-muted">
-            100% grass-fed beef, free-range chicken, wild-caught seafood
-            &amp;&nbsp;more&nbsp;— delivered to your door.
+            100% grass-fed beef, organic free-range chicken, wild-caught seafood — from trusted farms to your freezer. Free steak for a year when you join today.
           </motion.p>
 
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
-              Build Your Box
+              Choose Your Plan — Starting at $179
             </Button>
             <Button variant="secondary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
-              Try a One-Time Box
+              Send a Gift Box
             </Button>
           </motion.div>
 
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-6 text-sm text-text-muted">
-            Free shipping always&nbsp;&nbsp;·&nbsp;&nbsp;Cancel anytime
+            Free shipping always&nbsp;&nbsp;·&nbsp;&nbsp;Skip or cancel anytime&nbsp;&nbsp;·&nbsp;&nbsp;100% satisfaction guarantee
           </motion.p>
         </div>
       </div>

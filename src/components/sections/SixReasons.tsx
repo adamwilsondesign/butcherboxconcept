@@ -1,24 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Truck, RefreshCcw, ThumbsUp, Award, Leaf } from "lucide-react";
+import { RefreshCw, Truck, ShieldCheck, Award, ShieldX, Leaf } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { IMAGES } from "@/lib/images";
 
-const TRUST_ITEMS = [
-  { icon: RefreshCcw, label: "Flexible Subscription" },
-  { icon: ShieldCheck, label: "Skip or Cancel Anytime" },
+const TRUST_BADGES = [
+  { icon: RefreshCw, label: "Flexible Plans" },
   { icon: Truck, label: "Free Shipping" },
-  { icon: ThumbsUp, label: "100% Satisfaction Guarantee" },
-  { icon: Award, label: "Third-Party Certified for Animal Welfare" },
-  { icon: Leaf, label: "No Antibiotics Ever" },
+  { icon: ShieldCheck, label: "Satisfaction Guarantee" },
+  { icon: Award, label: "Certified Humane" },
+  { icon: ShieldX, label: "No Antibiotics Ever" },
+  { icon: Leaf, label: "B Corp Certified" },
 ];
 
 const REASONS = [
   { number: 1, title: "Freezer to Table in 20 Minutes", image: IMAGES.sirloin },
-  { number: 2, title: "400,000+ Happy Members", image: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt9ddf16a5496544b5/685d8851ed43a234704d8e38/grilling-recipes-hero.jpg?q=70&width=1920&auto=webp" },
+  { number: 2, title: "400,000+ Happy Members", image: "https://images.ctfassets.net/1yr7azz9gqt1/7AEaPBe34XdJyyQW4XvibD/6870bf8f751f0b50b8e09e1e7f94d76c/WhatsInTheBox-Mobile.jpg?q=50&fm=jpg" },
   { number: 3, title: "100% Grass-Fed, No Exceptions", image: IMAGES.chickensField },
-  { number: 4, title: "Free Shipping, Always", image: "https://swyftcourier.ca/wp-content/uploads/2023/12/reliable-personal-delivery-in-vancouver.webp" },
+  { number: 4, title: "Free Shipping, Always", image: "https://images.ctfassets.net/1yr7azz9gqt1/382W88cbfXXjJSvHF6Hqog/0f286ffefd26e6ef5c4fabbce2180064/26_Q1_NYNY_Web_UnauthenticatedHomepage_Mobile_770x1100.jpg?q=50&fm=jpg" },
   { number: 5, title: "Certified B Corporation", image: IMAGES.fishingBoat },
   { number: 6, title: "2M+ Meals Donated", image: IMAGES.steakRosemary },
 ] as const;
@@ -28,8 +28,8 @@ const cardReveal = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0,
 
 export default function SixReasons() {
   return (
-    <section className="bg-surface" id="why-butcherbox">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-[#FAF7F2]" id="why-butcherbox">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, ease: "easeOut" as const }}>
           <SectionHeading eyebrow="On The Fence?" heading="6 Reasons to Try ButcherBox" subtitle="Premium proteins, humanely raised and delivered frozen — ready when you are." />
         </motion.div>
@@ -47,18 +47,16 @@ export default function SixReasons() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
 
-      {/* ── Trust Banner ── */}
-      <div className="border-t border-border bg-[#243B35]">
-        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 py-5 sm:px-8 lg:px-12">
-          {TRUST_ITEMS.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-2 text-sm font-medium text-white/90">
-              <Icon size={16} className="shrink-0 text-white/70" />
+        {/* ── Trust Badges ── */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.5, delay: 0.2 }} className="mt-14 flex flex-wrap items-center justify-center gap-3">
+          {TRUST_BADGES.map(({ icon: Icon, label }) => (
+            <div key={label} className="inline-flex items-center gap-2 rounded-full border border-[#E5DDD4] bg-white px-4 py-2 text-sm font-medium text-[#6B6B6B]">
+              <Icon size={15} className="shrink-0" />
               <span>{label}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

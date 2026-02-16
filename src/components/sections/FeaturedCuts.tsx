@@ -22,8 +22,8 @@ export default function FeaturedCuts() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="bg-surface" id="featured-cuts">
-      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-white" id="featured-cuts">
+      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <SectionHeading eyebrow="Real Ingredients. Unreal Taste." heading="Level Up Your Dinner" eyebrowColor="accent" />
         </motion.div>
