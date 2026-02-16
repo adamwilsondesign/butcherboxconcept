@@ -1,8 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ShieldCheck, Truck, RefreshCcw, ThumbsUp, Award, Leaf } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { IMAGES } from "@/lib/images";
+
+const TRUST_ITEMS = [
+  { icon: RefreshCcw, label: "Flexible Subscription" },
+  { icon: ShieldCheck, label: "Skip or Cancel Anytime" },
+  { icon: Truck, label: "Free Shipping" },
+  { icon: ThumbsUp, label: "100% Satisfaction Guarantee" },
+  { icon: Award, label: "Third-Party Certified for Animal Welfare" },
+  { icon: Leaf, label: "No Antibiotics Ever" },
+];
 
 const REASONS = [
   { number: 1, title: "Freezer to Table in 20 Minutes", image: IMAGES.sirloin },
@@ -37,6 +47,18 @@ export default function SixReasons() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* ── Trust Banner ── */}
+      <div className="border-t border-border bg-[#243B35]">
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-4 px-6 py-5 sm:px-8 lg:px-12">
+          {TRUST_ITEMS.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex items-center gap-2 text-sm font-medium text-white/90">
+              <Icon size={16} className="shrink-0 text-white/70" />
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

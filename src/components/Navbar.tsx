@@ -10,6 +10,11 @@ const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Our Standards", href: "#our-standards" },
   { label: "Reviews", href: "#reviews" },
+  { label: "Sourcing", href: "#" },
+  { label: "Gifts", href: "#" },
+  { label: "Recipes", href: "#" },
+  { label: "FAQs", href: "#" },
+  { label: "Store Locator", href: "#" },
 ];
 
 export default function Navbar() {
