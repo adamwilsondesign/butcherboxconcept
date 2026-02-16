@@ -24,7 +24,7 @@ export default function Hero() {
           alt="ButcherBox premium meat spread"
           loading="eager"
           className="h-full w-full object-cover"
-          style={{ transform: "scaleX(-1)" }}
+          style={{ transform: "scaleX(1)" }}
         />
       </div>
 
