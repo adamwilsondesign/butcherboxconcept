@@ -6,9 +6,9 @@ import { IMAGES } from "@/lib/images";
 
 const REASONS = [
   { number: 1, title: "Freezer to Table in 20 Minutes", image: IMAGES.sirloin },
-  { number: 2, title: "400,000+ Happy Members", image: IMAGES.whatsInBox },
+  { number: 2, title: "400,000+ Happy Members", image: "https://lh3.googleusercontent.com/gg-dl/AOI_d_8yf7v8GltjxJDskckvPSOJgGrZvL2IuS_yGi--K45K876GEq3uH8uXYKenCpWCg-yMToYfiEAGkipVExVrkJvd7PzODnw-KKVWoY1JViHAnavUdeAQioV7h3vtUeCL6ceam6j8mvnuEmlFKxdhaaRiKLlK29mx5o18AlL4Iy45H57f=s1024-rj" },
   { number: 3, title: "100% Grass-Fed, No Exceptions", image: IMAGES.chickensField },
-  { number: 4, title: "Free Shipping, Always", image: IMAGES.whatsInBox },
+  { number: 4, title: "Free Shipping, Always", image: "https://lh3.googleusercontent.com/gg-dl/AOI_d_8Q5KZDDUOC8um0KDmzErNF40GJQAgQo513crwaPWxZ5PeGnEjOfeNUcPU6LGNxnsej6e6V8CJ3xWbB3KZFixOANtFRYi1Wfuukkf8BVAJQCpMXTMUgvM5cKEqbcaNuiCtgml3h8tLIkRkdBwHbfEu16KLP_KPMFylX1E6-JQb6Z7Q9BA=s1024-rj" },
   { number: 5, title: "Certified B Corporation", image: IMAGES.fishingBoat },
   { number: 6, title: "2M+ Meals Donated", image: IMAGES.steakRosemary },
 ] as const;
