@@ -20,7 +20,7 @@ export default function Hero() {
     <section className="relative min-h-[calc(100vh-108px)] overflow-hidden" id="hero" aria-label="Hero">
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="https://lh3.googleusercontent.com/gg-dl/AOI_d_8yf7v8GltjxJDskckvPSOJgGrZvL2IuS_yGi--K45K876GEq3uH8uXYKenCpWCg-yMToYfiEAGkipVExVrkJvd7PzODnw-KKVWoY1JViHAnavUdeAQioV7h3vtUeCL6ceam6j8mvnuEmlFKxdhaaRiKLlK29mx5o18AlL4Iy45H57f=s1024-rj"
+          src="https://njfamily-images.s3.amazonaws.com/wp-content/uploads/2020/07/NJF_Family-BBQ-Covid-19.jpg"
           alt="ButcherBox premium meat spread"
           loading="eager"
           className="h-full w-full object-cover"
