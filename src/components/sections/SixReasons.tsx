@@ -16,9 +16,9 @@ const TRUST_BADGES = [
 
 const REASONS = [
   { number: 1, title: "Freezer to Table in 20 Minutes", image: IMAGES.sirloin },
-  { number: 2, title: "400,000+ Happy Members", image: "https://images.ctfassets.net/1yr7azz9gqt1/7AEaPBe34XdJyyQW4XvibD/6870bf8f751f0b50b8e09e1e7f94d76c/WhatsInTheBox-Mobile.jpg?q=50&fm=jpg" },
+  { number: 2, title: "400,000+ Happy Members", image: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt9ddf16a5496544b5/685d8851ed43a234704d8e38/grilling-recipes-hero.jpg?q=70&width=1920&auto=webp" },
   { number: 3, title: "100% Grass-Fed, No Exceptions", image: IMAGES.chickensField },
-  { number: 4, title: "Free Shipping, Always", image: "https://images.ctfassets.net/1yr7azz9gqt1/382W88cbfXXjJSvHF6Hqog/0f286ffefd26e6ef5c4fabbce2180064/26_Q1_NYNY_Web_UnauthenticatedHomepage_Mobile_770x1100.jpg?q=50&fm=jpg" },
+  { number: 4, title: "Free Shipping, Always", image: "https://swyftcourier.ca/wp-content/uploads/2023/12/reliable-personal-delivery-in-vancouver.webp" },
   { number: 5, title: "Certified B Corporation", image: IMAGES.fishingBoat },
   { number: 6, title: "2M+ Meals Donated", image: IMAGES.steakRosemary },
 ] as const;

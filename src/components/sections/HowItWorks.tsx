@@ -48,7 +48,7 @@ export default function HowItWorks() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, ease: "easeOut" as const, delay: 0.1 }} className="mt-14 overflow-hidden rounded-2xl">
-          <img src="https://images.ctfassets.net/1yr7azz9gqt1/7AEaPBe34XdJyyQW4XvibD/6870bf8f751f0b50b8e09e1e7f94d76c/WhatsInTheBox-Mobile.jpg?q=50&fm=jpg" alt="What's in a ButcherBox" loading="lazy" className="aspect-[21/9] w-full object-cover" />
+          <img src="https://shapinup.com/wp-content/uploads/2019/02/BBmeatbox1.jpg" alt="What's in a ButcherBox" loading="lazy" className="aspect-[21/9] w-full object-cover" />
         </motion.div>
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
