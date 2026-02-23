@@ -21,7 +21,7 @@ export default function HowItWorks() {
 
   return (
     <section className="bg-[#F5F0EB]" id="how-it-works">
-      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <SectionHeading eyebrow="How It Works" heading="Delivered Frozen, Served Incredible" subtitle="We partner with trusted ranchers and fisheries to bring you the best proteins, made simple." />
         </motion.div>
@@ -33,7 +33,7 @@ export default function HowItWorks() {
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {STEPS.map((step) => (
             <motion.div key={step.number} variants={stepReveal} className="flex gap-5">
-              <span className="font-serif text-5xl font-bold leading-none text-[#2D5E4A]/20 sm:text-6xl lg:text-7xl">
+              <span className="font-serif text-5xl font-bold leading-none text-[#2D5E4A] sm:text-6xl lg:text-7xl">
                 {step.number}
               </span>
               <div className="pt-1">
@@ -49,7 +49,7 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-14 flex justify-center"
+          className="mt-20 flex justify-center"
         >
           <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
             Start Building Your Box →

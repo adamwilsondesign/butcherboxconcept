@@ -65,7 +65,7 @@ export default function ForEveryTable() {
 
   return (
     <section className="bg-[#FAF7F2]" id="products">
-      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <SectionHeading eyebrow="Something For Everyone" heading="For Every Table" subtitle="Over 400,000 members cook with us. Premium proteins that fit every diet and every lifestyle." />
         </motion.div>
@@ -73,7 +73,7 @@ export default function ForEveryTable() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, ease: "easeOut" as const, delay: 0.1 }} className="mt-12">
           <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-2 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {FILTERS.map((filter) => (
-              <button key={filter.key} onClick={() => setActiveFilter(filter.key)} className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${activeFilter === filter.key ? "bg-[#2D5E4A] text-white shadow-md" : "bg-surface text-text-dark hover:bg-[#2D5E4A]/10"}`}>
+              <button key={filter.key} onClick={() => setActiveFilter(filter.key)} className={`shrink-0 rounded-full px-7 py-3 text-sm font-semibold transition-all duration-200 ${activeFilter === filter.key ? "bg-[#2D5E4A] text-white shadow-md" : "bg-surface text-text-dark hover:bg-[#2D5E4A]/10"}`}>
                 {filter.label}
               </button>
             ))}
@@ -83,7 +83,7 @@ export default function ForEveryTable() {
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-3">
             <AnimatePresence mode="wait">
-              <motion.div key={active.key} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} transition={{ duration: 0.3, ease: "easeOut" as const }} className="sticky top-[132px]">
+              <motion.div key={active.key} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} transition={{ duration: 0.3, ease: "easeOut" as const }} className="sticky top-[140px]">
                 <h3 className="font-serif text-2xl font-bold text-text-dark sm:text-3xl">{active.label}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-text-muted">{active.description}</p>
                 <div className="mt-5 h-[3px] w-12 rounded-full bg-[#2D5E4A]/30" />
@@ -103,8 +103,8 @@ export default function ForEveryTable() {
                       </div>
                       <div className="px-4 py-3.5 sm:px-5 sm:py-4">
                         <h4 className="text-sm font-bold leading-snug text-text-dark group-hover:text-[#2D5E4A] transition-colors duration-200 sm:text-base">{product.name}</h4>
-                        <div className="mt-1.5 flex items-center gap-2">
-                          <span className="text-base font-bold text-[#2D5E4A]">${product.price}</span>
+                        <div className="mt-2 flex items-baseline gap-2">
+                          <span className="text-lg font-bold text-[#2D5E4A]">${product.price}</span>
                           <span className="text-sm text-text-muted line-through">${product.originalPrice}</span>
                         </div>
                       </div>

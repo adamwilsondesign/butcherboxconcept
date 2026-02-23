@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <SignupProvider>
           <Navbar />
-          <div className="pt-[108px]">{children}</div>
+          <div className="pt-[116px]">{children}</div>
           <Footer />
         </SignupProvider>
       </body>

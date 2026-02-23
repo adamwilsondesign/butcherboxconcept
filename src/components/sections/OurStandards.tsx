@@ -45,14 +45,14 @@ export default function OurStandards() {
             <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#2D5E4A]">
               Sourcing
             </motion.p>
-            <motion.h2 variants={fadeUp} className="mt-4 font-serif text-3xl font-bold leading-tight text-text-dark sm:text-4xl lg:text-5xl">
+            <motion.h2 variants={fadeUp} className="mt-4 font-serif text-3xl font-bold leading-[1.1] text-text-dark sm:text-4xl">
               We Know Where Every Cut Comes From
             </motion.h2>
             <motion.p variants={fadeUp} className="mt-5 max-w-lg text-[16px] leading-relaxed text-text-muted">
               Every product in your box is traceable to farms and fisheries that meet our strict standards for animal welfare, sustainability, and taste.
             </motion.p>
 
-            <motion.ul variants={fadeUp} className="mt-8 space-y-4">
+            <motion.ul variants={fadeUp} className="mt-10 space-y-6">
               {CREDENTIALS.map((cred) => (
                 <li key={cred} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2D5E4A]">

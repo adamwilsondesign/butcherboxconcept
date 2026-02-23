@@ -21,9 +21,9 @@ export default function ProductCategories() {
 
   return (
     <section className="bg-white" id="categories">
-      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.6, ease: "easeOut" as const }}>
-          <SectionHeading eyebrow="What We Offer" heading="Premium Proteins, Your&nbsp;Way" subtitle="From pasture-raised staples to chef-ready meals — explore our curated categories." />
+          <SectionHeading eyebrow="What We Offer" heading="Premium Proteins, Your&nbsp;Way" subtitle="Explore our curated categories." />
         </motion.div>
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
@@ -44,8 +44,8 @@ export default function ProductCategories() {
               <div className="h-1 w-0 bg-[#2D5E4A] transition-all duration-300 group-hover:w-full" />
               <div className="flex flex-1 items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
                 <div>
-                  <h3 className="font-serif text-xl font-bold text-text-dark sm:text-2xl">{category.name}</h3>
-                  <p className="mt-1 text-sm text-text-muted">{category.description}</p>
+                  <h3 className="font-serif text-lg font-bold text-text-dark">{category.name}</h3>
+                  <p className="mt-0.5 text-sm text-text-muted">{category.description}</p>
                 </div>
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#2D5E4A]/20 text-[#2D5E4A] transition-all duration-300 group-hover:border-[#2D5E4A] group-hover:bg-[#2D5E4A] group-hover:text-white">
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />

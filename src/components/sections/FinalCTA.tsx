@@ -40,7 +40,7 @@ export default function FinalCTA() {
             </button>
           </motion.div>
 
-          <motion.p variants={fadeUp} className="mt-4 text-sm text-white/50">
+          <motion.p variants={fadeUp} className="mt-6 text-sm text-white/50">
             Cancel or pause anytime.
           </motion.p>
 

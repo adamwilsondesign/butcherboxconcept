@@ -9,7 +9,7 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } }
 export default function MemberReviews() {
   return (
     <section className="bg-white" id="reviews">
-      <div className="mx-auto w-full max-w-3xl px-6 py-28 sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -19,7 +19,7 @@ export default function MemberReviews() {
         >
           <motion.div variants={fadeUp} className="flex gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={20} className="fill-[#D4A84B] text-[#D4A84B]" />
+              <Star key={i} size={20} className="fill-[#2D5E4A] text-[#2D5E4A]" />
             ))}
           </motion.div>
 
@@ -30,8 +30,8 @@ export default function MemberReviews() {
           </motion.blockquote>
 
           <motion.div variants={fadeUp} className="mt-8">
-            <p className="text-base font-semibold text-text-dark">Paul T.</p>
-            <p className="mt-1 text-sm text-text-muted">ButcherBox Member since 2022</p>
+            <p className="text-lg font-semibold text-text-dark">Paul T.</p>
+            <p className="mt-1 text-base font-medium text-text-muted">ButcherBox Member since 2022</p>
           </motion.div>
 
           <motion.p variants={fadeUp} className="mt-6 text-sm text-text-muted">

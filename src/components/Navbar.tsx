@@ -52,7 +52,7 @@ export default function Navbar() {
             : "bg-white"
         }`}
       >
-        <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12" aria-label="Main navigation">
+        <nav className="mx-auto flex h-[80px] max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12" aria-label="Main navigation">
           <Link href="/" className="relative z-10" aria-label="ButcherBox home">
             <span className="text-lg font-extrabold uppercase tracking-[0.18em] text-[#2D5E4A] sm:text-xl">BUTCHERBOX</span>
           </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} onClick={() => setMobileOpen(false)} className="fixed inset-0 z-40 bg-black/40 md:hidden" aria-hidden="true" />
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 30, stiffness: 300 }} className="fixed right-0 top-0 z-40 flex h-full w-[280px] flex-col bg-white shadow-2xl md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-              <div className="h-[108px] shrink-0" />
+              <div className="h-[116px] shrink-0" />
               <nav className="flex flex-1 flex-col gap-2 px-6 py-4" aria-label="Mobile navigation links">
                 {NAV_LINKS.map(({ label, href }, i) => (
                   <motion.a key={href} href={href} onClick={() => setMobileOpen(false)} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.05 }} className="rounded-lg px-3 py-3 text-base font-medium text-text-dark transition-colors hover:bg-[#2D5E4A]/5 hover:text-[#2D5E4A]">

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Plus, ArrowRight } from "lucide-react";
-import SectionHeading from "@/components/ui/SectionHeading";
 import { useSignup } from "@/components/signup/SignupFlow";
 import { IMAGES } from "@/lib/images";
 
@@ -23,12 +22,13 @@ export default function FeaturedCuts() {
 
   return (
     <section className="bg-white" id="featured-cuts">
-      <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-          <SectionHeading eyebrow="Real Ingredients. Unreal Taste." heading="Level Up Your Dinner" eyebrowColor="accent" />
+      <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-[#C8512B]">Real Ingredients. Unreal Taste.</p>
+          <h2 className="font-serif text-5xl font-bold leading-tight text-text-dark sm:text-6xl">Level Up Your Dinner</h2>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-16 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, ease: "easeOut" as const }} className="overflow-hidden rounded-2xl">
             <img src={IMAGES.whatsInBox} alt="Artful arrangement of ButcherBox cuts" loading="lazy" className="aspect-[4/5] w-full object-cover" />
           </motion.div>

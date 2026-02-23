@@ -17,7 +17,8 @@ const fadeUp = {
 export default function Hero() {
   const { openSignup } = useSignup();
   return (
-    <section className="relative min-h-[calc(100vh-108px)] overflow-hidden" id="hero" aria-label="Hero">
+    <section className="relative h-[calc(100vh-116px)] max-h-[900px] overflow-hidden" id="hero" aria-label="Hero">
+      {/* Background image */}
       <div className="absolute inset-0 overflow-hidden">
         <img
           src="https://njfamily-images.s3.amazonaws.com/wp-content/uploads/2020/07/NJF_Family-BBQ-Covid-19.jpg"
@@ -28,12 +29,14 @@ export default function Hero() {
         />
       </div>
 
-      {/* Gradient overlay — cream to transparent for readability */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/95 via-40% to-[#FAF7F2]/10 lg:via-[#FAF7F2]/90 lg:via-35% lg:to-transparent" />
       <div className="absolute inset-0 bg-[#FAF7F2]/60 sm:bg-transparent" />
 
-      <div className="relative mx-auto flex h-full min-h-[calc(100vh-108px)] max-w-7xl items-center px-6 sm:px-8 lg:px-12">
-        <div className="w-full max-w-xl py-16 lg:py-24">
+      {/* Content — vertically centred */}
+      <div className="relative mx-auto flex h-full max-w-7xl items-center px-6 sm:px-8 lg:px-12">
+        <div className="w-full max-w-2xl">
+          {/* Star badge */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-text-dark shadow-sm backdrop-blur-sm">
               <span className="flex gap-0.5">
@@ -45,26 +48,33 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-6 font-serif text-3xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-4xl md:text-5xl lg:text-6xl">
-            Restaurant-Quality Meals,
-            <br />
+          {/* Headline — dominant size */}
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={1}
+            className="mt-5 font-serif text-5xl font-bold leading-[1.05] tracking-tight text-text-dark sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            Restaurant-Quality Meals,<br />
             <span className="text-[#2D5E4A]">Without the Restaurant Price.</span>
           </motion.h1>
 
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="mt-6 max-w-md text-lg leading-relaxed text-text-muted">
-            100% grass-fed beef, organic free-range chicken, wild-caught seafood — from trusted farms to your freezer. Free steak for a year when you join today.
+          {/* Short subtitle — one line */}
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="mt-4 text-lg text-text-muted lg:text-xl">
+            Grass-fed beef, free-range chicken, wild-caught seafood — delivered free.
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-8 flex flex-col items-start gap-3">
-            <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
-              Get Started
-            </Button>
+          {/* CTA */}
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-6 flex flex-col items-start gap-3">
+            <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>Get Started</Button>
             <button onClick={() => openSignup()} className="text-sm font-medium text-text-muted hover:text-[#2D5E4A] transition-colors">
               Not ready to commit? <span className="underline underline-offset-2">Try a one-time box →</span>
             </button>
           </motion.div>
 
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-8 text-sm text-text-muted">
+          {/* Trust stats — immediately below CTA with 12px gap */}
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-3 text-sm text-text-muted">
             400k+ Members&nbsp;&nbsp;·&nbsp;&nbsp;1B+ Meals Delivered&nbsp;&nbsp;·&nbsp;&nbsp;70k+ 5-Star Reviews
           </motion.p>
         </div>
