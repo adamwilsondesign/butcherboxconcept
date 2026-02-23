@@ -9,17 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#2D5E4A",
-        "primary-light": "#3A7D64",
-        "primary-dark": "#243B35",
+        primary: "#243B35",
         accent: "#C8512B",
         background: "#FAF7F2",
         surface: "#FFFFFF",
         "surface-warm": "#F5F0EB",
-        "text-dark": "#1A1A1A",
+        "text-dark": "#2C2C2C",
         "text-muted": "#6B6B6B",
         border: "#E5DDD4",
-        "star-gold": "#D4A84B",
       },
       fontFamily: {
         serif: ["var(--font-libre)", "serif"],

@@ -14,17 +14,17 @@
   }
 
   ::selection {
-    @apply bg-accent text-white;
+    @apply bg-primary text-white;
   }
 
-  /* Scroll-margin for anchor links to clear fixed nav (36px banner + 72px nav + 24px breathing room) */
+  /* Scroll-margin for anchor links to clear fixed nav (36px banner + 68px nav + 24px breathing room) */
   [id] {
-    scroll-margin-top: 132px;
+    scroll-margin-top: 128px;
   }
 
   /* Global focus-visible outline for keyboard navigation */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-primary-light;
+    @apply outline-2 outline-offset-2 outline-primary;
   }
 
   /* Remove default outline, rely on focus-visible */

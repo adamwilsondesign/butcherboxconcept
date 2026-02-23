@@ -2,40 +2,25 @@
 
 import { motion } from "framer-motion";
 
-const VALUES = [
-  {
-    title: "Premium Quality",
-    description: "100% grass-fed beef, free-range chicken, heritage pork, and wild-caught seafood.",
-  },
-  {
-    title: "Better Prices",
-    description: "Up to 30% less than specialty grocery stores, delivered free to your door.",
-  },
-  {
-    title: "Zero Hassle",
-    description: "Ships frozen on your schedule. Skip, pause, or cancel anytime.",
-  },
-] as const;
-
-const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } } };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
+const STATS = ["400k+ Members", "1B+ Meals Delivered", "70k+ 5-Star Reviews"];
 
 export default function StatsBar() {
   return (
     <motion.section
-      variants={stagger}
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="bg-[#243B35]"
+      transition={{ duration: 0.5 }}
     >
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-6 py-10 sm:grid-cols-3 sm:gap-6 sm:px-8 sm:py-12 lg:gap-12 lg:px-12 lg:py-14">
-        {VALUES.map(({ title, description }) => (
-          <motion.div key={title} variants={fadeUp} className="text-center">
-            <h3 className="text-lg font-bold text-white">{title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-white/60">{description}</p>
-          </motion.div>
-        ))}
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-center px-6 py-10 sm:px-8 lg:px-12">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
+          {STATS.map((stat, i) => (
+            <span key={stat} className="flex items-center gap-2 text-[13px] font-medium text-[#6B6B6B]">
+              {i > 0 && <span className="hidden text-border sm:inline">·</span>}
+              {stat}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.section>
   );

@@ -70,8 +70,8 @@ export default function TrustBar() {
     <section className="bg-[#FAF7F2]" id="press">
       <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-          <p className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-[#2D5E4A]">As Seen In</p>
-          <SectionHeading eyebrow="" heading="Trusted & Recognized" subtitle="Ranked among the best food subscription services by leading publications." />
+          <p className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-[#243B35]">As Seen In</p>
+          <SectionHeading heading="Trusted & Recognized" />
         </motion.div>
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">

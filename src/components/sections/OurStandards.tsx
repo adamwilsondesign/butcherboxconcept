@@ -8,7 +8,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, tra
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
 
 const CREDENTIALS = [
-  "Certified B Corporation — meeting the highest standards of social and environmental impact",
+  "Certified B Corporation — highest standards of social and environmental impact",
   "No antibiotics or added hormones — ever. 200+ banned ingredients.",
   "100% recyclable packaging — shipped frozen in eco-friendly materials",
 ] as const;
@@ -34,43 +34,28 @@ export default function OurStandards() {
             />
           </motion.div>
 
-          {/* Right: Copy */}
+          {/* Right: Headline + credentials */}
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="flex flex-col justify-center px-6 py-16 sm:px-12 sm:py-20 lg:px-16 lg:py-24"
+            className="flex flex-col justify-center px-6 py-[100px] sm:px-12 lg:px-16"
           >
-            <motion.p variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest text-[#2D5E4A]">
-              Sourcing
-            </motion.p>
-            <motion.h2 variants={fadeUp} className="mt-4 font-serif text-3xl font-bold leading-[1.1] text-text-dark sm:text-4xl">
+            <motion.h2 variants={fadeUp} className="font-serif text-[40px] font-semibold leading-[1.15] text-[#2C2C2C]">
               We Know Where Every Cut Comes From
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 max-w-lg text-[16px] leading-relaxed text-text-muted">
-              Every product in your box is traceable to farms and fisheries that meet our strict standards for animal welfare, sustainability, and taste.
-            </motion.p>
 
             <motion.ul variants={fadeUp} className="mt-10 space-y-6">
               {CREDENTIALS.map((cred) => (
                 <li key={cred} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2D5E4A]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#243B35]">
                     <Check size={12} className="text-white" />
                   </span>
-                  <span className="text-[15px] leading-relaxed text-text-muted">{cred}</span>
+                  <span className="text-[16px] leading-relaxed text-[#6B6B6B]">{cred}</span>
                 </li>
               ))}
             </motion.ul>
-
-            <motion.div variants={fadeUp} className="mt-10">
-              <a
-                href="#"
-                className="text-sm font-semibold text-[#2D5E4A] underline underline-offset-4 transition-colors hover:text-[#243B35]"
-              >
-                Learn more about our sourcing →
-              </a>
-            </motion.div>
           </motion.div>
         </div>
       </div>

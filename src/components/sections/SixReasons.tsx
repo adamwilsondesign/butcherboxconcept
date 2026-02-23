@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 
-/* ── Inline SVG press logos ── */
-
 function ForbesSVG() {
   return (
     <svg viewBox="0 0 100 28" className="h-6 w-auto sm:h-7">
@@ -57,7 +55,7 @@ export default function SixReasons() {
           viewport={{ once: true }}
           className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10 lg:gap-14"
         >
-          <motion.span variants={logoReveal} className="shrink-0 text-xs font-semibold uppercase tracking-widest text-text-muted">
+          <motion.span variants={logoReveal} className="shrink-0 text-[13px] font-medium uppercase tracking-widest text-[#6B6B6B]">
             As Seen In
           </motion.span>
 

@@ -3,7 +3,6 @@ import StatsBar from "@/components/sections/StatsBar";
 import SixReasons from "@/components/sections/SixReasons";
 import ProductCategories from "@/components/sections/ProductCategories";
 import HowItWorks from "@/components/sections/HowItWorks";
-import FeaturedCuts from "@/components/sections/FeaturedCuts";
 import ForEveryTable from "@/components/sections/ForEveryTable";
 import OurStandards from "@/components/sections/OurStandards";
 import MemberReviews from "@/components/sections/MemberReviews";
@@ -17,7 +16,6 @@ export default function Home() {
       <SixReasons />
       <ProductCategories />
       <HowItWorks />
-      <FeaturedCuts />
       <ForEveryTable />
       <OurStandards />
       <MemberReviews />

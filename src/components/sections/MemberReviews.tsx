@@ -8,8 +8,8 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } }
 
 export default function MemberReviews() {
   return (
-    <section className="bg-white" id="reviews">
-      <div className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-8 lg:px-12">
+    <section className="bg-[#FAF7F2]" id="reviews">
+      <div className="mx-auto w-full max-w-3xl px-6 py-[100px] sm:px-8 lg:px-12">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -19,24 +19,20 @@ export default function MemberReviews() {
         >
           <motion.div variants={fadeUp} className="flex gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={20} className="fill-[#2D5E4A] text-[#2D5E4A]" />
+              <Star key={i} size={20} className="fill-[#243B35] text-[#243B35]" />
             ))}
           </motion.div>
 
           <motion.blockquote variants={fadeUp} className="mt-8">
-            <p className="font-serif text-2xl font-medium leading-relaxed text-text-dark sm:text-3xl lg:text-4xl">
+            <p className="font-serif text-[20px] font-normal leading-relaxed text-[#2C2C2C] sm:text-[28px] lg:text-[32px]">
               &ldquo;I was nervous about the subscription but cancelling is genuinely easy — and the quality makes it a no-brainer.&rdquo;
             </p>
           </motion.blockquote>
 
           <motion.div variants={fadeUp} className="mt-8">
-            <p className="text-lg font-semibold text-text-dark">Paul T.</p>
-            <p className="mt-1 text-base font-medium text-text-muted">ButcherBox Member since 2022</p>
+            <p className="text-[16px] font-medium text-[#2C2C2C]">Paul T.</p>
+            <p className="mt-1 text-[13px] text-[#6B6B6B]">Member since 2022</p>
           </motion.div>
-
-          <motion.p variants={fadeUp} className="mt-6 text-sm text-text-muted">
-            70,000+ five-star reviews
-          </motion.p>
         </motion.div>
       </div>
     </section>
