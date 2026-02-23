@@ -9,18 +9,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#243B35",
-        accent: "#C8512B",
-        background: "#FAF7F2",
-        surface: "#FFFFFF",
-        "surface-warm": "#F5F0EB",
-        "text-dark": "#2C2C2C",
+        "green-dark": "#1B3A2D",
+        "green-mid": "#2D5A40",
+        cream: "#F7F3EE",
+        "cream-dark": "#EDE8E1",
+        "text-primary": "#1A1A1A",
         "text-muted": "#6B6B6B",
-        border: "#E5DDD4",
+        accent: "#C8512B",
+        border: "#EDE8E1",
+        /* Aliases for existing Tailwind classes in other components */
+        primary: "#1B3A2D",
+        background: "#F7F3EE",
+        surface: "#FFFFFF",
+        "surface-warm": "#EDE8E1",
+        "text-dark": "#1A1A1A",
       },
       fontFamily: {
-        serif: ["var(--font-libre)", "serif"],
+        display: ["var(--font-playfair)", "serif"],
+        serif: ["var(--font-playfair)", "serif"],
         sans: ["var(--font-inter)", "sans-serif"],
+      },
+      borderRadius: {
+        card: "12px",
+        pill: "100px",
+      },
+      boxShadow: {
+        card: "0 2px 16px rgba(0,0,0,0.07)",
       },
     },
   },

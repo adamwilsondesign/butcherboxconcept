@@ -10,11 +10,11 @@
   }
 
   body {
-    @apply bg-background text-text-dark;
+    @apply bg-cream text-text-primary;
   }
 
   ::selection {
-    @apply bg-primary text-white;
+    @apply bg-green-dark text-white;
   }
 
   /* Scroll-margin for anchor links to clear fixed nav (36px banner + 68px nav + 24px breathing room) */
@@ -24,7 +24,7 @@
 
   /* Global focus-visible outline for keyboard navigation */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-primary;
+    @apply outline-2 outline-offset-2 outline-green-dark;
   }
 
   /* Remove default outline, rely on focus-visible */

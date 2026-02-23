@@ -40,16 +40,19 @@ export default function OurStandards() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="flex flex-col justify-center px-6 py-[100px] sm:px-12 lg:px-16"
+            className="flex flex-col justify-center px-6 py-[120px] sm:px-12 lg:px-16"
           >
-            <motion.h2 variants={fadeUp} className="font-serif text-[40px] font-semibold leading-[1.15] text-[#2C2C2C]">
+            <motion.span variants={fadeUp} className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#2D5A40]">
+              Our Promise
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="mt-4 font-display text-[40px] font-bold leading-[1.15] text-[#1A1A1A]">
               We Know Where Every Cut Comes From
             </motion.h2>
 
             <motion.ul variants={fadeUp} className="mt-10 space-y-6">
               {CREDENTIALS.map((cred) => (
                 <li key={cred} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#243B35]">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1B3A2D]">
                     <Check size={12} className="text-white" />
                   </span>
                   <span className="text-[16px] leading-relaxed text-[#6B6B6B]">{cred}</span>

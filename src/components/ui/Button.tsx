@@ -12,9 +12,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#243B35] text-white border-2 border-[#243B35] hover:bg-[#1a2c27] hover:border-[#1a2c27]",
+    "bg-[#1B3A2D] text-white border-2 border-[#1B3A2D] hover:bg-[#142e22] hover:border-[#142e22]",
   secondary:
-    "bg-transparent text-[#243B35] border-2 border-[#243B35] hover:bg-[#243B35] hover:text-white",
+    "bg-transparent text-[#1B3A2D] border-2 border-[#1B3A2D] hover:bg-[#1B3A2D] hover:text-white",
 };
 
 export default function Button({
@@ -25,10 +25,10 @@ export default function Button({
 }: ButtonProps) {
   return (
     <motion.button
-      whileHover={{ scale: 1.02, boxShadow: "0 4px 20px rgba(36,59,53,0.2)" }}
+      whileHover={{ scale: 1.02, boxShadow: "0 4px 20px rgba(27,58,45,0.2)" }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className={`rounded-md px-8 py-3.5 text-[13px] font-semibold tracking-wide uppercase transition-colors duration-200 ${variantStyles[variant]} ${className}`}
+      className={`rounded-pill px-8 py-3.5 text-[14px] font-semibold tracking-wide transition-colors duration-200 ${variantStyles[variant]} ${className}`}
       {...(props as React.ComponentPropsWithoutRef<typeof motion.button>)}
     >
       {children}
