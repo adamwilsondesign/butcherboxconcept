@@ -25,7 +25,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="bg-[#243B35] text-white/80">
+    <footer className="bg-[#015870] text-white/80">
       <div className="mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
@@ -69,7 +69,7 @@ export default function Footer() {
             </address>
             <div className="mt-5 flex gap-3">
               {SOCIALS.map((social) => (
-                <a key={social.label} href={social.href} aria-label={social.label} className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/60 transition-all hover:bg-[#2D5E4A] hover:text-white">
+                <a key={social.label} href={social.href} aria-label={social.label} className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/60 transition-all hover:bg-white/25 hover:text-white">
                   <social.icon size={16} />
                 </a>
               ))}

@@ -27,16 +27,16 @@ export default function ProductCategories() {
         </motion.div>
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[0].name}`} onClick={() => openSignup({ skipToStep: 2, prefilterCategory: CATEGORIES[0].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-7">
+          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[0].name}`} onClick={() => openSignup({ prefilterCategory: CATEGORIES[0].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-7">
             <CategoryCard category={CATEGORIES[0]} size="large" />
           </motion.button>
-          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[1].name}`} onClick={() => openSignup({ skipToStep: 2, prefilterCategory: CATEGORIES[1].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-5">
+          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[1].name}`} onClick={() => openSignup({ prefilterCategory: CATEGORIES[1].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-5">
             <CategoryCard category={CATEGORIES[1]} size="tall" />
           </motion.button>
-          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[2].name}`} onClick={() => openSignup({ skipToStep: 2, prefilterCategory: CATEGORIES[2].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-5">
+          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[2].name}`} onClick={() => openSignup({ prefilterCategory: CATEGORIES[2].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-5">
             <CategoryCard category={CATEGORIES[2]} size="tall" />
           </motion.button>
-          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[3].name}`} onClick={() => openSignup({ skipToStep: 2, prefilterCategory: CATEGORIES[3].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-7">
+          <motion.button variants={cardReveal} aria-label={`Explore ${CATEGORIES[3].name}`} onClick={() => openSignup({ prefilterCategory: CATEGORIES[3].filterCategory })} className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left transition-all duration-300 hover:shadow-xl hover:scale-[1.03] lg:col-span-7">
             <CategoryCard category={CATEGORIES[3]} size="large" />
           </motion.button>
         </motion.div>
