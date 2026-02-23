@@ -45,7 +45,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-8 font-serif text-4xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-5xl md:text-6xl lg:text-7xl">
+          <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-6 font-serif text-3xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-4xl md:text-5xl lg:text-6xl">
             Restaurant-Quality
             <br />
             <span className="text-[#2D5E4A]">Meat &amp; Seafood,</span>

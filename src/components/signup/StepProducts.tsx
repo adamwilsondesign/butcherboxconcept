@@ -66,7 +66,7 @@ export default function StepProducts({
   const progressColor = isOneAway ? "#C8512B" : "#2D5E4A";
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col px-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col px-4 pb-20">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ export default function StepProducts({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="sticky bottom-0 -mx-4 mt-4 flex items-center justify-between border-t border-border bg-background/95 px-4 py-4 backdrop-blur-sm sm:px-6"
+        className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between border-t border-border bg-background/95 px-6 py-4 backdrop-blur-sm sm:px-8"
       >
         <button
           onClick={onBack}
