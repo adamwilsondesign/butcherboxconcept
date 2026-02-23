@@ -33,6 +33,7 @@ export const useSignup = () => useContext(SignupContext);
 /* ── Step labels ── */
 
 const STEP_LABELS = ["Select Plan", "Choose Proteins", "Review & Checkout"];
+const STEP_SUBTITLES = ["Size & frequency", "Pick your cuts", "Review & pay"];
 
 /* ── Slide animation ── */
 
@@ -148,13 +149,18 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                         >
                           {done ? <Check size={12} /> : n}
                         </span>
-                        <span
-                          className={`text-xs font-medium ${
-                            active ? "text-[#2D5E4A]" : done ? "text-[#2D5E4A]" : "text-text-muted"
-                          }`}
-                        >
-                          {label}
-                        </span>
+                        <div className="flex flex-col">
+                          <span
+                            className={`text-xs font-medium leading-tight ${
+                              active ? "text-[#2D5E4A]" : done ? "text-[#2D5E4A]" : "text-text-muted"
+                            }`}
+                          >
+                            {label}
+                          </span>
+                          <span className="text-[10px] text-text-muted/60 leading-tight">
+                            {STEP_SUBTITLES[i]}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   );

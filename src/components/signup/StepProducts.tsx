@@ -66,7 +66,7 @@ export default function StepProducts({
   const progressColor = isOneAway ? "#C8512B" : "#2D5E4A";
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col px-4 pb-20">
+    <div className="mx-auto flex w-full max-w-5xl flex-col px-4 pb-24">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function StepProducts({
         Choose Your Proteins
       </motion.h2>
 
-      {/* Plan badge */}
+      {/* Plan badge with change plan link */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -84,27 +84,13 @@ export default function StepProducts({
       >
         <span className="inline-flex items-center gap-2 rounded-full bg-[#2D5E4A]/10 px-4 py-2 text-sm font-semibold text-[#2D5E4A]">
           {plan.id === "medium" ? "Medium" : plan.id === "large" ? "Large" : "Extra-Large"} · {plan.proteins} proteins · ${plan.price}
+          <button
+            onClick={onBack}
+            className="ml-1 text-xs font-medium underline underline-offset-2 opacity-70 hover:opacity-100 hover:no-underline"
+          >
+            Change plan
+          </button>
         </span>
-      </motion.div>
-
-      {/* Progress bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15 }}
-        className="mx-auto mt-5 w-full max-w-md"
-      >
-        <div className="flex items-center justify-between text-xs font-medium text-text-muted">
-          <span>{totalItems} of {maxItems} proteins selected</span>
-        </div>
-        <div className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-border">
-          <motion.div
-            className="h-full rounded-full transition-colors duration-300"
-            style={{ backgroundColor: progressColor }}
-            animate={{ width: `${progressPct}%` }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          />
-        </div>
       </motion.div>
 
       {/* Box full banner */}
@@ -194,6 +180,9 @@ export default function StepProducts({
                   <p className="mt-0.5 text-xs text-text-muted">
                     {p.weight}
                   </p>
+                  <p className="mt-0.5 text-[11px] leading-snug text-text-muted/70">
+                    {p.description}
+                  </p>
 
                   {/* Add / qty controls */}
                   <div className="mt-2.5 flex items-center gap-2">
@@ -243,32 +232,43 @@ export default function StepProducts({
         </AnimatePresence>
       </div>
 
-      {/* Sticky bottom bar */}
+      {/* Fixed bottom bar with progress */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between border-t border-border bg-background/95 px-6 py-4 backdrop-blur-sm sm:px-8"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur-sm"
       >
-        <button
-          onClick={onBack}
-          aria-label="Go back"
-          className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
-        >
-          ← Back
-        </button>
-
-        <div className="flex items-center gap-2 sm:gap-4">
-          <span className="text-sm text-text-muted">
-            {totalItems} of {maxItems} proteins · <span className="font-bold text-[#2D5E4A]">${plan.price}</span>
-          </span>
+        {/* Progress bar */}
+        <div className="h-1 w-full bg-border">
+          <motion.div
+            className="h-full transition-colors duration-300"
+            style={{ backgroundColor: progressColor }}
+            animate={{ width: `${progressPct}%` }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          />
+        </div>
+        <div className="flex items-center justify-between px-6 py-3.5 sm:px-8">
           <button
-            onClick={onContinue}
-            disabled={totalItems !== maxItems}
-            className="rounded-md bg-[#2D5E4A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#243B35] disabled:opacity-40 disabled:cursor-not-allowed sm:px-6"
+            onClick={onBack}
+            aria-label="Go back"
+            className="text-sm font-medium text-text-muted transition-colors hover:text-text-dark"
           >
-            Review Order →
+            ← Back
           </button>
+
+          <div className="flex items-center gap-2 sm:gap-4">
+            <span className="text-sm text-text-muted">
+              {totalItems} of {maxItems} proteins · <span className="font-bold text-[#2D5E4A]">${plan.price}</span>
+            </span>
+            <button
+              onClick={onContinue}
+              disabled={totalItems !== maxItems}
+              className="rounded-md bg-[#2D5E4A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#243B35] disabled:opacity-40 disabled:cursor-not-allowed sm:px-6"
+            >
+              Review Order →
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>

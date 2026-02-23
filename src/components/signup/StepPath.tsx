@@ -83,17 +83,24 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               <p className="mt-3 text-3xl font-bold text-[#2D5E4A]">
                 ${plan.price}
               </p>
+              <p className="mt-0.5 text-sm text-text-muted">
+                {plan.perMeal}
+              </p>
 
               <p className="mt-2 text-sm text-text-muted">
                 Choose {plan.proteins} proteins (up to {plan.maxLbs} lbs)
               </p>
 
+              <p className="mt-1 text-xs font-medium text-[#2D5E4A]">
+                {plan.feeds}
+              </p>
+
               <div className={`mt-4 rounded-md py-2.5 text-center text-sm font-semibold transition-colors ${
                 isSelected
                   ? "bg-[#2D5E4A] text-white"
-                  : "bg-[#2D5E4A]/10 text-[#2D5E4A] group-hover:bg-[#2D5E4A] group-hover:text-white"
+                  : "bg-[#2D5E4A] text-white hover:bg-[#243B35]"
               }`}>
-                {isSelected ? "Selected" : "Select Plan"}
+                {isSelected ? "Selected ✓" : "Select Plan"}
               </div>
             </motion.button>
           );
@@ -138,7 +145,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="mt-10 flex justify-center"
+        className="mt-10 flex flex-col items-center gap-4"
       >
         <button
           onClick={onContinue}
@@ -147,6 +154,12 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         >
           Next, Choose Your Proteins →
         </button>
+        <p className="text-sm text-text-muted">
+          Not ready to commit?{" "}
+          <button className="font-medium text-[#2D5E4A] underline underline-offset-2 hover:no-underline">
+            Try a one-time box →
+          </button>
+        </p>
       </motion.div>
     </div>
   );
