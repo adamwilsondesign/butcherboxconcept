@@ -46,28 +46,26 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1} className="mt-6 font-serif text-3xl font-bold leading-[1.1] tracking-tight text-text-dark sm:text-4xl md:text-5xl lg:text-6xl">
-            Restaurant-Quality
+            Restaurant-Quality Meals,
             <br />
-            <span className="text-[#2D5E4A]">Meat &amp; Seafood,</span>
-            <br />
-            Delivered
+            <span className="text-[#2D5E4A]">Without the Restaurant Price.</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2} className="mt-6 max-w-md text-lg leading-relaxed text-text-muted">
             100% grass-fed beef, organic free-range chicken, wild-caught seafood — from trusted farms to your freezer. Free steak for a year when you join today.
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3} className="mt-8 flex flex-col items-start gap-3">
             <Button variant="primary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
-              Choose Your Plan — Starting at $179
+              Get Started
             </Button>
-            <Button variant="secondary" className="px-10 py-4 text-base" onClick={() => openSignup()}>
-              Send a Gift Box
-            </Button>
+            <button onClick={() => openSignup()} className="text-sm font-medium text-text-muted hover:text-[#2D5E4A] transition-colors">
+              Not ready to commit? <span className="underline underline-offset-2">Try a one-time box →</span>
+            </button>
           </motion.div>
 
-          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-6 text-sm text-text-muted">
-            Free shipping always&nbsp;&nbsp;·&nbsp;&nbsp;Skip or cancel anytime&nbsp;&nbsp;·&nbsp;&nbsp;100% satisfaction guarantee
+          <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={4} className="mt-8 text-sm text-text-muted">
+            400k+ Members&nbsp;&nbsp;·&nbsp;&nbsp;1B+ Meals Delivered&nbsp;&nbsp;·&nbsp;&nbsp;70k+ 5-Star Reviews
           </motion.p>
         </div>
       </div>
