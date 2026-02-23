@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { DM_Sans, Cormorant_Garamond } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SignupProvider } from "@/components/signup/SignupFlow";
 import "./globals.css";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-dm-sans",
+  weight: ["400", "500"],
 });
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
 });
 
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-cream text-text-primary`}
+        className={`${dmSans.variable} ${cormorant.variable} font-sans antialiased bg-cream text-text-primary`}
       >
         <SignupProvider>
           <Navbar />

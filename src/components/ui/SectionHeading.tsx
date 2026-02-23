@@ -12,11 +12,11 @@ export default function SectionHeading({
   return (
     <div className={`mx-auto max-w-2xl text-center ${className}`}>
       {label && (
-        <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#6B6B6B]">
+        <span className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#767676]">
           {label}
         </span>
       )}
-      <h2 className={`font-display text-[40px] font-bold leading-tight text-[#1A1A1A] ${label ? "mt-4" : ""}`}>
+      <h2 className={`font-display text-[40px] font-semibold leading-tight tracking-heading text-[#2A2A2A] ${label ? "mt-4" : ""}`}>
         {heading}
       </h2>
     </div>

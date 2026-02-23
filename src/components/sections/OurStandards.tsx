@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { IMAGES } from "@/lib/images";
 
-const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } } };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
-
 const CREDENTIALS = [
   "Certified B Corporation — highest standards of social and environmental impact",
   "No antibiotics or added hormones — ever. 200+ banned ingredients.",
@@ -23,7 +20,7 @@ export default function OurStandards() {
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: "easeOut" as const }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative min-h-[320px] lg:min-h-[520px]"
           >
             <img
@@ -35,31 +32,44 @@ export default function OurStandards() {
           </motion.div>
 
           {/* Right: Headline + credentials */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="flex flex-col justify-center px-6 py-[120px] sm:px-12 lg:px-16"
-          >
-            <motion.span variants={fadeUp} className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#2D5A40]">
+          <div className="flex flex-col justify-center px-6 py-[120px] sm:px-12 lg:px-16">
+            <motion.span
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#2D6A4F]"
+            >
               Our Promise
             </motion.span>
-            <motion.h2 variants={fadeUp} className="mt-4 font-display text-[40px] font-bold leading-[1.15] text-[#1A1A1A]">
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="mt-4 font-display text-[40px] font-semibold leading-[1.15] tracking-heading text-[#2A2A2A]"
+            >
               We Know Where Every Cut Comes From
             </motion.h2>
 
-            <motion.ul variants={fadeUp} className="mt-10 space-y-6">
-              {CREDENTIALS.map((cred) => (
-                <li key={cred} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1B3A2D]">
+            <ul className="mt-10 space-y-6">
+              {CREDENTIALS.map((cred, i) => (
+                <motion.li
+                  key={cred}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: 0.2 + i * 0.08, ease: "easeOut" }}
+                  className="flex items-start gap-3"
+                >
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#1B4332]">
                     <Check size={12} className="text-white" />
                   </span>
-                  <span className="text-[16px] leading-relaxed text-[#6B6B6B]">{cred}</span>
-                </li>
+                  <span className="text-[16px] leading-relaxed text-[#767676]">{cred}</span>
+                </motion.li>
               ))}
-            </motion.ul>
-          </motion.div>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

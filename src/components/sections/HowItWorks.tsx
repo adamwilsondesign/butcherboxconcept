@@ -50,50 +50,53 @@ const REASONS: Reason[] = [
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
-
 export default function HowItWorks() {
   const { openSignup } = useSignup();
 
   return (
     <section className="bg-white" id="how-it-works">
       <div className="mx-auto w-full max-w-7xl px-6 py-[120px] sm:px-8 lg:px-12">
-        {/* Section header */}
+        {/* Section header — fade in */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" as const }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#6B6B6B]">
+          <span className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#767676]">
             Why ButcherBox
           </span>
-          <h2 className="mt-4 font-display text-[40px] font-bold leading-tight text-[#1A1A1A]">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="mt-4 font-display text-[40px] font-semibold leading-tight tracking-heading text-[#2A2A2A]"
+          >
             6 Reasons to Try ButcherBox
-          </h2>
+          </motion.h2>
         </motion.div>
 
-        {/* Alternating rows */}
+        {/* Alternating rows — image slides from edge, text from opposite */}
         <div className="mt-16 space-y-0">
           {REASONS.map((reason, i) => {
             const imageLeft = i % 2 === 0;
             return (
-              <motion.div
+              <div
                 key={reason.number}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
                 className={`grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
                   i > 0 ? "mt-20 lg:mt-24" : ""
                 }`}
               >
-                {/* Image */}
-                <div className={`relative overflow-hidden rounded-card ${imageLeft ? "lg:order-1" : "lg:order-2"}`}>
+                {/* Image — slides in from its edge */}
+                <motion.div
+                  initial={{ opacity: 0, x: imageLeft ? -32 : 32 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className={`relative overflow-hidden rounded-card ${imageLeft ? "lg:order-1" : "lg:order-2"}`}
+                >
                   <div
                     className="aspect-[4/3] w-full overflow-hidden"
                     style={{
@@ -109,28 +112,52 @@ export default function HowItWorks() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Text */}
-                <div className={`relative ${imageLeft ? "lg:order-2" : "lg:order-1"}`}>
-                  {/* Decorative large number */}
-                  <span className="absolute -left-2 -top-8 font-display text-[120px] font-bold leading-none text-[#1B3A2D]/[0.04] lg:-left-4 lg:-top-12 lg:text-[160px]">
+                {/* Text — slides in from opposite edge */}
+                <motion.div
+                  initial={{ opacity: 0, x: imageLeft ? 32 : -32 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className={`relative ${imageLeft ? "lg:order-2" : "lg:order-1"}`}
+                >
+                  {/* Decorative large number — opacity 0.06 */}
+                  <span className="absolute -left-2 -top-8 font-display text-[120px] font-semibold leading-none text-[#1B4332]/[0.06] lg:-left-4 lg:-top-12 lg:text-[160px]">
                     {reason.number}
                   </span>
 
                   <div className="relative">
-                    <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#2D5A40]">
+                    <motion.span
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#2D6A4F]"
+                    >
                       {reason.number}
-                    </span>
-                    <h3 className="mt-3 font-display text-[24px] font-semibold leading-snug text-[#1A1A1A] sm:text-[28px]">
+                    </motion.span>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                      className="mt-3 font-display text-[24px] font-semibold leading-snug tracking-heading text-[#2A2A2A] sm:text-[28px]"
+                    >
                       {reason.title}
-                    </h3>
-                    <p className="mt-4 max-w-md text-[16px] leading-relaxed text-[#6B6B6B]">
+                    </motion.h3>
+                    <motion.p
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                      className="mt-4 max-w-md text-[16px] leading-relaxed text-[#767676]"
+                    >
                       {reason.body}
-                    </p>
+                    </motion.p>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             );
           })}
         </div>
@@ -143,12 +170,15 @@ export default function HowItWorks() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-20 flex justify-center"
         >
-          <button
+          <motion.button
             onClick={() => openSignup()}
-            className="rounded-pill bg-[#1B3A2D] px-10 py-4 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-[#142e22] hover:shadow-lg"
+            whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
+            whileTap={{ y: 0 }}
+            transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="rounded-pill bg-[#1B4332] px-10 py-4 text-[14px] font-medium text-white transition-colors duration-200 hover:bg-[#2D6A4F]"
           >
             Start Building Your Box
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </section>

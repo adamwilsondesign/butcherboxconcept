@@ -11,23 +11,39 @@
 
   body {
     @apply bg-cream text-text-primary;
+    color: #2A2A2A;
+  }
+
+  /* Typography — all headings use Cormorant Garamond */
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant), serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* All body / UI text uses DM Sans */
+  p, span, a, button, label, li {
+    font-family: var(--font-dm-sans), sans-serif;
+  }
+
+  /* Body copy colour */
+  p, li {
+    color: #2A2A2A;
   }
 
   ::selection {
     @apply bg-green-dark text-white;
   }
 
-  /* Scroll-margin for anchor links to clear fixed nav (36px banner + 68px nav + 24px breathing room) */
+  /* Scroll-margin for anchor links to clear fixed nav */
   [id] {
     scroll-margin-top: 128px;
   }
 
-  /* Global focus-visible outline for keyboard navigation */
+  /* Global focus-visible outline */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-green-dark;
   }
 
-  /* Remove default outline, rely on focus-visible */
   *:focus:not(:focus-visible) {
     outline: none;
   }

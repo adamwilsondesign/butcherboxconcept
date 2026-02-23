@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 function ForbesSVG() {
   return (
     <svg viewBox="0 0 100 28" className="h-6 w-auto sm:h-7">
-      <text x="50" y="22" textAnchor="middle" fontFamily="'Playfair Display', serif" fontWeight="700" fontStyle="italic" fontSize="22" fill="currentColor">Forbes</text>
+      <text x="50" y="22" textAnchor="middle" fontFamily="'Cormorant Garamond', serif" fontWeight="700" fontStyle="italic" fontSize="22" fill="currentColor">Forbes</text>
     </svg>
   );
 }
@@ -13,7 +13,7 @@ function ForbesSVG() {
 function BonAppetitSVG() {
   return (
     <svg viewBox="0 0 150 28" className="h-6 w-auto sm:h-7">
-      <text x="75" y="22" textAnchor="middle" fontFamily="'Playfair Display', serif" fontWeight="400" fontStyle="italic" fontSize="18" fill="currentColor">Bon Appétit</text>
+      <text x="75" y="22" textAnchor="middle" fontFamily="'Cormorant Garamond', serif" fontWeight="400" fontStyle="italic" fontSize="18" fill="currentColor">Bon Appétit</text>
     </svg>
   );
 }
@@ -21,7 +21,7 @@ function BonAppetitSVG() {
 function NYTCookingSVG() {
   return (
     <svg viewBox="0 0 160 28" className="h-6 w-auto sm:h-7">
-      <text x="80" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="700" fontSize="16" fill="currentColor">NYT Cooking</text>
+      <text x="80" y="22" textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontWeight="700" fontSize="16" fill="currentColor">NYT Cooking</text>
     </svg>
   );
 }
@@ -29,7 +29,7 @@ function NYTCookingSVG() {
 function TodayShowSVG() {
   return (
     <svg viewBox="0 0 120 28" className="h-6 w-auto sm:h-7">
-      <text x="60" y="22" textAnchor="middle" fontFamily="'Inter', sans-serif" fontWeight="800" fontSize="18" fill="currentColor" letterSpacing="1">TODAY</text>
+      <text x="60" y="22" textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontWeight="800" fontSize="18" fill="currentColor" letterSpacing="1">TODAY</text>
     </svg>
   );
 }
@@ -42,7 +42,10 @@ const PRESS = [
 ] as const;
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
-const logoReveal = { hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } } };
+const logoReveal = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
+};
 
 export default function SixReasons() {
   return (
@@ -55,7 +58,7 @@ export default function SixReasons() {
           viewport={{ once: true }}
           className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10 lg:gap-14"
         >
-          <motion.span variants={logoReveal} className="shrink-0 text-[12px] font-semibold uppercase tracking-[0.15em] text-[#6B6B6B]">
+          <motion.span variants={logoReveal} className="shrink-0 text-[12px] font-medium uppercase tracking-[0.15em] text-[#767676]">
             As Seen In
           </motion.span>
 

@@ -134,15 +134,15 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                   return (
                     <div key={label} className="flex items-center">
                       {i > 0 && (
-                        <div className={`mx-1 h-px w-6 ${done ? "bg-[#2D5E4A]" : "bg-border"}`} />
+                        <div className={`mx-1 h-px w-6 ${done ? "bg-[#1B4332]" : "bg-border"}`} />
                       )}
                       <div className="flex items-center gap-1.5">
                         <span
                           className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
                             done
-                              ? "bg-[#2D5E4A] text-white"
+                              ? "bg-[#1B4332] text-white"
                               : active
-                                ? "bg-[#3A7D64] text-white"
+                                ? "bg-[#2D6A4F] text-white"
                                 : "bg-border text-text-muted"
                           }`}
                           aria-current={active ? "step" : undefined}
@@ -152,7 +152,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                         <div className="flex flex-col">
                           <span
                             className={`text-xs font-medium leading-tight ${
-                              active ? "text-[#2D5E4A]" : done ? "text-[#2D5E4A]" : "text-text-muted"
+                              active ? "text-[#1B4332]" : done ? "text-[#1B4332]" : "text-text-muted"
                             }`}
                           >
                             {label}
@@ -175,7 +175,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
               {/* Close */}
               <button
                 onClick={close}
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#2D5E4A]/5"
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#1B4332]/5"
                 aria-label="Close signup"
               >
                 <X size={20} className="text-text-muted" />

@@ -9,25 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "green-dark": "#1B3A2D",
-        "green-mid": "#2D5A40",
-        cream: "#F7F3EE",
+        "green-dark": "#1B4332",
+        "green-mid": "#2D6A4F",
+        cream: "#F8F4EF",
         "cream-dark": "#EDE8E1",
-        "text-primary": "#1A1A1A",
-        "text-muted": "#6B6B6B",
+        "text-primary": "#2A2A2A",
+        "text-muted": "#767676",
         accent: "#C8512B",
         border: "#EDE8E1",
-        /* Aliases for existing Tailwind classes in other components */
-        primary: "#1B3A2D",
-        background: "#F7F3EE",
+        primary: "#1B4332",
+        background: "#F8F4EF",
         surface: "#FFFFFF",
         "surface-warm": "#EDE8E1",
-        "text-dark": "#1A1A1A",
+        "text-dark": "#2A2A2A",
       },
       fontFamily: {
-        display: ["var(--font-playfair)", "serif"],
-        serif: ["var(--font-playfair)", "serif"],
-        sans: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-cormorant)", "serif"],
+        serif: ["var(--font-cormorant)", "serif"],
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+      },
+      letterSpacing: {
+        heading: "-0.02em",
       },
       borderRadius: {
         card: "12px",
@@ -35,6 +37,8 @@ const config: Config = {
       },
       boxShadow: {
         card: "0 2px 16px rgba(0,0,0,0.07)",
+        "card-hover": "0 12px 32px rgba(0,0,0,0.10)",
+        "btn-hover": "0 8px 24px rgba(0,0,0,0.15)",
       },
     },
   },
