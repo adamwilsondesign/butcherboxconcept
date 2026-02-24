@@ -64,7 +64,7 @@ export default function StepProducts({
   const progressPct = Math.min((totalItems / maxItems) * 100, 100);
 
   return (
-    <div className="flex w-full flex-col px-4 pb-4">
+    <div className="flex w-full flex-col px-4">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -235,7 +235,7 @@ export default function StepProducts({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="sticky bottom-0 z-50 -mx-4 mt-4 border-t border-border bg-background/95 backdrop-blur-sm"
+        className="sticky bottom-0 z-50 -mx-4 mt-4 border-t border-border bg-background backdrop-blur-sm"
       >
         {/* Progress bar */}
         <div className="h-1 w-full bg-border">

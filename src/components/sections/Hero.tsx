@@ -7,13 +7,13 @@ import { useSignup } from "@/components/signup/SignupFlow";
 const SLIDES = [
   {
     image:
-      "https://images.unsplash.com/photo-1588347818481-0e5e2f450243?w=1920&q=80",
-    alt: "Premium beef cuts on cutting board",
+      "https://images.unsplash.com/photo-1529543544282-ea54407e4567?w=1920&q=80",
+    alt: "Family grilling together at a backyard barbecue",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1432139509613-5c4255a1d015?w=1920&q=80",
-    alt: "Fresh wild-caught salmon",
+      "https://images.unsplash.com/photo-1606838232498-db1fede3c1d0?w=1920&q=80",
+    alt: "Family gathered around the dinner table with a roast",
   },
   {
     image:

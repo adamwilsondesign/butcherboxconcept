@@ -48,7 +48,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
   }, [freqOpen]);
 
   return (
-    <div className="mx-auto flex w-full flex-col px-4">
+    <div className="mx-auto flex w-full flex-col px-4 pb-6">
       <motion.h2
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -157,12 +157,46 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         </p>
       </motion.div>
 
+      {/* Free offer CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.28 }}
+        className="mt-5 overflow-hidden rounded-xl border border-[#2D6A4F]/20 bg-[#2D6A4F]/5"
+      >
+        <div className="flex items-center gap-3 px-3.5 py-3">
+          <img
+            src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=200&q=80"
+            alt="Free steak offer"
+            className="h-14 w-14 shrink-0 rounded-lg object-cover"
+          />
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-bold text-[#1B4332]">
+              🥩 Free NY Strip Steaks for a Year
+            </p>
+            <p className="mt-0.5 text-[10px] leading-snug text-[#1B4332]/70">
+              Enter your email to unlock a free premium cut in every box.
+            </p>
+            <div className="mt-1.5 flex gap-1.5">
+              <input
+                type="email"
+                placeholder="you@email.com"
+                className="h-7 flex-1 min-w-0 rounded-md border border-[#2D6A4F]/20 bg-white px-2.5 text-[11px] text-text-dark placeholder:text-text-muted/50 focus:border-[#2D6A4F] focus:outline-none"
+              />
+              <button className="h-7 shrink-0 rounded-md bg-[#2D6A4F] px-3 text-[11px] font-semibold text-white transition-colors hover:bg-[#1B4332]">
+                Claim
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Continue button */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mt-5 flex flex-col items-center gap-2"
+        className="mt-4 flex flex-col items-center gap-2"
       >
         <button
           onClick={onContinue}

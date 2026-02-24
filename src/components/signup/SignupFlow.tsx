@@ -187,7 +187,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
               </div>
 
               {/* ── Step content (scrollable) ── */}
-              <div className="flex-1 overflow-y-auto py-4 sm:py-6">
+              <div className="flex-1 overflow-y-auto pt-4 sm:pt-6">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={step}

@@ -24,12 +24,9 @@ export default function SeekingBetterWay() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="mb-6 flex items-center gap-3">
-              <span className="block h-[2px] w-12 bg-[#40916C]" />
-              <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#40916C]">
-                Our Story
-              </span>
-            </div>
+            <p className="mb-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/60">
+              Our Story
+            </p>
             <h2 className="font-sans font-extrabold text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
               Seeking a Better Way
             </h2>
@@ -61,7 +58,7 @@ export default function SeekingBetterWay() {
 
             <a
               href="#"
-              className="mt-8 inline-flex items-center gap-2 text-[15px] font-medium text-[#40916C] transition-colors hover:text-white"
+              className="mt-8 inline-flex items-center gap-2 text-[15px] font-medium text-white/70 transition-colors hover:text-white"
             >
               Read Our Story →
             </a>

@@ -59,7 +59,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
   }
 
   return (
-    <div className="flex w-full flex-col gap-6 px-4">
+    <div className="flex w-full flex-col gap-6 px-4 pb-6">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
