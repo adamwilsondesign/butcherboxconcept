@@ -1,10 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import { PLANS, type Plan } from "@/lib/products";
 
-const FREQS = ["Every Two Weeks", "Every Four Weeks", "Every Six Weeks", "Every Eight Weeks"];
+const FREQS = [
+  { label: "Every 2 weeks", value: "Every Two Weeks" },
+  { label: "Every 4 weeks", value: "Every Four Weeks" },
+  { label: "Every 6 weeks", value: "Every Six Weeks" },
+  { label: "Every 8 weeks", value: "Every Eight Weeks" },
+];
 
 interface Props {
   selectedPlan: Plan | null;
@@ -15,35 +21,44 @@ interface Props {
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.4, ease: "easeOut" as const },
+    transition: { delay: i * 0.08, duration: 0.35, ease: "easeOut" as const },
   }),
 };
 
 export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSelectFrequency, onContinue }: Props) {
-  return (
-    <div className="mx-auto w-full px-4">
-      <motion.h2
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-2xl text-text-dark"
-      >
-        Select Your Plan &amp; Frequency
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1 }}
-        className="mt-2 text-center text-sm font-semibold text-[#2D6A4F]"
-      >
-        Select a Signature Box
-      </motion.p>
+  const [freqOpen, setFreqOpen] = useState(false);
+  const freqRef = useRef<HTMLDivElement>(null);
 
-      {/* Plan cards — single column for sidebar */}
-      <div className="mt-8 grid grid-cols-1 gap-4">
+  const activeFreq = FREQS.find((f) => f.value === frequency) ?? FREQS[1];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!freqOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (freqRef.current && !freqRef.current.contains(e.target as Node)) {
+        setFreqOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [freqOpen]);
+
+  return (
+    <div className="mx-auto flex w-full flex-col px-4">
+      <motion.h2
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center font-serif text-xl text-text-dark"
+      >
+        Choose Your Box
+      </motion.h2>
+
+      {/* Plan cards — 2-column grid, left column spans 1 card, right column spans 2 */}
+      <div className="mt-5 grid grid-cols-2 gap-3">
         {PLANS.map((plan, i) => {
           const isSelected = selectedPlan?.id === plan.id;
           const isPopular = plan.id === "large";
@@ -56,108 +71,109 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               initial="hidden"
               animate="visible"
               onClick={() => onSelectPlan(plan)}
-              className={`group relative flex flex-col rounded-2xl border-2 bg-surface p-5 text-left transition-all hover:shadow-lg ${
+              className={`group relative flex flex-col rounded-xl border-2 bg-surface p-3.5 text-left transition-all hover:shadow-md ${
                 isSelected
-                  ? "border-[#2D6A4F] shadow-lg"
+                  ? "border-[#2D6A4F] shadow-md"
                   : "border-border hover:border-[#40916C]"
-              }`}
+              } ${i === 0 ? "col-span-2" : ""}`}
             >
               {/* Most Popular badge */}
               {isPopular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#2D6A4F] px-4 py-1 text-xs font-bold text-white whitespace-nowrap">
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-[#2D6A4F] px-3 py-0.5 text-[11px] font-bold text-white whitespace-nowrap">
                   Most Popular
                 </span>
               )}
 
               {/* Selected checkmark */}
               {isSelected && (
-                <span className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#2D6A4F] text-white">
-                  <Check size={16} />
+                <span className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-[#2D6A4F] text-white">
+                  <Check size={14} />
                 </span>
               )}
 
-              <div className="flex items-baseline justify-between">
-                <h3 className="font-serif text-lg text-text-dark">
-                  {plan.name}
+              <div className="flex items-baseline justify-between pr-8">
+                <h3 className="font-serif text-base text-text-dark">
+                  {plan.id === "medium" ? "Medium" : plan.id === "large" ? "Large" : "XL"} Box
                 </h3>
-                <p className="text-2xl font-bold text-[#2D6A4F]">
+                <span className="text-lg font-bold text-[#2D6A4F]">
                   ${plan.price}
-                </p>
+                </span>
               </div>
 
-              <p className="mt-1 text-sm text-text-muted">
-                Choose {plan.proteins} proteins (up to {plan.maxLbs} lbs) · {plan.perMeal}
+              <p className="mt-0.5 text-xs text-text-muted">
+                {plan.proteins} proteins · up to {plan.maxLbs} lbs · {plan.perMeal}
               </p>
-
-              <p className="mt-1 text-xs font-medium text-[#2D6A4F]">
+              <p className="mt-0.5 text-[11px] font-medium text-[#2D6A4F]">
                 {plan.feeds}
               </p>
-
-              <div className={`mt-3 rounded-md py-2 text-center text-sm font-semibold transition-colors ${
-                isSelected
-                  ? "bg-[#2D6A4F] text-white"
-                  : "bg-[#2D6A4F] text-white hover:bg-[#1B4332]"
-              }`}>
-                {isSelected ? "Selected ✓" : "Select Plan"}
-              </div>
             </motion.button>
           );
         })}
       </div>
 
-      {/* Frequency selector */}
+      {/* Frequency — compact inline dropdown */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mt-8"
+        transition={{ delay: 0.25 }}
+        className="mt-5"
+        ref={freqRef}
       >
-        <h3 className="text-center font-serif text-lg text-text-dark">
-          How often do you want a box?
-        </h3>
-        <p className="mt-1 text-center text-sm text-text-muted">
-          You can pause or cancel anytime.
-        </p>
-
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          {FREQS.map((f) => (
+        <div className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3">
+          <div>
+            <p className="text-xs font-medium text-text-muted">Delivery frequency</p>
+            <p className="text-sm font-semibold text-text-dark">{activeFreq.label}</p>
+          </div>
+          <div className="relative">
             <button
               type="button"
-              key={f}
-              onClick={() => onSelectFrequency(f)}
-              aria-pressed={frequency === f}
-              className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
-                frequency === f
-                  ? "bg-[#2D6A4F] text-white shadow-md"
-                  : "bg-surface-warm text-text-muted hover:bg-[#2D6A4F]/10"
-              }`}
+              onClick={() => setFreqOpen(!freqOpen)}
+              className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-[#2D6A4F] transition-colors hover:bg-[#2D6A4F]/5"
             >
-              {f}
+              Change <ChevronDown size={14} className={`transition-transform ${freqOpen ? "rotate-180" : ""}`} />
             </button>
-          ))}
+
+            {/* Dropdown */}
+            {freqOpen && (
+              <div className="absolute right-0 top-full z-10 mt-1 w-44 rounded-lg border border-border bg-white py-1 shadow-lg">
+                {FREQS.map((f) => (
+                  <button
+                    key={f.value}
+                    onClick={() => { onSelectFrequency(f.value); setFreqOpen(false); }}
+                    className={`flex w-full items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[#2D6A4F]/5 ${
+                      frequency === f.value ? "font-semibold text-[#2D6A4F]" : "text-text-dark"
+                    }`}
+                  >
+                    {f.label}
+                    {frequency === f.value && <Check size={14} className="text-[#2D6A4F]" />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
+        <p className="mt-1.5 text-center text-[11px] text-text-muted">
+          Pause or cancel anytime — free shipping always
+        </p>
       </motion.div>
 
       {/* Continue button */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="mt-8 flex flex-col items-center gap-3"
+        transition={{ delay: 0.3 }}
+        className="mt-5 flex flex-col items-center gap-2"
       >
         <button
           onClick={onContinue}
           disabled={!selectedPlan}
-          className="w-full rounded-lg bg-[#2D6A4F] py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full rounded-lg bg-[#2D6A4F] py-3 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Next, Choose Your Proteins →
+          Choose Proteins →
         </button>
-        <p className="text-sm text-text-muted">
-          Not ready to commit?{" "}
-          <button className="font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline">
-            Try a one-time box →
-          </button>
-        </p>
+        <button className="text-xs font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline">
+          Or try a one-time box
+        </button>
       </motion.div>
     </div>
   );
