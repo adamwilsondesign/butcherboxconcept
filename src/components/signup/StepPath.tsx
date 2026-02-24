@@ -14,12 +14,12 @@ const FREE_OFFERS = [
   {
     emoji: "🍗",
     title: "Free Chicken Breasts for a Year",
-    image: "https://images.unsplash.com/photo-1604503468506-a8da13d82571?w=200&q=80",
+    image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=200&q=80",
   },
   {
     emoji: "🍔",
     title: "Free Ground Beef for a Year",
-    image: "https://images.unsplash.com/photo-1551028150-64b9f398f678?w=200&q=80",
+    image: "https://images.unsplash.com/photo-1602473812169-ede22ec03f39?w=200&q=80",
   },
 ];
 
