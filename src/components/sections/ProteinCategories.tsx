@@ -4,139 +4,121 @@ import { motion } from "framer-motion";
 import { useSignup } from "@/components/signup/SignupFlow";
 import { IMAGES } from "@/lib/images";
 
+/* Inline image pill — rounded-rect image that sits within the text flow */
+function InlineImage({
+  src,
+  alt,
+  onClick,
+}: {
+  src: string;
+  alt: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="group/img relative inline-block h-[72px] w-[120px] shrink-0 translate-y-[6px] overflow-hidden rounded-[1.5rem] shadow-sm transition-shadow duration-300 hover:shadow-md sm:h-[90px] sm:w-[150px] lg:h-[110px] lg:w-[180px]"
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+      />
+    </button>
+  );
+}
+
 export default function ProteinCategories() {
   const { openSignup } = useSignup();
 
   return (
     <section className="overflow-hidden bg-[#FAF7F2] py-16 sm:py-20" id="proteins">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        {/* Row 1: "Grass-Fed Beef" text + Beef image + Poultry image */}
+      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+        {/* One flowing sentence with inline images */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-8"
+          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-center sm:gap-x-5 lg:gap-x-6"
         >
+          {/* "Grass Fed Beef" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Beef" })}
-            className="group flex items-center gap-4 sm:gap-6"
+            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
           >
-            <h3 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-[#1B4332] transition-colors duration-300 group-hover:text-[#40916C] sm:text-5xl lg:text-6xl">
-              Grass-Fed<br />Beef
-            </h3>
-            <div className="h-28 w-40 shrink-0 overflow-hidden rounded-[2rem] shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-32 sm:w-48 lg:h-36 lg:w-52">
-              <img
-                src={IMAGES.ribeye}
-                alt="Grass-fed ribeye steaks"
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
+            Grass-Fed Beef
           </button>
 
+          {/* Beef image */}
+          <InlineImage
+            src={IMAGES.ribeye}
+            alt="Grass-fed ribeye steaks"
+            onClick={() => openSignup({ prefilterCategory: "Beef" })}
+          />
+
+          {/* "Free Range Poultry" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Chicken" })}
-            className="group"
+            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
           >
-            <div className="h-28 w-40 shrink-0 overflow-hidden rounded-[2rem] shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-32 sm:w-48 lg:h-36 lg:w-52">
-              <img
-                src={IMAGES.chickenBreast}
-                alt="Free-range chicken breasts"
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
+            Free-Range Poultry
           </button>
-        </motion.div>
 
-        {/* Row 2: Pork image + "Free-Range Poultry & Crate-Free Pork" text + Seafood image */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-8 sm:gap-x-8"
-        >
+          {/* Poultry image */}
+          <InlineImage
+            src={IMAGES.chickenBreast}
+            alt="Free-range chicken breasts"
+            onClick={() => openSignup({ prefilterCategory: "Chicken" })}
+          />
+
+          {/* "Crate Free Pork" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Pork" })}
-            className="group flex items-center gap-4 sm:gap-6"
+            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
           >
-            <div className="h-28 w-40 shrink-0 overflow-hidden rounded-[2rem] shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-32 sm:w-48 lg:h-36 lg:w-52">
-              <img
-                src={IMAGES.porkChops}
-                alt="Heritage breed pork chops"
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <h3 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-[#1B4332] transition-colors duration-300 group-hover:text-[#40916C] sm:text-5xl lg:text-6xl">
-              Free-Range<br />Poultry
-            </h3>
+            Crate-Free Pork
           </button>
 
-          <button
-            onClick={() => openSignup({ prefilterCategory: "Seafood" })}
-            className="group"
-          >
-            <div className="h-28 w-40 shrink-0 overflow-hidden rounded-[2rem] shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-32 sm:w-48 lg:h-36 lg:w-52">
-              <img
-                src={IMAGES.salmon}
-                alt="Wild-caught sockeye salmon"
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-          </button>
-        </motion.div>
-
-        {/* Row 3: "Crate-Free Pork & Wild-Caught Seafood" text centered */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-8 sm:gap-x-8"
-        >
-          <button
+          {/* Pork image */}
+          <InlineImage
+            src={IMAGES.porkChops}
+            alt="Crate-free pork chops"
             onClick={() => openSignup({ prefilterCategory: "Pork" })}
-            className="group"
-          >
-            <h3 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-[#1B4332] transition-colors duration-300 group-hover:text-[#40916C] sm:text-5xl lg:text-6xl">
-              Crate-Free Pork
-            </h3>
-          </button>
+          />
 
-          <span className="font-display text-4xl text-[#40916C] sm:text-5xl lg:text-6xl">&amp;</span>
-
+          {/* "& Wild Caught Seafood" */}
+          <span className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-5xl lg:text-6xl">
+            &amp;
+          </span>
           <button
             onClick={() => openSignup({ prefilterCategory: "Seafood" })}
-            className="group"
+            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
           >
-            <h3 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-[#1B4332] transition-colors duration-300 group-hover:text-[#40916C] sm:text-5xl lg:text-6xl">
-              Wild-Caught Seafood
-            </h3>
+            Wild-Caught Seafood
           </button>
-        </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 text-center text-base font-medium text-[#2D6A4F] sm:mt-10 sm:text-lg"
-        >
-          Delivered right to your door.
-        </motion.p>
+          {/* Seafood image */}
+          <InlineImage
+            src={IMAGES.salmon}
+            alt="Wild-caught sockeye salmon"
+            onClick={() => openSignup({ prefilterCategory: "Seafood" })}
+          />
+
+          {/* "delivered right to your door!" */}
+          <span className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-5xl lg:text-6xl">
+            Delivered Right to Your Door!
+          </span>
+        </motion.div>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="mt-4 flex justify-center"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-10 flex justify-center"
         >
           <button
             onClick={() => openSignup()}
