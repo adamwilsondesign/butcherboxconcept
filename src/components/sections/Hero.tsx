@@ -12,8 +12,8 @@ const SLIDES = [
   },
   {
     image:
-      "https://www.vmcdn.ca/f/files/guelphtoday/spotlight-photos/jls-home-hardware/adobestock_228347985.jpeg",
-    alt: "Family gathered around the dinner table",
+      "https://imgcms.patioheatandshade.com/site/common/patio/blog/PHS-blog04ofjuly-1.jpeg",
+    alt: "Family celebrating Fourth of July barbecue",
   },
   {
     image:
