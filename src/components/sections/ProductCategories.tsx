@@ -39,7 +39,7 @@ export default function ProductCategories() {
               whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.10)" }}
               aria-label={`Explore ${category.name}`}
               onClick={() => openSignup({ prefilterCategory: category.filterCategory })}
-              className="group relative flex flex-col overflow-hidden rounded-card bg-surface text-left shadow-card"
+              className="group relative flex flex-col overflow-hidden rounded-2xl bg-surface text-left shadow-card"
               style={{ transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
             >
               <div className="relative w-full overflow-hidden">

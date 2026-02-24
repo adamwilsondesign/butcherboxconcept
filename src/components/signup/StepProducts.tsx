@@ -63,7 +63,7 @@ export default function StepProducts({
   };
 
   const progressPct = Math.min((totalItems / maxItems) * 100, 100);
-  const progressColor = isOneAway ? "#C8512B" : "#2D5E4A";
+  const progressColor = isOneAway ? "#2D6A4F" : "#2D6A4F";
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col px-4 pb-24">
@@ -82,7 +82,7 @@ export default function StepProducts({
         transition={{ delay: 0.1 }}
         className="mt-4 flex justify-center"
       >
-        <span className="inline-flex items-center gap-2 rounded-full bg-[#2D5E4A]/10 px-4 py-2 text-sm font-semibold text-[#2D5E4A]">
+        <span className="inline-flex items-center gap-2 rounded-full bg-[#2D6A4F]/10 px-4 py-2 text-sm font-semibold text-[#2D6A4F]">
           {plan.id === "medium" ? "Medium" : plan.id === "large" ? "Large" : "Extra-Large"} · {plan.proteins} proteins · ${plan.price}
           <button
             onClick={onBack}
@@ -100,10 +100,10 @@ export default function StepProducts({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mx-auto mt-3 flex w-full max-w-md items-center gap-3 rounded-xl bg-[#C8512B]/10 px-4 py-3 text-sm"
+            className="mx-auto mt-3 flex w-full max-w-md items-center gap-3 rounded-xl bg-[#1B4332]/10 px-4 py-3 text-sm"
           >
-            <AlertTriangle size={18} className="shrink-0 text-[#C8512B]" />
-            <span className="flex-1 font-medium text-[#C8512B]">
+            <AlertTriangle size={18} className="shrink-0 text-[#1B4332]" />
+            <span className="flex-1 font-medium text-[#1B4332]">
               Your box is full! Remove an item to swap, or{" "}
               <button onClick={onUpgrade} className="underline underline-offset-2 font-bold hover:no-underline">
                 upgrade your plan
@@ -126,8 +126,8 @@ export default function StepProducts({
             onClick={() => setFilter(f)}
             className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
               filter === f
-                ? "bg-[#2D5E4A] text-white"
-                : "bg-surface-warm text-text-muted hover:bg-[#2D5E4A]/10"
+                ? "bg-[#2D6A4F] text-white"
+                : "bg-surface-warm text-text-muted hover:bg-[#2D6A4F]/10"
             }`}
           >
             {f}
@@ -151,7 +151,7 @@ export default function StepProducts({
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.25 }}
                 className={`overflow-hidden rounded-xl border-2 bg-surface transition-colors ${
-                  qty > 0 ? "border-[#2D5E4A]" : "border-transparent"
+                  qty > 0 ? "border-[#2D6A4F]" : "border-transparent"
                 }`}
               >
                 <div className="aspect-[4/3] w-full overflow-hidden relative">
@@ -162,12 +162,12 @@ export default function StepProducts({
                     className="h-full w-full object-cover"
                   />
                   {/* Source badge */}
-                  <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold text-[#2D5E4A] backdrop-blur-sm">
+                  <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold text-[#2D6A4F] backdrop-blur-sm">
                     {p.sourceBadge}
                   </span>
                   {/* Quantity overlay */}
                   {qty > 0 && (
-                    <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#2D5E4A] text-xs font-bold text-white">
+                    <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#2D6A4F] text-xs font-bold text-white">
                       {qty}
                     </span>
                   )}
@@ -193,7 +193,7 @@ export default function StepProducts({
                         className={`flex h-8 w-full items-center justify-center gap-1 rounded-md text-xs font-semibold transition-colors ${
                           addDisabled
                             ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                            : "bg-[#2D5E4A] text-white hover:bg-[#243B35]"
+                            : "bg-[#2D6A4F] text-white hover:bg-[#1B4332]"
                         }`}
                       >
                         <Plus size={14} /> Add
@@ -203,7 +203,7 @@ export default function StepProducts({
                         <button
                           onClick={() => setQty(p.id, qty - 1)}
                           aria-label={`Remove one ${p.name}`}
-                          className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted transition-colors hover:bg-[#2D5E4A]/10"
+                          className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted transition-colors hover:bg-[#2D6A4F]/10"
                         >
                           <Minus size={14} />
                         </button>
@@ -217,7 +217,7 @@ export default function StepProducts({
                           className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
                             isFull
                               ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                              : "bg-[#2D5E4A] text-white hover:bg-[#243B35]"
+                              : "bg-[#2D6A4F] text-white hover:bg-[#1B4332]"
                           }`}
                         >
                           <Plus size={14} />
@@ -259,12 +259,12 @@ export default function StepProducts({
 
           <div className="flex items-center gap-2 sm:gap-4">
             <span className="text-sm text-text-muted">
-              {totalItems} of {maxItems} proteins · <span className="font-bold text-[#2D5E4A]">${plan.price}</span>
+              {totalItems} of {maxItems} proteins · <span className="font-bold text-[#2D6A4F]">${plan.price}</span>
             </span>
             <button
               onClick={onContinue}
               disabled={totalItems !== maxItems}
-              className="rounded-md bg-[#2D5E4A] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#243B35] disabled:opacity-40 disabled:cursor-not-allowed sm:px-6"
+              className="rounded-md bg-[#2D6A4F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed sm:px-6"
             >
               Review Order →
             </button>

@@ -52,33 +52,34 @@ export default function HowItWorks() {
           {STEPS.map((step, i) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.15,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
               className="relative text-center"
             >
               {/* Connecting dotted line between steps — desktop only */}
               {i < STEPS.length - 1 && (
-                <div className="absolute right-0 top-12 hidden w-full translate-x-1/2 md:block">
-                  <div className="mx-auto h-px w-full border-t-2 border-dashed border-[#2D5E4A]/20" />
+                <div className="absolute right-0 top-10 hidden w-full translate-x-1/2 md:block">
+                  <div className="mx-auto h-px w-full border-t-2 border-dashed border-[#2D6A4F]/20" />
                 </div>
               )}
 
-              {/* Icon circle */}
-              <div className="relative mx-auto flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#2D5E4A]">
-                <step.icon size={28} className="text-white" />
-                {/* Small number badge */}
-                <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#C8512B] text-[11px] font-bold text-white">
-                  {step.number}
-                </span>
+              {/* Icon — tinted rounded-xl square */}
+              <div className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#1B4332]/5">
+                <step.icon size={24} className="text-[#2D6A4F]" />
               </div>
 
-              <h3 className="mt-6 font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
+              {/* Step number */}
+              <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.15em] text-[#2D6A4F]">
+                Step {step.number}
+              </p>
+
+              <h3 className="mt-2 font-display text-xl text-[#1A1A1A] sm:text-2xl">
                 {step.title}
               </h3>
               <p
@@ -102,9 +103,9 @@ export default function HowItWorks() {
           {PILLS.map((pill) => (
             <div
               key={pill}
-              className="flex items-center gap-2 rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#243B35]"
+              className="flex items-center gap-2 rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#1B4332]"
             >
-              <Check size={14} className="text-[#2D5E4A]" />
+              <Check size={14} className="text-[#2D6A4F]" />
               {pill}
             </div>
           ))}
@@ -120,7 +121,7 @@ export default function HowItWorks() {
         >
           <button
             onClick={() => openSignup()}
-            className="rounded-full border-2 border-[#243B35] bg-transparent px-8 py-4 text-[14px] font-semibold text-[#243B35] transition-all duration-200 hover:bg-[#243B35] hover:text-white"
+            className="rounded-lg border-2 border-[#1B4332] bg-transparent px-8 py-3.5 text-base font-medium text-[#1B4332] transition-colors duration-200 hover:bg-[#1B4332] hover:text-white"
           >
             Explore Plans
           </button>

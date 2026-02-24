@@ -14,10 +14,10 @@
     color: #1A1A1A;
   }
 
-  /* Typography — headings use Libre Baskerville 700 */
+  /* Typography — headings use Playfair Display 400 (regular, not bold) */
   h1, h2, h3, h4 {
-    font-family: var(--font-libre), serif;
-    font-weight: 700;
+    font-family: var(--font-playfair), Georgia, serif;
+    font-weight: 400;
   }
 
   /* All body / UI text uses Inter */
@@ -25,13 +25,13 @@
     font-family: var(--font-inter), sans-serif;
   }
 
-  /* Body copy colour + relaxed line height */
+  /* Body copy colour */
   p, li {
     color: #1A1A1A;
   }
 
   ::selection {
-    @apply bg-brand-teal text-white;
+    @apply bg-brand-green-mid text-white;
   }
 
   /* Scroll-margin for anchor links to clear fixed nav + promo bar */
@@ -41,7 +41,7 @@
 
   /* Global focus-visible outline */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-teal;
+    @apply outline-2 outline-offset-2 outline-brand-green-mid;
   }
 
   *:focus:not(:focus-visible) {
@@ -63,11 +63,11 @@
   animation: marquee 30s linear infinite;
 }
 
-/* Fade-up animation utility — for use with Intersection Observer or Framer Motion fallback */
+/* Fade-up animation utility */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;

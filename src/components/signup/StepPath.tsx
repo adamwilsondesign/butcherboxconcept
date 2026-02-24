@@ -37,7 +37,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
-        className="mt-2 text-center text-[#2D5E4A] font-semibold"
+        className="mt-2 text-center text-[#2D6A4F] font-semibold"
       >
         Select a Signature Box
       </motion.p>
@@ -58,20 +58,20 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               onClick={() => onSelectPlan(plan)}
               className={`group relative flex flex-col rounded-2xl border-2 bg-surface p-6 text-left transition-all hover:shadow-lg sm:p-8 ${
                 isSelected
-                  ? "border-[#2D5E4A] shadow-lg"
-                  : "border-border hover:border-[#3A7D64]"
+                  ? "border-[#2D6A4F] shadow-lg"
+                  : "border-border hover:border-[#40916C]"
               }`}
             >
               {/* Most Popular badge */}
               {isPopular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#2D5E4A] px-4 py-1 text-xs font-bold text-white whitespace-nowrap">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#2D6A4F] px-4 py-1 text-xs font-bold text-white whitespace-nowrap">
                   Most Popular
                 </span>
               )}
 
               {/* Selected checkmark */}
               {isSelected && (
-                <span className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#2D5E4A] text-white">
+                <span className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#2D6A4F] text-white">
                   <Check size={16} />
                 </span>
               )}
@@ -80,7 +80,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
                 {plan.name}
               </h3>
 
-              <p className="mt-3 text-3xl font-bold text-[#2D5E4A]">
+              <p className="mt-3 text-3xl font-bold text-[#2D6A4F]">
                 ${plan.price}
               </p>
               <p className="mt-0.5 text-sm text-text-muted">
@@ -91,14 +91,14 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
                 Choose {plan.proteins} proteins (up to {plan.maxLbs} lbs)
               </p>
 
-              <p className="mt-1 text-xs font-medium text-[#2D5E4A]">
+              <p className="mt-1 text-xs font-medium text-[#2D6A4F]">
                 {plan.feeds}
               </p>
 
               <div className={`mt-4 rounded-md py-2.5 text-center text-sm font-semibold transition-colors ${
                 isSelected
-                  ? "bg-[#2D5E4A] text-white"
-                  : "bg-[#2D5E4A] text-white hover:bg-[#243B35]"
+                  ? "bg-[#2D6A4F] text-white"
+                  : "bg-[#2D6A4F] text-white hover:bg-[#1B4332]"
               }`}>
                 {isSelected ? "Selected ✓" : "Select Plan"}
               </div>
@@ -130,8 +130,8 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               aria-pressed={frequency === f}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
                 frequency === f
-                  ? "bg-[#2D5E4A] text-white shadow-md"
-                  : "bg-surface-warm text-text-muted hover:bg-[#2D5E4A]/10"
+                  ? "bg-[#2D6A4F] text-white shadow-md"
+                  : "bg-surface-warm text-text-muted hover:bg-[#2D6A4F]/10"
               }`}
             >
               {f}
@@ -150,13 +150,13 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         <button
           onClick={onContinue}
           disabled={!selectedPlan}
-          className="rounded-md bg-[#2D5E4A] px-10 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#243B35] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="rounded-md bg-[#2D6A4F] px-10 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Next, Choose Your Proteins →
         </button>
         <p className="text-sm text-text-muted">
           Not ready to commit?{" "}
-          <button className="font-medium text-[#2D5E4A] underline underline-offset-2 hover:no-underline">
+          <button className="font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline">
             Try a one-time box →
           </button>
         </p>

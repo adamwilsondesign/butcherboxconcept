@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Libre_Baskerville } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 import { SignupProvider } from "@/components/signup/SignupFlow";
@@ -8,13 +8,13 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const libre = Libre_Baskerville({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-libre",
-  weight: ["400", "700"],
+  variable: "--font-playfair",
+  weight: ["400"],
   style: ["normal", "italic"],
 });
 
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${libre.variable} font-sans antialiased bg-cream text-text-primary`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-cream text-text-primary`}
       >
         <SignupProvider>
           <ClientShell />

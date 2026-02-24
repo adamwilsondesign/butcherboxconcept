@@ -67,7 +67,7 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-full max-w-md rounded-card bg-white p-8 shadow-2xl"
+            className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl"
           >
             <button
               onClick={handleDismiss}
@@ -77,10 +77,14 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
               <X size={18} />
             </button>
             <div className="text-center">
-              <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#6B6B6B]">
-                Personalize Your Experience
-              </span>
-              <h3 className="mt-3 font-display text-[24px] font-bold text-[#1A1A1A]">
+              <div className="mb-3 flex items-center justify-center gap-3">
+                <span className="block h-[2px] w-8 bg-[#2D6A4F]" />
+                <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#2D6A4F]">
+                  Personalize Your Experience
+                </span>
+                <span className="block h-[2px] w-8 bg-[#2D6A4F]" />
+              </div>
+              <h3 className="mt-3 font-display text-[24px] text-[#1A1A1A]">
                 What do you love to cook?
               </h3>
               <p className="mt-2 text-[14px] text-[#6B6B6B]">
@@ -91,19 +95,13 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
               {PROTEINS.map((protein) => {
                 const isSelected = selected === protein.key;
                 return (
-                  <motion.button
+                  <button
                     key={protein.key}
                     onClick={() => handleSelect(protein.key)}
-                    whileHover={{ y: -3 }}
-                    whileTap={{ y: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    }}
-                    className={`group relative flex flex-col items-center gap-2 rounded-card border-2 bg-white p-5 transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center gap-2 rounded-2xl border-2 bg-white p-5 transition-all duration-200 ${
                       isSelected
-                        ? "border-[#2D5E4A] bg-[#FAF7F2]"
-                        : "border-[#E5DDD4] hover:border-[#2D5E4A] hover:bg-[#FAF7F2]"
+                        ? "border-[#2D6A4F] bg-[#FAF7F2]"
+                        : "border-[#E5DDD4] hover:border-[#2D6A4F] hover:bg-[#FAF7F2]"
                     }`}
                   >
                     <AnimatePresence>
@@ -116,7 +114,7 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
                             duration: 0.25,
                             ease: [0.175, 0.885, 0.32, 1.275],
                           }}
-                          className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#2D5E4A]"
+                          className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#2D6A4F]"
                         >
                           <Check size={12} className="text-white" />
                         </motion.span>
@@ -128,7 +126,7 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
                     <span className="text-[14px] font-medium text-[#1A1A1A]">
                       {protein.label}
                     </span>
-                  </motion.button>
+                  </button>
                 );
               })}
             </div>

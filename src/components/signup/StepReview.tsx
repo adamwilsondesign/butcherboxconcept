@@ -40,9 +40,9 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-          className="flex h-20 w-20 items-center justify-center rounded-full bg-[#2D5E4A]/10"
+          className="flex h-20 w-20 items-center justify-center rounded-full bg-[#2D6A4F]/10"
         >
-          <Check size={40} className="text-[#2D5E4A]" />
+          <Check size={40} className="text-[#2D6A4F]" />
         </motion.div>
         <h2 className="mt-6 font-serif text-4xl font-bold text-text-dark">Thank You!</h2>
         <p className="mt-3 max-w-sm text-text-muted">
@@ -50,7 +50,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
         </p>
         <button
           onClick={onClose}
-          className="mt-8 rounded-md bg-[#2D5E4A] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#243B35]"
+          className="mt-8 rounded-md bg-[#2D6A4F] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332]"
         >
           Return Home
         </button>
@@ -80,14 +80,14 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
 
           {/* Plan badge */}
           <div className="mt-4 flex items-center gap-2">
-            <span className="rounded-full bg-[#2D5E4A] px-3 py-1 text-xs font-bold text-white">
+            <span className="rounded-full bg-[#2D6A4F] px-3 py-1 text-xs font-bold text-white">
               {plan.name}
             </span>
             <span className="text-xs text-text-muted">{freqDisplay}</span>
           </div>
 
           {/* Promo banner */}
-          <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#C8512B]/10 px-3 py-2 text-xs font-semibold text-[#C8512B]">
+          <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#2D6A4F]/10 px-3 py-2 text-xs font-semibold text-[#2D6A4F]">
             <PartyPopper size={14} /> Free Steak For A Year — included!
           </div>
 
@@ -105,14 +105,14 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
                 <div className="flex items-center gap-2">
                   <button
                     onClick={onBack}
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-[#2D5E4A]/10 transition-colors"
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-[#2D6A4F]/10 transition-colors"
                     aria-label={`Edit ${item.name}`}
                   >
                     <Pencil size={12} />
                   </button>
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-[#C8512B]/10 hover:text-[#C8512B] transition-colors"
+                    className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-red-50 hover:text-red-400 transition-colors"
                     aria-label={`Remove ${item.name}`}
                   >
                     <XIcon size={12} />
@@ -129,12 +129,12 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-text-muted">Shipping</span>
-            <span className="font-medium text-[#2D5E4A]">FREE</span>
+            <span className="font-medium text-[#2D6A4F]">FREE</span>
           </div>
           <hr className="my-3 border-border" />
           <div className="flex justify-between text-base font-bold">
             <span className="text-text-dark">Total</span>
-            <span className="text-[#2D5E4A]">${total}</span>
+            <span className="text-[#2D6A4F]">${total}</span>
           </div>
         </motion.div>
 
@@ -151,26 +151,26 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
             aria-label="Checkout form"
           >
             <label className="sr-only" htmlFor="checkout-email">Email address</label>
-            <input id="checkout-email" placeholder="Email address" type="email" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none transition-colors focus:border-[#2D5E4A]" />
+            <input id="checkout-email" placeholder="Email address" type="email" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none transition-colors focus:border-[#2D6A4F]" />
 
             <label className="sr-only" htmlFor="checkout-name">Full name</label>
-            <input id="checkout-name" placeholder="Full Name" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A]" />
+            <input id="checkout-name" placeholder="Full Name" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F]" />
 
             <label className="sr-only" htmlFor="checkout-address">Street address</label>
-            <input id="checkout-address" placeholder="Street Address" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A]" />
+            <input id="checkout-address" placeholder="Street Address" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F]" />
 
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <div>
                 <label className="sr-only" htmlFor="checkout-city">City</label>
-                <input id="checkout-city" placeholder="City" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A] sm:px-4" />
+                <input id="checkout-city" placeholder="City" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F] sm:px-4" />
               </div>
               <div>
                 <label className="sr-only" htmlFor="checkout-state">State</label>
-                <input id="checkout-state" placeholder="State" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A] sm:px-4" />
+                <input id="checkout-state" placeholder="State" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F] sm:px-4" />
               </div>
               <div>
                 <label className="sr-only" htmlFor="checkout-zip">ZIP</label>
-                <input id="checkout-zip" placeholder="ZIP" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A] sm:px-4" />
+                <input id="checkout-zip" placeholder="ZIP" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F] sm:px-4" />
               </div>
             </div>
 
@@ -179,21 +179,21 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <div className="col-span-3 sm:col-span-1">
                 <label className="sr-only" htmlFor="checkout-card">Card number</label>
-                <input id="checkout-card" placeholder="Card number" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A]" />
+                <input id="checkout-card" placeholder="Card number" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-4 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F]" />
               </div>
               <div>
                 <label className="sr-only" htmlFor="checkout-exp">Expiration</label>
-                <input id="checkout-exp" placeholder="MM / YY" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A] sm:px-4" />
+                <input id="checkout-exp" placeholder="MM / YY" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F] sm:px-4" />
               </div>
               <div>
                 <label className="sr-only" htmlFor="checkout-cvc">CVC</label>
-                <input id="checkout-cvc" placeholder="CVC" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D5E4A] sm:px-4" />
+                <input id="checkout-cvc" placeholder="CVC" className="w-full rounded-md border border-[#E5DDD4] bg-[#FAF7F2] px-3 py-2.5 text-sm text-text-dark outline-none focus:border-[#2D6A4F] sm:px-4" />
               </div>
             </div>
 
             <button
               type="submit"
-              className="mt-2 w-full rounded-md bg-[#2D5E4A] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#243B35]"
+              className="mt-2 w-full rounded-md bg-[#2D6A4F] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332]"
             >
               Place Order
             </button>

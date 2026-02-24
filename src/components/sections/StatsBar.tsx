@@ -76,13 +76,13 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
       className="text-center"
     >
-      <p className="font-display text-4xl font-bold leading-none text-white sm:text-5xl">
+      <p className="text-4xl font-bold leading-none text-white sm:text-5xl">
         {count}
         {stat.suffix}
       </p>
@@ -95,7 +95,7 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
 
 export default function StatsBar() {
   return (
-    <section className="bg-[#243B35]">
+    <section className="bg-[#1B4332]">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-6 py-16 sm:flex-row sm:gap-16 sm:px-8 lg:px-12">
         {STATS.map((stat, i) => (
           <React.Fragment key={stat.label}>

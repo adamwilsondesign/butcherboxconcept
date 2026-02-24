@@ -48,16 +48,16 @@ export default function Standards() {
           {STANDARDS.map((card, i) => (
             <motion.div
               key={card.heading}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.1,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -6 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg"
+              whileHover={{ y: -4 }}
+              className="group relative overflow-hidden rounded-2xl shadow-sm"
               style={{ aspectRatio: "3/4" }}
             >
               {/* Background image */}
@@ -67,18 +67,18 @@ export default function Standards() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              {/* Dark gradient overlay — rgba(0,0,0,0.6) */}
+              {/* Green-tinted gradient overlay */}
               <div
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.05) 100%)",
+                    "linear-gradient(to top, rgba(27,67,50,0.7) 0%, rgba(27,67,50,0.3) 50%, rgba(27,67,50,0.05) 100%)",
                 }}
               />
               {/* Text */}
               <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
                 <p className="text-sm font-medium text-white/80">{card.label}</p>
-                <h3 className="mt-2 font-display text-xl font-bold leading-snug text-white sm:text-2xl">
+                <h3 className="mt-2 font-display text-xl leading-snug text-white sm:text-2xl">
                   {card.heading}
                 </h3>
               </div>
@@ -99,7 +99,7 @@ export default function Standards() {
               key={cert}
               className="flex h-16 w-16 items-center justify-center rounded-full border border-[#E5DDD4] bg-white shadow-sm"
             >
-              <span className="text-[11px] font-bold text-[#243B35]">
+              <span className="text-[11px] font-bold text-[#1B4332]">
                 {cert}
               </span>
             </div>

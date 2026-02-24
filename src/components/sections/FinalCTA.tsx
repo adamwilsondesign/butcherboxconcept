@@ -46,7 +46,7 @@ export default function FinalCTA() {
               whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
               whileTap={{ y: 0 }}
               transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="rounded-pill bg-white px-10 py-4 text-[18px] font-medium text-[#1B4332] transition-all duration-200 hover:bg-white/90"
+              className="rounded-lg bg-white px-10 py-4 text-[18px] font-medium text-[#1B4332] transition-all duration-200 hover:bg-white/90"
             >
               Get Started
             </motion.button>

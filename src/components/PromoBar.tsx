@@ -3,35 +3,8 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 
-const PROMO_SEGMENTS = [
-  { text: "Free Steak For A Year — Claim Yours Today", highlight: true },
-  { text: "Free Shipping on Every Order", highlight: false },
-  { text: "Skip or Cancel Anytime", highlight: false },
-  { text: "100% Satisfaction Guaranteed", highlight: false },
-  { text: "70,000+ Five-Star Reviews", highlight: false },
-  { text: "B Corp Certified", highlight: false },
-];
-
-function PromoText() {
-  return (
-    <>
-      {PROMO_SEGMENTS.map((seg, i) => (
-        <span key={i}>
-          <span
-            className={
-              seg.highlight
-                ? "font-semibold text-[#C8512B]"
-                : "text-white"
-            }
-          >
-            {seg.text}
-          </span>
-          <span className="mx-4 text-white/30">{"\u25C6"}</span>
-        </span>
-      ))}
-    </>
-  );
-}
+const PROMO_TEXT =
+  "Free Steak For A Year — Claim Yours Today  \u25C6  Free Shipping on Every Order  \u25C6  Skip or Cancel Anytime  \u25C6  100% Satisfaction Guaranteed  \u25C6  70,000+ Five-Star Reviews  \u25C6  B Corp Certified  \u25C6  ";
 
 export default function PromoBar({
   onDismiss,
@@ -49,22 +22,22 @@ export default function PromoBar({
 
   return (
     <div
-      className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center overflow-hidden bg-[#243B35]"
+      className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center overflow-hidden bg-[#1B4332]"
       role="banner"
     >
       {/* Scrolling marquee — 4x repeated for seamless loop */}
       <div className="flex animate-marquee whitespace-nowrap">
-        <span className="text-xs font-medium tracking-wide sm:text-sm">
-          <PromoText />
+        <span className="text-xs font-medium tracking-wide text-white sm:text-sm">
+          {PROMO_TEXT}
         </span>
-        <span className="text-xs font-medium tracking-wide sm:text-sm">
-          <PromoText />
+        <span className="text-xs font-medium tracking-wide text-white sm:text-sm">
+          {PROMO_TEXT}
         </span>
-        <span className="text-xs font-medium tracking-wide sm:text-sm">
-          <PromoText />
+        <span className="text-xs font-medium tracking-wide text-white sm:text-sm">
+          {PROMO_TEXT}
         </span>
-        <span className="text-xs font-medium tracking-wide sm:text-sm">
-          <PromoText />
+        <span className="text-xs font-medium tracking-wide text-white sm:text-sm">
+          {PROMO_TEXT}
         </span>
       </div>
 

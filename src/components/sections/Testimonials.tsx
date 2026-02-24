@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -93,14 +93,14 @@ export default function Testimonials() {
           <div className="hidden gap-3 sm:flex">
             <button
               onClick={() => scroll("left")}
-              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#1B4332] transition-all hover:bg-[#2D6A4F] hover:text-white"
               aria-label="Scroll reviews left"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#1B4332] transition-all hover:bg-[#2D6A4F] hover:text-white"
               aria-label="Scroll reviews right"
             >
               <ChevronRight size={18} />
@@ -117,7 +117,7 @@ export default function Testimonials() {
           {REVIEWS.map((review, i) => (
             <motion.div
               key={review.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{
@@ -125,11 +125,11 @@ export default function Testimonials() {
                 delay: i * 0.08,
                 ease: "easeOut",
               }}
-              className={`min-w-[320px] max-w-[380px] shrink-0 snap-start rounded-2xl p-8 shadow-md sm:p-10 ${
+              className={`min-w-[320px] max-w-[380px] shrink-0 snap-start rounded-2xl p-8 shadow-sm sm:p-10 ${
                 i % 2 === 0 ? "bg-white" : "bg-[#F5F0EB]"
               }`}
             >
-              {/* Stars — larger */}
+              {/* Stars */}
               <div className="flex gap-1">
                 {Array.from({ length: review.stars }).map((_, j) => (
                   <Star
@@ -139,7 +139,7 @@ export default function Testimonials() {
                   />
                 ))}
               </div>
-              {/* Quote — larger text */}
+              {/* Quote */}
               <p
                 className="mt-5 text-base italic leading-relaxed text-[#1A1A1A]"
                 style={{ lineHeight: 1.75 }}
@@ -150,14 +150,14 @@ export default function Testimonials() {
               <div className="my-5 h-px bg-[#E5DDD4]" />
               {/* Attribution */}
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#2D5E4A] text-xs font-bold text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#2D6A4F] text-xs font-bold text-white">
                   {review.initials}
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-[#1A1A1A]">
                     {review.name}
                   </p>
-                  <p className="text-xs text-[#2D5E4A]">Verified Member</p>
+                  <p className="text-xs text-[#2D6A4F]">Verified Member</p>
                 </div>
               </div>
             </motion.div>
@@ -180,7 +180,7 @@ export default function Testimonials() {
               className="group cursor-pointer"
               style={{ transform: `rotate(${ROTATIONS[i]}deg)` }}
             >
-              <div className="overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-xl">
+              <div className="overflow-hidden rounded-2xl shadow-sm transition-all duration-500 group-hover:shadow-md">
                 <img
                   src={src}
                   alt="Member meal"
@@ -202,13 +202,9 @@ export default function Testimonials() {
         >
           <button
             onClick={() => openSignup()}
-            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-[#C8512B] transition-colors hover:text-[#A8431F]"
+            className="text-[15px] font-medium text-[#2D6A4F] transition-colors hover:text-[#1B4332] hover:underline"
           >
-            Join 400,000+ members
-            <ArrowRight
-              size={16}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
+            Join 400,000+ members →
           </button>
         </motion.div>
       </div>

@@ -76,14 +76,14 @@ export default function TrustBar() {
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {PRESS.map((pub) => (
-            <motion.div key={pub.name} variants={logoReveal} className="group flex items-center justify-center rounded-card border border-[#EDE8E1] bg-white px-8 py-4 text-[#9CA3AF] transition-all duration-200 hover:border-[#1B4332] hover:text-[#4B5563] hover:shadow-card hover:-translate-y-0.5">
+            <motion.div key={pub.name} variants={logoReveal} className="group flex items-center justify-center rounded-2xl border border-[#EDE8E1] bg-white px-8 py-4 text-[#9CA3AF] transition-all duration-200 hover:border-[#1B4332] hover:text-[#4B5563] hover:shadow-card hover:-translate-y-0.5">
               <pub.Logo />
             </motion.div>
           ))}
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }} className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-2.5 rounded-pill bg-[#1B4332]/5 border border-[#1B4332]/15 px-5 py-2.5">
+          <div className="inline-flex items-center gap-2.5 rounded-full bg-[#1B4332]/5 border border-[#1B4332]/15 px-5 py-2.5">
             <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#1B4332]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
               <text x="12" y="16" textAnchor="middle" fontSize="12" fontWeight="700" fill="currentColor" stroke="none">B</text>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
 
 const SLIDES = [
@@ -86,8 +85,8 @@ export default function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
+      {/* Green-tinted gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1B4332]/70 via-[#1B4332]/40 to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center">
@@ -100,7 +99,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="mb-6 flex items-center gap-3"
             >
-              <span className="block h-[2px] w-12 bg-[#C8512B]" />
+              <span className="block h-[2px] w-12 bg-[#40916C]" />
               <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-white/80">
                 100% Grass-Fed &amp; Free-Range
               </span>
@@ -108,11 +107,10 @@ export default function Hero() {
 
             {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="font-display text-5xl font-bold leading-[1.1] text-white sm:text-6xl lg:text-7xl"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
+              className="font-display text-5xl leading-[1.1] text-white sm:text-6xl lg:text-7xl"
             >
               Protein Your Family Deserves.
             </motion.h1>
@@ -138,15 +136,11 @@ export default function Hero() {
             >
               <button
                 onClick={() => openSignup()}
-                className="group inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
+                className="rounded-lg bg-[#2D6A4F] px-8 py-3.5 text-[14px] font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
               >
-                Build Your Box — Free Shipping
-                <ArrowRight
-                  size={16}
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                />
+                Get Started Today
               </button>
-              <button className="rounded-full border-2 border-white/40 px-8 py-4 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-white/10">
+              <button className="rounded-lg border-2 border-white/40 px-8 py-3.5 text-[14px] font-medium text-white transition-colors duration-200 hover:bg-white/10">
                 See How It Works
               </button>
             </motion.div>

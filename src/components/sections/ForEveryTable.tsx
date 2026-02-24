@@ -104,7 +104,7 @@ export default function ForEveryTable() {
           >
             {/* Animated pill highlight */}
             <motion.div
-              className="absolute top-0 h-full rounded-pill bg-[#1B4332]"
+              className="absolute top-0 h-full rounded-full bg-[#1B4332]"
               animate={{ left: pillStyle.left, width: pillStyle.width }}
               transition={{ type: "spring", stiffness: 400, damping: 35 }}
               style={{ height: "100%", zIndex: 0 }}
@@ -115,7 +115,7 @@ export default function ForEveryTable() {
                 key={filter.key}
                 ref={(el) => setTabRef(filter.key, el)}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`relative z-10 shrink-0 rounded-pill px-7 py-3 text-[14px] font-medium transition-colors duration-200 ${
+                className={`relative z-10 shrink-0 rounded-full px-7 py-3 text-[14px] font-medium transition-colors duration-200 ${
                   activeFilter === filter.key
                     ? "text-white"
                     : "text-[#2A2A2A] hover:text-[#1B4332]"
@@ -150,7 +150,7 @@ export default function ForEveryTable() {
                   <motion.div
                     whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.10)" }}
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="group overflow-hidden rounded-card bg-white shadow-card"
+                    className="group overflow-hidden rounded-2xl bg-white shadow-card"
                   >
                     {/* Image — overflow hidden, scale on hover */}
                     <div className="h-[200px] w-full overflow-hidden sm:h-[240px]">
@@ -174,7 +174,7 @@ export default function ForEveryTable() {
                         whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
                         whileTap={{ y: 0 }}
                         transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="mt-3 w-full rounded-pill border border-[#1B4332] py-2 text-[13px] font-medium text-[#1B4332] transition-colors duration-200 hover:bg-[#1B4332] hover:text-white"
+                        className="mt-3 w-full rounded-full border border-[#1B4332] py-2 text-[13px] font-medium text-[#1B4332] transition-colors duration-200 hover:bg-[#1B4332] hover:text-white"
                       >
                         + Add
                       </motion.button>

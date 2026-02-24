@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { useSignup } from "@/components/signup/SignupFlow";
 
@@ -53,22 +52,22 @@ export default function SomethingForEveryone() {
           subtitle="Over 400,000 members trust ButcherBox for protein that fits the way they eat. From keto to family-friendly, we've got your table covered."
         />
 
-        {/* Category Cards — taller with standard image, rounded-2xl */}
+        {/* Category Cards */}
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((cat, i) => (
             <motion.button
               key={cat.name}
               onClick={() => openSignup()}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.1,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -8 }}
-              className="group cursor-pointer overflow-hidden rounded-2xl bg-white text-left shadow-lg transition-shadow duration-300 hover:shadow-xl"
+              whileHover={{ y: -4 }}
+              className="group cursor-pointer overflow-hidden rounded-2xl bg-white text-left shadow-sm transition-shadow duration-300 hover:shadow-md"
             >
               {/* Image */}
               <div className="relative aspect-[4/5] overflow-hidden">
@@ -83,18 +82,14 @@ export default function SomethingForEveryone() {
               </div>
               {/* Text */}
               <div className="p-8 sm:p-10">
-                <h3 className="font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
+                <h3 className="font-display text-xl text-[#1A1A1A] sm:text-2xl">
                   {cat.name}
                 </h3>
                 <p className="mt-2 text-base leading-relaxed text-[#6B6B6B]">
                   {cat.desc}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#C8512B] transition-colors group-hover:text-[#A8431F]">
-                  Shop Now
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-200 group-hover:translate-x-1"
-                  />
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#2D6A4F] transition-colors group-hover:text-[#1B4332]">
+                  Shop Now →
                 </span>
               </div>
             </motion.button>
@@ -113,7 +108,7 @@ export default function SomethingForEveryone() {
             <button
               key={pill}
               onClick={() => openSignup()}
-              className="rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
+              className="rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#1B4332] transition-all hover:bg-[#1B4332] hover:text-white"
             >
               {pill}
             </button>

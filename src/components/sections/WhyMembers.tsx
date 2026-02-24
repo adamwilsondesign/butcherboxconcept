@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  DollarSign,
-  Sparkles,
-  Tag,
-  Check,
-  X,
-  HelpCircle,
-  ArrowRight,
-} from "lucide-react";
+import { DollarSign, Sparkles, Tag, Check, X, HelpCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { useSignup } from "@/components/signup/SignupFlow";
 
@@ -87,8 +79,8 @@ const COMPARISON_ROWS: { label: string; values: CellValue[] }[] = [
 function CellIcon({ value }: { value: CellValue }) {
   if (value === "check")
     return (
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2D5E4A]/10">
-        <Check size={16} className="text-[#2D5E4A]" />
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2D6A4F]/10">
+        <Check size={16} className="text-[#2D6A4F]" />
       </span>
     );
   if (value === "cross")
@@ -123,24 +115,25 @@ export default function WhyMembers() {
           {VALUE_CARDS.map((card, i) => (
             <motion.div
               key={card.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.12,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -4 }}
               className="rounded-2xl bg-[#F5F0EB] p-8 text-center shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-10"
             >
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#2D5E4A] text-white">
-                <card.icon size={24} />
+              {/* Icon — tinted rounded-xl square */}
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-[#1B4332]/5">
+                <card.icon size={24} className="text-[#2D6A4F]" />
               </div>
-              <span className="mt-4 block text-[12px] font-semibold uppercase tracking-[0.15em] text-[#C8512B]">
+              <span className="mt-4 block text-[12px] font-semibold uppercase tracking-[0.15em] text-[#40916C]">
                 {card.label}
               </span>
-              <h3 className="mt-2 font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
+              <h3 className="mt-2 font-display text-xl text-[#1A1A1A] sm:text-2xl">
                 {card.title}
               </h3>
               <p
@@ -156,13 +149,13 @@ export default function WhyMembers() {
         {/* Comparison table section — warm bg */}
         <div className="mt-20 rounded-2xl bg-[#FAF7F2] p-8 sm:p-10 lg:p-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="text-center">
-              <h3 className="font-display text-3xl font-bold text-[#1A1A1A] sm:text-4xl">
+              <h3 className="font-display text-3xl text-[#1A1A1A] sm:text-4xl">
                 ButcherBox vs Others
               </h3>
               <p
@@ -173,7 +166,7 @@ export default function WhyMembers() {
               </p>
             </div>
 
-            <div className="mt-10 overflow-x-auto rounded-2xl border border-[#E5DDD4] bg-white shadow-lg">
+            <div className="mt-10 overflow-x-auto rounded-2xl border border-[#E5DDD4] bg-white shadow-sm">
               <table className="w-full min-w-[640px] text-left">
                 <thead>
                   <tr className="border-b border-[#E5DDD4]">
@@ -182,14 +175,14 @@ export default function WhyMembers() {
                         key={h || "label"}
                         className={`px-5 py-4 text-sm font-semibold ${
                           i === 1
-                            ? "relative bg-[#2D5E4A]/5 text-[#2D5E4A]"
+                            ? "relative bg-[#2D6A4F]/5 text-[#2D6A4F]"
                             : i === 0
                               ? "text-[#1A1A1A]"
                               : "text-[#6B6B6B]"
                         }`}
                       >
                         {i === 1 && (
-                          <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#C8512B] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                          <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#2D6A4F] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
                             Best Value
                           </span>
                         )}
@@ -212,7 +205,7 @@ export default function WhyMembers() {
                           key={j}
                           className={`px-5 py-4 ${
                             j === 0
-                              ? "bg-[#2D5E4A]/5 font-semibold text-[#2D5E4A]"
+                              ? "bg-[#2D6A4F]/5 font-semibold text-[#2D6A4F]"
                               : ""
                           }`}
                         >
@@ -242,13 +235,9 @@ export default function WhyMembers() {
         >
           <button
             onClick={() => openSignup()}
-            className="group inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
+            className="rounded-lg bg-[#2D6A4F] px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
           >
             Choose ButcherBox
-            <ArrowRight
-              size={16}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
           </button>
         </motion.div>
       </div>

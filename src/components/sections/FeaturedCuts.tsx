@@ -24,12 +24,12 @@ export default function FeaturedCuts() {
     <section className="bg-white" id="featured-cuts">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="mx-auto max-w-2xl text-center">
-          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[#C8512B]">Real Ingredients. Unreal Taste.</p>
+          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[#2D6A4F]">Real Ingredients. Unreal Taste.</p>
           <h2 className="font-display text-5xl font-semibold leading-tight tracking-heading text-[#2A2A2A] sm:text-6xl">Level Up Your Dinner</h2>
         </motion.div>
 
         <div className="mt-16 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, ease: "easeOut" as const }} className="overflow-hidden rounded-card">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6, ease: "easeOut" as const }} className="overflow-hidden rounded-2xl">
             <img src={IMAGES.whatsInBox} alt="Artful arrangement of ButcherBox cuts" loading="lazy" className="aspect-[4/5] w-full object-cover" />
           </motion.div>
 
@@ -46,7 +46,7 @@ export default function FeaturedCuts() {
                       <h3 className="text-base font-medium text-[#2A2A2A] group-hover:text-[#1B4332] transition-colors duration-200">{product.name}</h3>
                       <p className="mt-0.5 text-sm text-[#767676]">{product.detail}</p>
                     </div>
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#C8512B]/10 text-[#C8512B] transition-all duration-200 group-hover:bg-[#C8512B] group-hover:text-white group-hover:shadow-md">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2D6A4F]/10 text-[#2D6A4F] transition-all duration-200 group-hover:bg-[#2D6A4F] group-hover:text-white group-hover:shadow-md">
                       <Plus size={18} strokeWidth={2.5} />
                     </span>
                   </motion.button>

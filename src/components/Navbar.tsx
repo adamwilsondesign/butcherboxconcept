@@ -58,7 +58,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
             className="relative z-10"
             aria-label="ButcherBox home"
           >
-            <span className="font-display text-[18px] font-bold text-[#243B35]">
+            <span className="font-display text-[18px] text-[#1B4332]">
               ButcherBox
             </span>
           </Link>
@@ -69,11 +69,11 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
               <li key={href}>
                 <a
                   href={href}
-                  className="nav-link relative py-1 text-[14px] font-medium text-[#1A1A1A] transition-colors duration-200 hover:text-[#2D5E4A]"
+                  className="nav-link relative py-1 text-[14px] font-medium text-[#1A1A1A] transition-colors duration-200 hover:text-[#2D6A4F]"
                 >
                   {label}
                   <span
-                    className="absolute inset-x-0 -bottom-0.5 h-[1.5px] origin-left scale-x-0 bg-[#2D5E4A] transition-transform duration-[250ms] ease-out"
+                    className="absolute inset-x-0 -bottom-0.5 h-[1.5px] origin-left scale-x-0 bg-[#2D6A4F] transition-transform duration-[250ms] ease-out"
                     style={{ transitionProperty: "transform" }}
                   />
                 </a>
@@ -90,32 +90,23 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
           <div className="hidden items-center gap-6 lg:flex">
             <a
               href="#"
-              className="text-[14px] font-medium text-[#1A1A1A] transition-colors duration-200 hover:text-[#2D5E4A]"
+              className="text-[14px] font-medium text-[#1A1A1A] transition-colors duration-200 hover:text-[#2D6A4F]"
             >
               Sign In
             </a>
-            <motion.button
+            <button
               onClick={() => openSignup()}
-              whileHover={{
-                y: -2,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-              }}
-              whileTap={{ y: 0 }}
-              transition={{
-                duration: 0.2,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className="rounded-full bg-[#C8512B] px-6 py-2.5 text-[13px] font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#A8431F]"
+              className="rounded-lg bg-[#2D6A4F] px-6 py-2.5 text-[14px] font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
             >
               Get Started
-            </motion.button>
+            </button>
           </div>
 
           {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#2D5E4A]/5 lg:hidden"
+            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#1B4332]/5 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -128,7 +119,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X size={24} className="text-[#243B35]" />
+                  <X size={24} className="text-[#1B4332]" />
                 </motion.span>
               ) : (
                 <motion.span
@@ -138,7 +129,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu size={24} className="text-[#243B35]" />
+                  <Menu size={24} className="text-[#1B4332]" />
                 </motion.span>
               )}
             </AnimatePresence>
@@ -182,7 +173,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 + i * 0.05 }}
-                    className="rounded-lg px-3 py-3 text-[16px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#2D5E4A]/5 hover:text-[#2D5E4A]"
+                    className="rounded-lg px-3 py-3 text-[16px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1B4332]/5 hover:text-[#2D6A4F]"
                   >
                     {label}
                   </motion.a>
@@ -191,7 +182,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                 <a
                   href="#"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-3 text-[16px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#2D5E4A]/5 hover:text-[#2D5E4A]"
+                  className="rounded-lg px-3 py-3 text-[16px] font-medium text-[#1A1A1A] transition-colors hover:bg-[#1B4332]/5 hover:text-[#2D6A4F]"
                 >
                   Sign In
                 </a>
@@ -200,7 +191,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                     setMobileOpen(false);
                     openSignup();
                   }}
-                  className="mt-2 rounded-full bg-[#C8512B] py-3.5 text-center text-[13px] font-semibold text-white transition-colors hover:bg-[#A8431F]"
+                  className="mt-2 rounded-lg bg-[#2D6A4F] py-3.5 text-center text-[14px] font-medium text-white transition-colors hover:bg-[#1B4332]"
                 >
                   Get Started
                 </button>

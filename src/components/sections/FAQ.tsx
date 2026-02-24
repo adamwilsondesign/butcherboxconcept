@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -58,7 +58,7 @@ export default function FAQ() {
               <div
                 key={i}
                 className={`border-b border-[#E5DDD4] transition-all duration-300 ${
-                  isOpen ? "border-l-4 border-l-[#C8512B] pl-6" : "pl-0"
+                  isOpen ? "border-l-4 border-l-[#2D6A4F] pl-6" : "pl-0"
                 }`}
               >
                 <button
@@ -102,33 +102,29 @@ export default function FAQ() {
 
         {/* CTA banner */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-16 rounded-2xl bg-[#FAF7F2] p-8 text-center sm:p-10"
         >
-          <p className="font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
+          <p className="font-display text-xl text-[#1A1A1A] sm:text-2xl">
             Still have questions?
           </p>
           <p className="mt-2 text-base text-[#6B6B6B]">
             Reach out anytime at{" "}
             <a
               href="tel:+18559818568"
-              className="font-medium text-[#2D5E4A] hover:underline"
+              className="font-medium text-[#2D6A4F] hover:underline"
             >
               855-981-8568
             </a>
           </p>
           <button
             onClick={() => openSignup()}
-            className="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
+            className="mt-6 rounded-lg bg-[#2D6A4F] px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
           >
             Get Started
-            <ArrowRight
-              size={16}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
           </button>
         </motion.div>
       </div>

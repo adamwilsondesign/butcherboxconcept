@@ -1,29 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 const CERTS = ["USDA", "ROC", "Non-GMO", "GAP", "CH", "CSI-RFM"];
 
 export default function SeekingBetterWay() {
   return (
-    <section className="bg-[#243B35] py-24 sm:py-32" id="our-story">
+    <section className="bg-[#1B4332] py-24 sm:py-32" id="our-story">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Left — Content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <div className="mb-6 flex items-center gap-3">
-              <span className="block h-[2px] w-12 bg-[#C8512B]" />
-              <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-white/60">
+              <span className="block h-[2px] w-12 bg-[#40916C]" />
+              <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#40916C]">
                 Our Story
               </span>
             </div>
-            <h2 className="font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="font-display text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">
               Seeking a Better Way
             </h2>
 
@@ -54,26 +53,22 @@ export default function SeekingBetterWay() {
 
             <a
               href="#"
-              className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-[#C8512B] transition-colors hover:text-white"
+              className="mt-8 inline-flex items-center gap-2 text-[15px] font-medium text-[#40916C] transition-colors hover:text-white"
             >
-              Read Our Story
-              <ArrowRight
-                size={16}
-                className="transition-transform duration-200 group-hover:translate-x-1"
-              />
+              Read Our Story →
             </a>
           </motion.div>
 
           {/* Right — Two images with rounded-2xl */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
             className="relative"
           >
             {/* Top image */}
-            <div className="overflow-hidden rounded-2xl shadow-lg">
+            <div className="overflow-hidden rounded-2xl shadow-md">
               <img
                 src="https://images.ctfassets.net/1yr7azz9gqt1/32ECyiesQH4g30lgLeGs9t/9a2292c7be487b2519db98b663cd2b5b/25_Q3_Website_SuperiorStandardModules_NoAntibioticsHormones.jpg?q=50&fm=jpg"
                 alt="Cows in green field"
@@ -83,7 +78,7 @@ export default function SeekingBetterWay() {
             </div>
             {/* Bottom image — offset left, overlapping */}
             <div className="-mt-16 ml-0 mr-auto w-[65%] lg:-mt-20 lg:ml-[-20px]">
-              <div className="overflow-hidden rounded-2xl shadow-lg">
+              <div className="overflow-hidden rounded-2xl shadow-md">
                 <img
                   src="https://images.ctfassets.net/1yr7azz9gqt1/4GcoyJ3da0Kb0gY3IM9H4N/b5dc8ef16383638fff9454a8c0063cce/25_Q3_Website_SuperiorStandardModules_SustainableSeafood.jpg?q=50&fm=jpg"
                   alt="Sustainable fishing"
@@ -95,7 +90,7 @@ export default function SeekingBetterWay() {
           </motion.div>
         </div>
 
-        {/* Certification badges — larger, more visible */}
+        {/* Certification badges */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
