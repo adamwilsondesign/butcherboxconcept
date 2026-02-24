@@ -1,9 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Check, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { PLANS, type Plan } from "@/lib/products";
+
+const FREE_OFFERS = [
+  {
+    emoji: "🥩",
+    title: "Free Top Sirloin Steaks for a Year",
+    image: "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=200&q=80",
+  },
+  {
+    emoji: "🍗",
+    title: "Free Chicken Breasts for a Year",
+    image: "https://images.unsplash.com/photo-1604503468506-a8da13d82571?w=200&q=80",
+  },
+  {
+    emoji: "🍔",
+    title: "Free Ground Beef for a Year",
+    image: "https://images.unsplash.com/photo-1551028150-64b9f398f678?w=200&q=80",
+  },
+];
 
 const FREQS = [
   { label: "Every 2 weeks", value: "Every Two Weeks" },
@@ -31,7 +49,12 @@ const fadeUp = {
 
 export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSelectFrequency, onContinue }: Props) {
   const [freqOpen, setFreqOpen] = useState(false);
+  const [offerIdx, setOfferIdx] = useState(0);
   const freqRef = useRef<HTMLDivElement>(null);
+
+  const offer = FREE_OFFERS[offerIdx];
+  const prevOffer = () => setOfferIdx((i) => (i - 1 + FREE_OFFERS.length) % FREE_OFFERS.length);
+  const nextOffer = () => setOfferIdx((i) => (i + 1) % FREE_OFFERS.length);
 
   const activeFreq = FREQS.find((f) => f.value === frequency) ?? FREQS[1];
 
@@ -157,7 +180,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         </p>
       </motion.div>
 
-      {/* Free offer CTA */}
+      {/* Free offer CTA — cycles through 3 offers */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -165,18 +188,52 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         className="mt-5 overflow-hidden rounded-xl border border-[#2D6A4F]/20 bg-[#2D6A4F]/5"
       >
         <div className="flex items-center gap-3 px-3.5 py-3">
-          <img
-            src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=200&q=80"
-            alt="Free steak offer"
-            className="h-14 w-14 shrink-0 rounded-lg object-cover"
-          />
+          {/* Cycling image */}
+          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={offerIdx}
+                src={offer.image}
+                alt={offer.title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </AnimatePresence>
+          </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-[#1B4332]">
-              🥩 Free NY Strip Steaks for a Year
-            </p>
-            <p className="mt-0.5 text-[10px] leading-snug text-[#1B4332]/70">
-              Enter your email to unlock a free premium cut in every box.
-            </p>
+            {/* Title row with prev/next arrows */}
+            <div className="flex items-center gap-1">
+              <button onClick={prevOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Previous offer">
+                <ChevronLeft size={14} />
+              </button>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={offerIdx}
+                  initial={{ opacity: 0, x: 8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex-1 text-xs font-bold text-[#1B4332] truncate"
+                >
+                  {offer.emoji} {offer.title}
+                </motion.p>
+              </AnimatePresence>
+              <button onClick={nextOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Next offer">
+                <ChevronRight size={14} />
+              </button>
+            </div>
+            {/* Dots indicator */}
+            <div className="mt-1 flex items-center gap-1">
+              {FREE_OFFERS.map((_, i) => (
+                <span key={i} className={`h-1 rounded-full transition-all duration-200 ${i === offerIdx ? "w-3 bg-[#2D6A4F]" : "w-1 bg-[#2D6A4F]/25"}`} />
+              ))}
+              <span className="ml-1 text-[10px] leading-snug text-[#1B4332]/70">
+                Enter email to claim your free offer.
+              </span>
+            </div>
             <div className="mt-1.5 flex gap-1.5">
               <input
                 type="email"
