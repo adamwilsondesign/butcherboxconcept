@@ -2,9 +2,9 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import MaskedImage from "@/components/ui/MaskedImage";
+import { Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const REVIEWS = [
   {
@@ -52,31 +52,16 @@ const REVIEWS = [
 ];
 
 const MOSAIC_IMAGES = [
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/25_Q4_Website_Catalog_Beef_FCBarbacoa_974016.jpg.webp",
-    variant: "blob1" as const,
-  },
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SockeyeSalmon-1826BBoxSockeyeSalmon-1_06c04eb6-c711-4b52-8de0-6e0a7942fe46.jpg.webp",
-    variant: "blob2" as const,
-  },
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SeaScallops-board-1826BBoxScallops-4.jpg.webp",
-    variant: "oval" as const,
-  },
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/NYStrip_1815BBoxMeatonBoards-2_207175d2-2317-4681-80ba-42678c59ccc7.jpg.webp",
-    variant: "blob3" as const,
-  },
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/PorkTenderloin-1826BBoxPorkTenderloin-V2.jpg.webp",
-    variant: "arch" as const,
-  },
-  {
-    src: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/Ribeyes_1815BBoxMeatonBoards-1.jpg.webp",
-    variant: "blob1" as const,
-  },
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/25_Q4_Website_Catalog_Beef_FCBarbacoa_974016.jpg.webp",
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SockeyeSalmon-1826BBoxSockeyeSalmon-1_06c04eb6-c711-4b52-8de0-6e0a7942fe46.jpg.webp",
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SeaScallops-board-1826BBoxScallops-4.jpg.webp",
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/NYStrip_1815BBoxMeatonBoards-2_207175d2-2317-4681-80ba-42678c59ccc7.jpg.webp",
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/PorkTenderloin-1826BBoxPorkTenderloin-V2.jpg.webp",
+  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/Ribeyes_1815BBoxMeatonBoards-1.jpg.webp",
 ];
+
+/* Slight rotation for pinboard feel */
+const ROTATIONS = [-2, 1.5, -1, 2, -1.5, 1];
 
 export default function Testimonials() {
   const { openSignup } = useSignup();
@@ -84,7 +69,7 @@ export default function Testimonials() {
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const amount = 340;
+    const amount = 380;
     scrollRef.current.scrollBy({
       left: direction === "left" ? -amount : amount,
       behavior: "smooth",
@@ -92,82 +77,80 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="bg-[#F5F0EB] py-20" id="reviews">
+    <section className="bg-[#FAF7F2] py-24 sm:py-32" id="reviews">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex items-end justify-between"
-        >
-          <div>
-            <span className="text-sm font-semibold uppercase tracking-wider text-[#2D5E4A]">
-              Real Members, Real Meals
-            </span>
-            <h2 className="mt-4 font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
-              See why 70,000+ members left 5-star reviews
-            </h2>
+        {/* Header with scroll arrows */}
+        <div className="flex items-end justify-between">
+          <div className="max-w-2xl">
+            <SectionHeading
+              label="Real Members, Real Meals"
+              title="See Why 70,000+ Members Left 5-Star Reviews"
+              className="text-left"
+            />
           </div>
 
           {/* Scroll arrows — desktop */}
-          <div className="hidden gap-2 sm:flex">
+          <div className="hidden gap-3 sm:flex">
             <button
               onClick={() => scroll("left")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5DDD4] bg-white text-[#243B35] transition-colors hover:bg-[#2D5E4A] hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
               aria-label="Scroll reviews left"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E5DDD4] bg-white text-[#243B35] transition-colors hover:bg-[#2D5E4A] hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
               aria-label="Scroll reviews right"
             >
               <ChevronRight size={18} />
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Testimonial cards — horizontal scroll */}
         <div
           ref={scrollRef}
-          className="mt-10 -mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
+          className="-mx-6 mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
           style={{ scrollbarWidth: "none" }}
         >
           {REVIEWS.map((review, i) => (
             <motion.div
               key={review.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.06,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
-              className="min-w-[320px] max-w-[360px] shrink-0 snap-start rounded-2xl bg-white p-6 shadow-sm"
+              className={`min-w-[320px] max-w-[380px] shrink-0 snap-start rounded-2xl p-8 shadow-md sm:p-10 ${
+                i % 2 === 0 ? "bg-white" : "bg-[#F5F0EB]"
+              }`}
             >
-              {/* Stars */}
-              <div className="flex gap-0.5">
+              {/* Stars — larger */}
+              <div className="flex gap-1">
                 {Array.from({ length: review.stars }).map((_, j) => (
                   <Star
                     key={j}
-                    size={16}
+                    size={20}
                     className="fill-[#D4A84B] text-[#D4A84B]"
                   />
                 ))}
               </div>
-              {/* Quote */}
-              <p className="mt-4 text-[15px] italic leading-relaxed text-[#1A1A1A]">
+              {/* Quote — larger text */}
+              <p
+                className="mt-5 text-base italic leading-relaxed text-[#1A1A1A]"
+                style={{ lineHeight: 1.75 }}
+              >
                 &ldquo;{review.quote}&rdquo;
               </p>
               {/* Divider */}
-              <div className="my-4 h-px bg-[#E5DDD4]" />
+              <div className="my-5 h-px bg-[#E5DDD4]" />
               {/* Attribution */}
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2D5E4A] text-xs font-bold text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#2D5E4A] text-xs font-bold text-white">
                   {review.initials}
                 </div>
                 <div>
@@ -181,9 +164,9 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* UGC mosaic */}
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3 lg:gap-5">
-          {MOSAIC_IMAGES.map((img, i) => (
+        {/* UGC mosaic — pinboard with rotation */}
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:gap-6">
+          {MOSAIC_IMAGES.map((src, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -191,17 +174,18 @@ export default function Testimonials() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.06,
+                delay: i * 0.08,
                 ease: "easeOut",
               }}
               className="group cursor-pointer"
+              style={{ transform: `rotate(${ROTATIONS[i]}deg)` }}
             >
-              <div className="overflow-hidden transition-transform duration-500 group-hover:scale-105">
-                <MaskedImage
-                  src={img.src}
+              <div className="overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:shadow-xl">
+                <img
+                  src={src}
                   alt="Member meal"
-                  variant={img.variant}
-                  className="aspect-square w-full"
+                  loading="lazy"
+                  className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             </motion.div>
@@ -209,14 +193,24 @@ export default function Testimonials() {
         </div>
 
         {/* CTA */}
-        <div className="mt-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 text-center"
+        >
           <button
             onClick={() => openSignup()}
-            className="text-[15px] font-medium text-[#2D5E4A] transition-colors hover:text-[#243B35]"
+            className="group inline-flex items-center gap-2 text-[15px] font-semibold text-[#C8512B] transition-colors hover:text-[#A8431F]"
           >
-            Join 400,000+ members →
+            Join 400,000+ members
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            />
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

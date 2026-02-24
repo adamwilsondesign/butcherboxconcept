@@ -1,24 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ClipboardList, Package, Truck, Check } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { useSignup } from "@/components/signup/SignupFlow";
 
 const STEPS = [
   {
     number: "01",
+    icon: ClipboardList,
     title: "Pick your plan",
-    desc: "Find the plan that best fits your needs—choose between Signature or Essentials.",
+    desc: "Find the plan that best fits your needs — choose between Signature or Essentials.",
   },
   {
     number: "02",
+    icon: Package,
     title: "Build your box",
     desc: "Select your preferred premium cuts that fit your family\u2019s tastes and needs.",
   },
   {
     number: "03",
+    icon: Truck,
     title: "Get it delivered for free",
-    desc: "Receive your box within 1-3 days—shipping\u2019s always on us.",
+    desc: "Receive your box within 1-3 days — shipping\u2019s always on us.",
   },
 ];
 
@@ -35,54 +39,52 @@ export default function HowItWorks() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="bg-[#F5F0EB] py-20" id="how-it-works">
+    <section className="bg-[#FAF7F2] py-24 sm:py-32" id="how-it-works">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <span className="text-sm font-semibold uppercase tracking-wider text-[#2D5E4A]">
-            Flexible Subscription, Zero Risk
-          </span>
-          <h2 className="mt-4 font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
-            How It Works
-          </h2>
-        </motion.div>
+        <SectionHeading
+          label="Flexible Subscription, Zero Risk"
+          title="How It Works"
+        />
 
         {/* Three steps */}
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
           {STEPS.map((step, i) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.12,
+                delay: i * 0.15,
                 ease: "easeOut",
               }}
               className="relative text-center"
             >
               {/* Connecting dotted line between steps — desktop only */}
               {i < STEPS.length - 1 && (
-                <div className="absolute right-0 top-10 hidden w-full translate-x-1/2 md:block">
+                <div className="absolute right-0 top-12 hidden w-full translate-x-1/2 md:block">
                   <div className="mx-auto h-px w-full border-t-2 border-dashed border-[#2D5E4A]/20" />
                 </div>
               )}
 
-              {/* Decorative number */}
-              <span className="font-display text-[64px] font-bold leading-none text-[#2D5E4A]/20">
-                {step.number}
-              </span>
-              <h3 className="mt-2 text-xl font-bold text-[#1A1A1A]">
+              {/* Icon circle */}
+              <div className="relative mx-auto flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#2D5E4A]">
+                <step.icon size={28} className="text-white" />
+                {/* Small number badge */}
+                <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#C8512B] text-[11px] font-bold text-white">
+                  {step.number}
+                </span>
+              </div>
+
+              <h3 className="mt-6 font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
                 {step.title}
               </h3>
-              <p className="mx-auto mt-3 max-w-xs text-[15px] leading-relaxed text-[#6B6B6B]">
+              <p
+                className="mx-auto mt-4 max-w-xs text-base leading-relaxed text-[#6B6B6B]"
+                style={{ lineHeight: 1.75 }}
+              >
                 {step.desc}
               </p>
             </motion.div>
@@ -90,41 +92,38 @@ export default function HowItWorks() {
         </div>
 
         {/* Reassurance pills */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
-          {PILLS.map((pill) => (
-            <div
-              key={pill}
-              className="flex items-center gap-2 rounded-full border border-[#E5DDD4] bg-white px-4 py-2 text-sm text-[#243B35]"
-            >
-              <Check size={14} className="text-[#2D5E4A]" />
-              {pill}
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 flex justify-center"
+          className="mt-16 flex flex-wrap items-center justify-center gap-3"
         >
-          <motion.button
+          {PILLS.map((pill) => (
+            <div
+              key={pill}
+              className="flex items-center gap-2 rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#243B35]"
+            >
+              <Check size={14} className="text-[#2D5E4A]" />
+              {pill}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTA — secondary style */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12 flex justify-center"
+        >
+          <button
             onClick={() => openSignup()}
-            whileHover={{
-              y: -2,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-            }}
-            whileTap={{ y: 0 }}
-            transition={{
-              duration: 0.2,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="rounded-pill bg-[#2D5E4A] px-10 py-4 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-[#3A7D64]"
+            className="rounded-full border-2 border-[#243B35] bg-transparent px-8 py-4 text-[14px] font-semibold text-[#243B35] transition-all duration-200 hover:bg-[#243B35] hover:text-white"
           >
-            Explore Plans →
-          </motion.button>
+            Explore Plans
+          </button>
         </motion.div>
       </div>
     </section>

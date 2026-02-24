@@ -37,7 +37,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
 
   return (
     <>
-      {/* ── Main nav — 68px, transparent→white on scroll ── */}
+      {/* Main nav — 68px, transparent -> white on scroll */}
       <header
         className="fixed inset-x-0 z-50"
         style={{
@@ -105,7 +105,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                 duration: 0.2,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
-              className="rounded-pill bg-[#2D5E4A] px-6 py-2.5 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-[#3A7D64]"
+              className="rounded-full bg-[#C8512B] px-6 py-2.5 text-[13px] font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#A8431F]"
             >
               Get Started
             </motion.button>
@@ -200,7 +200,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
                     setMobileOpen(false);
                     openSignup();
                   }}
-                  className="mt-2 rounded-pill bg-[#2D5E4A] py-3 text-center text-[13px] font-semibold text-white transition-colors hover:bg-[#3A7D64]"
+                  className="mt-2 rounded-full bg-[#C8512B] py-3.5 text-center text-[13px] font-semibold text-white transition-colors hover:bg-[#A8431F]"
                 >
                   Get Started
                 </button>

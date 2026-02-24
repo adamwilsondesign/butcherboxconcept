@@ -76,17 +76,17 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
       className="text-center"
     >
-      <p className="font-display text-[48px] font-bold leading-none text-white">
+      <p className="font-display text-4xl font-bold leading-none text-white sm:text-5xl">
         {count}
         {stat.suffix}
       </p>
-      <p className="mt-2 text-[14px] font-medium text-white/70">
+      <p className="mt-3 text-sm font-medium text-white/70 sm:text-base">
         {stat.label}
       </p>
     </motion.div>

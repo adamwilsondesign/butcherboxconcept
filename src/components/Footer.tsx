@@ -8,6 +8,7 @@ import {
   Instagram,
   Facebook,
   Youtube,
+  ArrowRight,
 } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
 
@@ -54,36 +55,43 @@ export default function Footer() {
       {/* Footer body */}
       <div className="bg-[#243B35] text-white">
         {/* Top CTA */}
-        <div className="mx-auto max-w-7xl px-6 pt-12 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl px-6 pt-16 sm:px-8 lg:px-12">
           <div className="text-center">
-            <h2 className="font-display text-3xl font-bold text-white">
-              Ready to eat better?
+            <h2 className="font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              Ready to Eat Better?
             </h2>
-            <p className="mt-3 text-[16px] text-white/70">
+            <p
+              className="mt-4 text-base text-white/70 sm:text-lg"
+              style={{ lineHeight: 1.75 }}
+            >
               Join 400,000+ members and get premium protein delivered to your
               door.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <button
                 onClick={() => openSignup()}
-                className="rounded-pill bg-[#2D5E4A] px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-[#3A7D64]"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
               >
                 Get Started — Free Shipping
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
               </button>
-              <button className="rounded-pill border border-white/30 px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-white/10">
+              <button className="rounded-full border-2 border-white/30 px-8 py-4 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-white/10">
                 Send a Gift
               </button>
             </div>
 
             {/* Trust badges */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
               {TRUST_BADGES.map((badge) => (
                 <div
                   key={badge.label}
-                  className="flex items-center gap-1.5 text-xs text-white/60"
+                  className="flex items-center gap-2 text-sm text-white/60"
                 >
-                  <badge.icon size={14} />
+                  <badge.icon size={16} />
                   <span>{badge.label}</span>
                 </div>
               ))}
@@ -92,14 +100,14 @@ export default function Footer() {
         </div>
 
         {/* Link grid */}
-        <div className="mx-auto mt-14 max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="mx-auto mt-16 max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
               <div key={heading}>
                 <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
                   {heading}
                 </h4>
-                <ul className="mt-4 space-y-1.5">
+                <ul className="mt-5 space-y-2">
                   {links.map((link) => (
                     <li key={link}>
                       <a
@@ -117,7 +125,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mx-auto mt-8 max-w-7xl border-t border-white/10 px-6 pt-6 pb-8 sm:px-8 lg:px-12">
+        <div className="mx-auto mt-10 max-w-7xl border-t border-white/10 px-6 pb-8 pt-6 sm:px-8 lg:px-12">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             {/* Left */}
             <p className="text-xs text-white/40">
@@ -131,7 +139,7 @@ export default function Footer() {
                   key={social.label}
                   href="#"
                   aria-label={social.label}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition-colors hover:text-white"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white"
                 >
                   <social.icon size={16} />
                 </a>

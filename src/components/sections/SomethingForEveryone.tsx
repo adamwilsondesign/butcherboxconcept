@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import MaskedImage from "@/components/ui/MaskedImage";
+import { ArrowRight } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { useSignup } from "@/components/signup/SignupFlow";
 
 const CATEGORIES = [
@@ -36,85 +37,88 @@ const LIFESTYLE_PILLS = [
   "High Protein",
   "Family-Friendly",
   "Ready to Cook",
-  "Whole30®",
+  "Whole30\u00AE",
 ];
 
 export default function SomethingForEveryone() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="bg-[#FAF7F2] py-20" id="proteins">
+    <section className="bg-[#FAF7F2] py-24 sm:py-32" id="proteins">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <span className="text-sm font-semibold uppercase tracking-wider text-[#2D5E4A]">
-            Premium Proteins for Every Lifestyle
-          </span>
-          <h2 className="mt-4 font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
-            Something for Every Table
-          </h2>
-          <p className="mt-4 text-[16px] leading-relaxed text-[#6B6B6B]">
-            Over 400,000 members trust ButcherBox for protein that fits the way
-            they eat. From keto to family-friendly, we&apos;ve got your table
-            covered.
-          </p>
-        </motion.div>
+        <SectionHeading
+          label="Premium Proteins for Every Lifestyle"
+          title="Something for Every Table"
+          subtitle="Over 400,000 members trust ButcherBox for protein that fits the way they eat. From keto to family-friendly, we've got your table covered."
+        />
 
-        {/* Category Cards */}
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Category Cards — taller with standard image, rounded-2xl */}
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((cat, i) => (
             <motion.button
               key={cat.name}
               onClick={() => openSignup()}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.08,
+                delay: i * 0.1,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.10)" }}
-              className="group cursor-pointer overflow-hidden rounded-2xl bg-white p-0 text-left shadow-card transition-shadow"
+              whileHover={{ y: -8 }}
+              className="group cursor-pointer overflow-hidden rounded-2xl bg-white text-left shadow-lg transition-shadow duration-300 hover:shadow-xl"
             >
-              {/* Image — top 60% */}
-              <div className="relative overflow-hidden" style={{ height: "60%" }}>
-                <MaskedImage
+              {/* Image */}
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <img
                   src={cat.image}
                   alt={cat.name}
-                  variant="oval"
-                  className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                {/* Warm gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
               {/* Text */}
-              <div className="p-5">
-                <h3 className="font-display text-xl font-bold text-[#1A1A1A]">
+              <div className="p-8 sm:p-10">
+                <h3 className="font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
                   {cat.name}
                 </h3>
-                <p className="mt-1.5 text-sm text-[#6B6B6B]">{cat.desc}</p>
+                <p className="mt-2 text-base leading-relaxed text-[#6B6B6B]">
+                  {cat.desc}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#C8512B] transition-colors group-hover:text-[#A8431F]">
+                  Shop Now
+                  <ArrowRight
+                    size={14}
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  />
+                </span>
               </div>
             </motion.button>
           ))}
         </div>
 
         {/* Lifestyle pills */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 flex flex-wrap items-center justify-center gap-3"
+        >
           {LIFESTYLE_PILLS.map((pill) => (
             <button
               key={pill}
               onClick={() => openSignup()}
-              className="rounded-full border border-[#E5DDD4] bg-white px-4 py-2 text-sm text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
+              className="rounded-full border border-[#E5DDD4] bg-white px-5 py-2.5 text-sm font-medium text-[#243B35] transition-all hover:bg-[#2D5E4A] hover:text-white"
             >
               {pill}
             </button>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

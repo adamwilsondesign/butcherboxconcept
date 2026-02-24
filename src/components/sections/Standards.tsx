@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const STANDARDS = [
   {
@@ -33,36 +34,30 @@ const CERTS = ["USDA", "ROC", "Non-GMO", "GAP", "CH", "CSI-RFM"];
 
 export default function Standards() {
   return (
-    <section className="bg-white py-20" id="standards">
+    <section className="bg-white py-24 sm:py-32" id="standards">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center"
-        >
-          <span className="text-sm font-semibold uppercase tracking-wider text-[#2D5E4A]">
-            Superior standards, no exceptions
-          </span>
-        </motion.div>
+        {/* Header */}
+        <SectionHeading
+          label="Superior standards, no exceptions"
+          title="We Source Differently"
+          subtitle="Every cut meets standards most brands can't match. Third-party verified, farm-to-freezer traceability."
+        />
 
         {/* Cards */}
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {STANDARDS.map((card, i) => (
             <motion.div
               key={card.heading}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.5,
-                delay: i * 0.08,
+                delay: i * 0.1,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.10)" }}
-              className="group relative overflow-hidden rounded-2xl"
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg"
               style={{ aspectRatio: "3/4" }}
             >
               {/* Background image */}
@@ -72,12 +67,18 @@ export default function Standards() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              {/* Dark gradient overlay — rgba(0,0,0,0.6) */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.05) 100%)",
+                }}
+              />
               {/* Text */}
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <p className="text-sm text-white/70">{card.label}</p>
-                <h3 className="mt-1.5 text-xl font-bold text-white">
+              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
+                <p className="text-sm font-medium text-white/80">{card.label}</p>
+                <h3 className="mt-2 font-display text-xl font-bold leading-snug text-white sm:text-2xl">
                   {card.heading}
                 </h3>
               </div>
@@ -86,18 +87,24 @@ export default function Standards() {
         </div>
 
         {/* Certification badges */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-6"
+        >
           {CERTS.map((cert) => (
             <div
               key={cert}
-              className="flex h-16 w-16 items-center justify-center rounded-full border border-[#E5DDD4] bg-white"
+              className="flex h-16 w-16 items-center justify-center rounded-full border border-[#E5DDD4] bg-white shadow-sm"
             >
               <span className="text-[11px] font-bold text-[#243B35]">
                 {cert}
               </span>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

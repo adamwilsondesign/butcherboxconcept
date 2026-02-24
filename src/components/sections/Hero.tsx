@@ -1,323 +1,198 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
-import MaskedImage from "@/components/ui/MaskedImage";
 
-interface Slide {
-  image: string;
-  label: string;
-  headline: string;
-  subtext: string;
-  cta: string;
-  textLink: string;
-}
-
-const SLIDES: Slide[] = [
+const SLIDES = [
   {
     image:
-      "https://images.ctfassets.net/1yr7azz9gqt1/382W88cbfXXjJSvHF6Hqog/0f286ffefd26e6ef5c4fabbce2180064/26_Q1_NYNY_Web_UnauthenticatedHomepage_Mobile_770x1100.jpg?q=50&fm=jpg",
-    label: "FREE STEAK FOR A YEAR",
-    headline: "Restaurant-Quality Meat, Delivered.",
-    subtext:
-      "100% grass-fed beef, free-range chicken, heritage pork & wild-caught seafood — shipped free to your door.",
-    cta: "Build Your First Box",
-    textLink: "See How It Works →",
+      "https://images.unsplash.com/photo-1588347818481-0e5e2f450243?w=1920&q=80",
+    alt: "Premium beef cuts on cutting board",
   },
   {
     image:
-      "https://images.ctfassets.net/1yr7azz9gqt1/7AHLVQoml5mgzCKgevo4bF/fba1d9919bff561f586de6ac01d8ce27/25_Q3_Website_SuperiorStandardModules_HumanelyRaisedMeat.jpg?q=50&fm=jpg",
-    label: "CERTIFIED B CORPORATION",
-    headline: "We Know Where Every Cut Comes From.",
-    subtext:
-      "No antibiotics, no added hormones — ever. 200+ banned ingredients. Sourced from farms we trust.",
-    cta: "Explore Our Standards",
-    textLink: "Read Our Story →",
+      "https://images.unsplash.com/photo-1432139509613-5c4255a1d015?w=1920&q=80",
+    alt: "Fresh wild-caught salmon",
   },
   {
     image:
-      "https://images.ctfassets.net/1yr7azz9gqt1/4GcoyJ3da0Kb0gY3IM9H4N/b5dc8ef16383638fff9454a8c0063cce/25_Q3_Website_SuperiorStandardModules_SustainableSeafood.jpg?q=50&fm=jpg",
-    label: "WILD-CAUGHT SEAFOOD",
-    headline: "From the Ocean to Your Kitchen.",
-    subtext:
-      "Sustainably sourced salmon, scallops, lobster, and more — flash-frozen at peak freshness.",
-    cta: "Shop Seafood",
-    textLink: "Browse All Proteins →",
+      "https://images.unsplash.com/photo-1606728035253-49e8a23146de?w=1920&q=80",
+    alt: "Family dinner with premium meats",
   },
 ];
 
-const AUTO_ADVANCE_MS = 5000;
-
-/* Word-by-word headline animation */
-function AnimatedHeadline({
-  text,
-  slideKey,
-}: {
-  text: string;
-  slideKey: number;
-}) {
-  const words = text.split(" ");
-  return (
-    <h1 className="mt-4 font-display text-[42px] font-bold leading-[1.08] text-white sm:text-[56px] lg:text-[72px]">
-      {words.map((word, i) => (
-        <motion.span
-          key={`${slideKey}-${i}`}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-          className="mr-[0.28em] inline-block"
-        >
-          {word}
-        </motion.span>
-      ))}
-    </h1>
-  );
-}
+const CYCLE_MS = 6000;
 
 export default function Hero() {
   const { openSignup } = useSignup();
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const progressRef = useRef<number>(0);
-  const rafRef = useRef<number>(0);
-  const startTimeRef = useRef<number>(0);
   const [scrollY, setScrollY] = useState(0);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const startRef = useRef(Date.now());
 
-  const next = useCallback(() => {
+  const advance = useCallback(() => {
     setCurrent((prev) => (prev + 1) % SLIDES.length);
-    setProgress(0);
-    progressRef.current = 0;
-  }, []);
-  const prev = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-    setProgress(0);
-    progressRef.current = 0;
+    startRef.current = Date.now();
   }, []);
 
-  /* Parallax scroll tracking for floating blob */
+  /* Auto-advance */
+  useEffect(() => {
+    const id = setInterval(advance, CYCLE_MS);
+    return () => clearInterval(id);
+  }, [advance]);
+
+  /* Progress bar */
+  useEffect(() => {
+    let raf: number;
+    const tick = () => {
+      const elapsed = Date.now() - startRef.current;
+      const pct = Math.min(elapsed / CYCLE_MS, 1);
+      if (progressRef.current) {
+        progressRef.current.style.width = `${pct * 100}%`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [current]);
+
+  /* Parallax */
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Progress bar animation & auto-advance */
-  useEffect(() => {
-    if (paused) return;
-    startTimeRef.current = Date.now();
-
-    const tick = () => {
-      const elapsed = Date.now() - startTimeRef.current;
-      const pct = Math.min(elapsed / AUTO_ADVANCE_MS, 1);
-      progressRef.current = pct;
-      setProgress(pct);
-
-      if (pct >= 1) {
-        next();
-        return;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [paused, current, next]);
-
-  const slide = SLIDES[current];
-
   return (
-    <section
-      className="relative min-h-[600px] overflow-hidden lg:min-h-[700px]"
-      id="hero"
-      aria-label="Hero"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/* Background images — pure crossfade */}
-      <AnimatePresence mode="sync">
+    <section className="relative h-[85vh] min-h-[600px] overflow-hidden">
+      {/* Background images with parallax */}
+      <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           className="absolute inset-0"
+          style={{ transform: `translateY(${scrollY * 0.3}px)` }}
         >
           <img
-            src={slide.image}
-            alt=""
-            loading={current === 0 ? "eager" : "lazy"}
+            src={SLIDES[current].image}
+            alt={SLIDES[current].alt}
             className="h-full w-full object-cover"
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Dark overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
 
-      {/* Content — left-aligned + floating blob on right (desktop) */}
-      <div className="relative mx-auto flex h-full min-h-[600px] max-w-7xl items-center px-6 sm:px-8 lg:min-h-[700px] lg:px-12">
-        {/* Left column — text */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="w-full max-w-xl"
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 8 }}
+      {/* Content */}
+      <div className="relative z-10 flex h-full items-center">
+        <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0 }}
-              className="text-[12px] font-semibold uppercase tracking-[0.15em] text-white/80"
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="mb-6 flex items-center gap-3"
             >
-              {slide.label}
-            </motion.span>
+              <span className="block h-[2px] w-12 bg-[#C8512B]" />
+              <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-white/80">
+                100% Grass-Fed &amp; Free-Range
+              </span>
+            </motion.div>
 
-            <AnimatedHeadline text={slide.headline} slideKey={current} />
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="font-display text-5xl font-bold leading-[1.1] text-white sm:text-6xl lg:text-7xl"
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
+            >
+              Protein Your Family Deserves.
+            </motion.h1>
 
+            {/* Subtext */}
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="mt-5 max-w-md text-[16px] leading-relaxed text-white/80 sm:text-[18px]"
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-6 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg"
+              style={{ lineHeight: 1.75 }}
             >
-              {slide.subtext}
+              Humanely raised beef, free-range chicken, wild-caught seafood —
+              delivered free to your door. Plans from $5.27/meal.
             </motion.p>
 
+            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-              className="mt-8 flex flex-wrap items-center gap-5"
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="mt-8 flex flex-wrap items-center gap-4"
             >
-              <motion.button
+              <button
                 onClick={() => openSignup()}
-                whileHover={{
-                  y: -2,
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-                }}
-                whileTap={{ y: 0 }}
-                transition={{
-                  duration: 0.2,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
-                className="rounded-pill bg-white px-8 py-3.5 text-[14px] font-semibold text-[#243B35] transition-all duration-200 hover:bg-white/90"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
               >
-                {slide.cta}
-              </motion.button>
-              <a
-                href="#how-it-works"
-                className="text-[14px] font-medium text-white/90 transition-colors hover:text-white"
-              >
-                {slide.textLink}
-              </a>
+                Build Your Box — Free Shipping
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </button>
+              <button className="rounded-full border-2 border-white/40 px-8 py-4 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-white/10">
+                See How It Works
+              </button>
             </motion.div>
-          </motion.div>
-        </AnimatePresence>
 
-        {/* Floating blob image — desktop only, parallax on scroll */}
-        <div
-          className="pointer-events-none absolute -right-4 bottom-12 hidden w-[280px] lg:block xl:right-8 xl:w-[340px]"
-          style={{
-            transform: `translateY(${scrollY * 0.1}px)`,
-          }}
-        >
-          <MaskedImage
-            src="https://cdn.shopify.com/s/files/1/0634/3121/3295/files/25_Q4_Website_Catalog_Beef_FCBarbacoa_974016.jpg.webp"
-            alt="Premium beef barbacoa"
-            variant="blob1"
-            className="aspect-square w-full drop-shadow-2xl"
-          />
+            {/* Trust line */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="mt-6 text-[13px] text-white/50"
+            >
+              ★ Trusted by 400,000+ families · Cancel anytime
+            </motion.p>
+          </div>
         </div>
       </div>
 
-      {/* Dot navigation with progress fill */}
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3">
-        {SLIDES.map((_, i) => {
-          const isActive = i === current;
-          return (
-            <button
-              key={i}
-              onClick={() => {
-                setCurrent(i);
-                setProgress(0);
-                progressRef.current = 0;
-              }}
-              className="relative h-2 overflow-hidden rounded-full bg-white/30 transition-all duration-[400ms]"
-              style={{
-                width: isActive ? 28 : 8,
-                transitionTimingFunction:
-                  "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              }}
-              aria-label={`Go to slide ${i + 1}`}
-            >
-              {isActive && (
-                <span
-                  className="absolute inset-0 rounded-full bg-white"
-                  style={{
-                    transformOrigin: "left",
-                    transform: `scaleX(${progress})`,
-                    transition: "none",
-                  }}
-                />
-              )}
-              {!isActive && (
-                <span className="absolute inset-0 rounded-full bg-white/50" />
-              )}
-            </button>
-          );
-        })}
+      {/* Slide dots + progress */}
+      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              setCurrent(i);
+              startRef.current = Date.now();
+            }}
+            className="group relative flex h-5 items-center"
+            aria-label={`Slide ${i + 1}`}
+          >
+            <span
+              className={`block h-[3px] rounded-full transition-all duration-300 ${
+                i === current
+                  ? "w-10 bg-white/30"
+                  : "w-3 bg-white/40 group-hover:bg-white/60"
+              }`}
+            />
+            {i === current && (
+              <div
+                ref={progressRef}
+                className="absolute left-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-white"
+                style={{ width: "0%" }}
+              />
+            )}
+          </button>
+        ))}
       </div>
-
-      {/* Arrow buttons */}
-      <motion.button
-        onClick={prev}
-        whileHover={{ scale: 1 }}
-        className="group absolute left-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full text-white transition-all duration-200 sm:left-6"
-        style={{
-          background: "rgba(255,255,255,0.12)",
-          backdropFilter: "blur(8px)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.22)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-        }}
-        aria-label="Previous slide"
-      >
-        <ChevronLeft
-          size={22}
-          className="transition-transform duration-200 group-hover:scale-110"
-        />
-      </motion.button>
-      <motion.button
-        onClick={next}
-        whileHover={{ scale: 1 }}
-        className="group absolute right-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full text-white transition-all duration-200 sm:right-6"
-        style={{
-          background: "rgba(255,255,255,0.12)",
-          backdropFilter: "blur(8px)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.22)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-        }}
-        aria-label="Next slide"
-      >
-        <ChevronRight
-          size={22}
-          className="transition-transform duration-200 group-hover:scale-110"
-        />
-      </motion.button>
     </section>
   );
 }

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { useSignup } from "@/components/signup/SignupFlow";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const FAQS = [
   {
@@ -41,36 +42,31 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-white py-20" id="faq">
+    <section className="bg-white py-24 sm:py-32" id="faq">
       <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center"
-        >
-          <h2 className="font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
-            Frequently Asked Questions
-          </h2>
-          <p className="mt-3 text-[16px] text-[#6B6B6B]">
-            Everything you need to know about ButcherBox
-          </p>
-        </motion.div>
+        <SectionHeading
+          title="Frequently Asked Questions"
+          subtitle="Everything you need to know about ButcherBox"
+        />
 
         {/* Accordion */}
-        <div className="mt-12">
+        <div className="mt-16">
           {FAQS.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
-              <div key={i} className="border-b border-[#E5DDD4]">
+              <div
+                key={i}
+                className={`border-b border-[#E5DDD4] transition-all duration-300 ${
+                  isOpen ? "border-l-4 border-l-[#C8512B] pl-6" : "pl-0"
+                }`}
+              >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between py-5 text-left"
+                  className="flex w-full items-center justify-between py-6 text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="pr-8 text-lg font-semibold text-[#1A1A1A]">
+                  <span className="pr-8 text-lg font-semibold text-[#1A1A1A] sm:text-xl">
                     {faq.q}
                   </span>
                   <motion.span
@@ -78,7 +74,7 @@ export default function FAQ() {
                     transition={{ duration: 0.25 }}
                     className="shrink-0"
                   >
-                    <ChevronDown size={20} className="text-[#6B6B6B]" />
+                    <ChevronDown size={22} className="text-[#6B6B6B]" />
                   </motion.span>
                 </button>
                 <AnimatePresence>
@@ -90,7 +86,10 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 text-[15px] leading-relaxed text-[#6B6B6B]">
+                      <p
+                        className="pb-6 text-base leading-relaxed text-[#6B6B6B]"
+                        style={{ lineHeight: 1.75 }}
+                      >
                         {faq.a}
                       </p>
                     </motion.div>
@@ -103,35 +102,34 @@ export default function FAQ() {
 
         {/* CTA banner */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-12 rounded-2xl bg-[#F5F0EB] p-8 text-center"
+          className="mt-16 rounded-2xl bg-[#FAF7F2] p-8 text-center sm:p-10"
         >
-          <p className="text-lg font-semibold text-[#1A1A1A]">
+          <p className="font-display text-xl font-bold text-[#1A1A1A] sm:text-2xl">
             Still have questions?
           </p>
-          <p className="mt-1 text-sm text-[#6B6B6B]">
+          <p className="mt-2 text-base text-[#6B6B6B]">
             Reach out anytime at{" "}
             <a
               href="tel:+18559818568"
-              className="text-[#2D5E4A] hover:underline"
+              className="font-medium text-[#2D5E4A] hover:underline"
             >
               855-981-8568
             </a>
           </p>
-          <motion.button
+          <button
             onClick={() => openSignup()}
-            whileHover={{
-              y: -2,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-            }}
-            whileTap={{ y: 0 }}
-            className="mt-5 rounded-pill bg-[#2D5E4A] px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-[#3A7D64]"
+            className="group mt-6 inline-flex items-center gap-2 rounded-full bg-[#C8512B] px-8 py-4 text-[14px] font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#A8431F] hover:shadow-lg"
           >
             Get Started
-          </motion.button>
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </button>
         </motion.div>
       </div>
     </section>
