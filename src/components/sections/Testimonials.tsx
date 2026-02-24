@@ -51,17 +51,6 @@ const REVIEWS = [
   },
 ];
 
-const MOSAIC_IMAGES = [
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/25_Q4_Website_Catalog_Beef_FCBarbacoa_974016.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SockeyeSalmon-1826BBoxSockeyeSalmon-1_06c04eb6-c711-4b52-8de0-6e0a7942fe46.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/SeaScallops-board-1826BBoxScallops-4.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/NYStrip_1815BBoxMeatonBoards-2_207175d2-2317-4681-80ba-42678c59ccc7.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/PorkTenderloin-1826BBoxPorkTenderloin-V2.jpg.webp",
-  "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/Ribeyes_1815BBoxMeatonBoards-1.jpg.webp",
-];
-
-/* Slight rotation for pinboard feel */
-const ROTATIONS = [-2, 1.5, -1, 2, -1.5, 1];
 
 export default function Testimonials() {
   const { openSignup } = useSignup();
@@ -159,34 +148,6 @@ export default function Testimonials() {
                   </p>
                   <p className="text-xs text-[#2D6A4F]">Verified Member</p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* UGC mosaic — pinboard with rotation */}
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:gap-6">
-          {MOSAIC_IMAGES.map((src, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.5,
-                delay: i * 0.08,
-                ease: "easeOut",
-              }}
-              className="group cursor-pointer"
-              style={{ transform: `rotate(${ROTATIONS[i]}deg)` }}
-            >
-              <div className="overflow-hidden rounded-2xl shadow-sm transition-all duration-500 group-hover:shadow-md">
-                <img
-                  src={src}
-                  alt="Member meal"
-                  loading="lazy"
-                  className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
               </div>
             </motion.div>
           ))}

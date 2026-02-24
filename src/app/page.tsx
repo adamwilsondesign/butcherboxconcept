@@ -5,6 +5,7 @@ import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
 import ProteinCategories from "@/components/sections/ProteinCategories";
 import Standards from "@/components/sections/Standards";
+import RecipeCards from "@/components/sections/RecipeCards";
 import HowItWorks from "@/components/sections/HowItWorks";
 import WhyMembers from "@/components/sections/WhyMembers";
 import SeekingBetterWay from "@/components/sections/SeekingBetterWay";
@@ -27,7 +28,10 @@ export default function Home() {
       {/* 3. Superior Standards */}
       <Standards />
 
-      {/* 4. How It Works (3 steps) */}
+      {/* 4. Recipe Cards (scrolling row) */}
+      <RecipeCards />
+
+      {/* 5. How It Works (3 steps) */}
       <HowItWorks />
 
       {/* 5. Why 400,000+ Members Choose Us */}
