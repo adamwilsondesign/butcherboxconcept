@@ -1,16 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { IMAGES } from "@/lib/images";
-
-const CERTS_DATA = [
-  { src: IMAGES.certUSDA, alt: "USDA Organic" },
-  { src: IMAGES.certRegenerativeOrganic, alt: "Regenerative Organic Certified" },
-  { src: IMAGES.certNonGMO, alt: "Non-GMO Project Verified" },
-  { src: IMAGES.certGAP, alt: "Global Animal Partnership" },
-  { src: IMAGES.certCSI, alt: "CSI Responsibly Fished & Managed" },
-  { src: IMAGES.certHumane, alt: "Certified Humane" },
-];
 
 export default function SeekingBetterWay() {
   return (
@@ -95,28 +85,6 @@ export default function SeekingBetterWay() {
           </motion.div>
         </div>
 
-        {/* Certification badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-20 flex flex-wrap items-center justify-center gap-8 sm:gap-10"
-        >
-          {CERTS_DATA.map((cert) => (
-            <div
-              key={cert.alt}
-              className="flex h-14 w-14 items-center justify-center brightness-0 invert sm:h-16 sm:w-16"
-            >
-              <img
-                src={cert.src}
-                alt={cert.alt}
-                loading="lazy"
-                className="h-full w-full object-contain"
-              />
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
