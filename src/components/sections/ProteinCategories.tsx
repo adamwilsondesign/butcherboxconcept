@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useSignup } from "@/components/signup/SignupFlow";
 import { IMAGES } from "@/lib/images";
-import SectionHeading from "@/components/ui/SectionHeading";
 
 const CATEGORIES = [
   {
@@ -44,17 +43,10 @@ export default function ProteinCategories() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="bg-[#FAF7F2] py-24 sm:py-32" id="proteins">
+    <section className="bg-[#FAF7F2] py-10 sm:py-14" id="proteins">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        {/* Header */}
-        <SectionHeading
-          label="Explore Our Proteins"
-          title="What's on Your Table?"
-          subtitle="From grass-fed beef to wild-caught seafood — click to start building your box."
-        />
-
-        {/* Category rows — editorial WildGrain-style layout */}
-        <div className="mt-16 flex flex-col gap-10 sm:gap-14 lg:gap-16">
+        {/* Category rows — compact editorial layout */}
+        <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
           {CATEGORIES.map((cat, i) => (
             <motion.button
               key={cat.name}
@@ -69,7 +61,7 @@ export default function ProteinCategories() {
                 delay: i * 0.08,
                 ease: "easeOut",
               }}
-              className={`group flex w-full cursor-pointer items-center gap-6 sm:gap-10 lg:gap-16 ${
+              className={`group flex w-full cursor-pointer items-center gap-4 sm:gap-8 lg:gap-12 ${
                 i % 2 === 1 ? "flex-row-reverse" : ""
               }`}
             >
@@ -79,16 +71,13 @@ export default function ProteinCategories() {
                   i % 2 === 1 ? "items-end text-right" : "items-start text-left"
                 }`}
               >
-                <h3 className="font-display text-6xl leading-[0.9] text-[#1B4332] transition-colors duration-300 group-hover:text-[#2D6A4F] sm:text-7xl lg:text-8xl xl:text-9xl">
+                <h3 className="font-display text-5xl leading-[0.9] text-[#1B4332] transition-colors duration-300 group-hover:text-[#40916C] sm:text-6xl lg:text-7xl">
                   {cat.name}
                 </h3>
-                <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#2D6A4F] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  Explore {cat.name} →
-                </span>
               </div>
 
               {/* Circular image */}
-              <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-40 sm:w-40 lg:h-48 lg:w-48">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full shadow-sm transition-shadow duration-300 group-hover:shadow-md sm:h-32 sm:w-32 lg:h-36 lg:w-36">
                 <img
                   src={cat.image}
                   alt={cat.alt}
@@ -106,7 +95,7 @@ export default function ProteinCategories() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-3"
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           {LIFESTYLE_PILLS.map((pill) => (
             <button
