@@ -41,7 +41,6 @@ export default function StepProducts({
   const totalItems = items.reduce((s, i) => s + i.qty, 0);
   const maxItems = plan.proteins;
   const isFull = totalItems >= maxItems;
-  const isOneAway = totalItems === maxItems - 1;
 
   const setQty = (id: number, qty: number) => {
     if (qty <= 0) {
@@ -63,14 +62,13 @@ export default function StepProducts({
   };
 
   const progressPct = Math.min((totalItems / maxItems) * 100, 100);
-  const progressColor = isOneAway ? "#2D6A4F" : "#2D6A4F";
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col px-4 pb-24">
+    <div className="flex w-full flex-col px-4 pb-4">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-3xl font-bold text-text-dark sm:text-4xl"
+        className="text-center font-serif text-2xl text-text-dark"
       >
         Choose Your Proteins
       </motion.h2>
@@ -80,7 +78,7 @@ export default function StepProducts({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="mt-4 flex justify-center"
+        className="mt-3 flex justify-center"
       >
         <span className="inline-flex items-center gap-2 rounded-full bg-[#2D6A4F]/10 px-4 py-2 text-sm font-semibold text-[#2D6A4F]">
           {plan.id === "medium" ? "Medium" : plan.id === "large" ? "Large" : "Extra-Large"} · {plan.proteins} proteins · ${plan.price}
@@ -100,7 +98,7 @@ export default function StepProducts({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mx-auto mt-3 flex w-full max-w-md items-center gap-3 rounded-xl bg-[#1B4332]/10 px-4 py-3 text-sm"
+            className="mt-3 flex items-center gap-3 rounded-xl bg-[#1B4332]/10 px-4 py-3 text-sm"
           >
             <AlertTriangle size={18} className="shrink-0 text-[#1B4332]" />
             <span className="flex-1 font-medium text-[#1B4332]">
@@ -118,7 +116,7 @@ export default function StepProducts({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="mt-5 flex gap-2 overflow-x-auto pb-1 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-4 flex gap-2 overflow-x-auto pb-1 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {FILTERS.map((f) => (
           <button
@@ -135,8 +133,8 @@ export default function StepProducts({
         ))}
       </motion.div>
 
-      {/* Product grid */}
-      <div className="mt-5 grid flex-1 grid-cols-2 gap-3 overflow-y-auto sm:grid-cols-3 sm:gap-4">
+      {/* Product grid — always 2 columns for sidebar */}
+      <div className="mt-4 grid flex-1 grid-cols-2 gap-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((p) => {
             const qty = getQty(p.id);
@@ -232,23 +230,22 @@ export default function StepProducts({
         </AnimatePresence>
       </div>
 
-      {/* Fixed bottom bar with progress */}
+      {/* Sticky bottom bar with progress — sticks within the drawer scroll container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur-sm"
+        className="sticky bottom-0 z-50 -mx-4 mt-4 border-t border-border bg-background/95 backdrop-blur-sm"
       >
         {/* Progress bar */}
         <div className="h-1 w-full bg-border">
           <motion.div
-            className="h-full transition-colors duration-300"
-            style={{ backgroundColor: progressColor }}
+            className="h-full bg-[#2D6A4F] transition-colors duration-300"
             animate={{ width: `${progressPct}%` }}
             transition={{ type: "spring", stiffness: 200, damping: 25 }}
           />
         </div>
-        <div className="flex items-center justify-between px-6 py-3.5 sm:px-8">
+        <div className="flex items-center justify-between px-4 py-3">
           <button
             onClick={onBack}
             aria-label="Go back"
@@ -257,16 +254,16 @@ export default function StepProducts({
             ← Back
           </button>
 
-          <div className="flex items-center gap-2 sm:gap-4">
-            <span className="text-sm text-text-muted">
-              {totalItems} of {maxItems} proteins · <span className="font-bold text-[#2D6A4F]">${plan.price}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-text-muted">
+              {totalItems}/{maxItems} · <span className="font-bold text-[#2D6A4F]">${plan.price}</span>
             </span>
             <button
               onClick={onContinue}
               disabled={totalItems !== maxItems}
-              className="rounded-md bg-[#2D6A4F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed sm:px-6"
+              className="rounded-lg bg-[#2D6A4F] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Review Order →
+              Review →
             </button>
           </div>
         </div>

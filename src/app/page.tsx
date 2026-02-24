@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
-import SomethingForEveryone from "@/components/sections/SomethingForEveryone";
+import ProteinCategories from "@/components/sections/ProteinCategories";
 import Standards from "@/components/sections/Standards";
 import HowItWorks from "@/components/sections/HowItWorks";
 import WhyMembers from "@/components/sections/WhyMembers";
@@ -21,8 +21,8 @@ export default function Home() {
       <Hero />
       <StatsBar />
 
-      {/* 2. Something for Everyone (protein categories) */}
-      <SomethingForEveryone />
+      {/* 2. Protein Categories (WildGrain-style editorial) */}
+      <ProteinCategories />
 
       {/* 3. Superior Standards */}
       <Standards />

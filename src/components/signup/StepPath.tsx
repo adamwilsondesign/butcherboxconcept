@@ -25,11 +25,11 @@ const fadeUp = {
 
 export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSelectFrequency, onContinue }: Props) {
   return (
-    <div className="mx-auto w-full max-w-4xl px-4">
+    <div className="mx-auto w-full px-4">
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-3xl font-bold text-text-dark sm:text-4xl"
+        className="text-center font-serif text-2xl text-text-dark"
       >
         Select Your Plan &amp; Frequency
       </motion.h2>
@@ -37,13 +37,13 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
-        className="mt-2 text-center text-[#2D6A4F] font-semibold"
+        className="mt-2 text-center text-sm font-semibold text-[#2D6A4F]"
       >
         Select a Signature Box
       </motion.p>
 
-      {/* Plan cards */}
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      {/* Plan cards — single column for sidebar */}
+      <div className="mt-8 grid grid-cols-1 gap-4">
         {PLANS.map((plan, i) => {
           const isSelected = selectedPlan?.id === plan.id;
           const isPopular = plan.id === "large";
@@ -56,7 +56,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               initial="hidden"
               animate="visible"
               onClick={() => onSelectPlan(plan)}
-              className={`group relative flex flex-col rounded-2xl border-2 bg-surface p-6 text-left transition-all hover:shadow-lg sm:p-8 ${
+              className={`group relative flex flex-col rounded-2xl border-2 bg-surface p-5 text-left transition-all hover:shadow-lg ${
                 isSelected
                   ? "border-[#2D6A4F] shadow-lg"
                   : "border-border hover:border-[#40916C]"
@@ -76,26 +76,24 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
                 </span>
               )}
 
-              <h3 className="font-serif text-xl font-bold text-text-dark sm:text-2xl">
-                {plan.name}
-              </h3>
+              <div className="flex items-baseline justify-between">
+                <h3 className="font-serif text-lg text-text-dark">
+                  {plan.name}
+                </h3>
+                <p className="text-2xl font-bold text-[#2D6A4F]">
+                  ${plan.price}
+                </p>
+              </div>
 
-              <p className="mt-3 text-3xl font-bold text-[#2D6A4F]">
-                ${plan.price}
-              </p>
-              <p className="mt-0.5 text-sm text-text-muted">
-                {plan.perMeal}
-              </p>
-
-              <p className="mt-2 text-sm text-text-muted">
-                Choose {plan.proteins} proteins (up to {plan.maxLbs} lbs)
+              <p className="mt-1 text-sm text-text-muted">
+                Choose {plan.proteins} proteins (up to {plan.maxLbs} lbs) · {plan.perMeal}
               </p>
 
               <p className="mt-1 text-xs font-medium text-[#2D6A4F]">
                 {plan.feeds}
               </p>
 
-              <div className={`mt-4 rounded-md py-2.5 text-center text-sm font-semibold transition-colors ${
+              <div className={`mt-3 rounded-md py-2 text-center text-sm font-semibold transition-colors ${
                 isSelected
                   ? "bg-[#2D6A4F] text-white"
                   : "bg-[#2D6A4F] text-white hover:bg-[#1B4332]"
@@ -112,23 +110,23 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mt-12"
+        className="mt-8"
       >
-        <h3 className="text-center font-serif text-xl font-bold text-text-dark sm:text-2xl">
+        <h3 className="text-center font-serif text-lg text-text-dark">
           How often do you want a box?
         </h3>
-        <p className="mt-2 text-center text-sm text-text-muted">
+        <p className="mt-1 text-center text-sm text-text-muted">
           You can pause or cancel anytime.
         </p>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="mt-4 grid grid-cols-2 gap-2">
           {FREQS.map((f) => (
             <button
               type="button"
               key={f}
               onClick={() => onSelectFrequency(f)}
               aria-pressed={frequency === f}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
+              className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
                 frequency === f
                   ? "bg-[#2D6A4F] text-white shadow-md"
                   : "bg-surface-warm text-text-muted hover:bg-[#2D6A4F]/10"
@@ -145,12 +143,12 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="mt-10 flex flex-col items-center gap-4"
+        className="mt-8 flex flex-col items-center gap-3"
       >
         <button
           onClick={onContinue}
           disabled={!selectedPlan}
-          className="rounded-md bg-[#2D6A4F] px-10 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full rounded-lg bg-[#2D6A4F] py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1B4332] disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Next, Choose Your Proteins →
         </button>
