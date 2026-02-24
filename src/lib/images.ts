@@ -26,6 +26,13 @@ export const IMAGES = {
   porkRoast: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/PorkLoinRoast-center-cut-1826BBoxBnlessCentCutLionRstPorkHalf-1.jpg.webp?v=1757949489",
   barbacoa: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/25_Q4_Website_Catalog_Beef_FCBarbacoa_974016.jpg.webp?v=1762890066",
   dicedChicken: "https://cdn.shopify.com/s/files/1/0634/3121/3295/files/Website_Catalog_Poultry_FCDicedChicken_974027.jpg.webp?v=1763150831",
+  // Certification logos (SVG)
+  certUSDA: "https://images.ctfassets.net/1yr7azz9gqt1/6lu2a6R2KfuTRyFWNn8Clz/b1feeb3945c642f5d838f09b16226688/25_Q3_Website_Certifications_USDA-Organic.svg",
+  certRegenerativeOrganic: "https://images.ctfassets.net/1yr7azz9gqt1/18PyS6DCfkeSG1kjqqEBrQ/2e59906253fd792bb067995e06827130/25_Q3_Website_Certifications_RegenerativeOrganic.svg",
+  certNonGMO: "https://images.ctfassets.net/1yr7azz9gqt1/39O21T8ByDLuEm0QLGv0Jy/e422a4f777be520e1587c5b66b3ecd1d/25_Q3_Website_Certifications_NonGMOProject.svg",
+  certGAP: "https://images.ctfassets.net/1yr7azz9gqt1/WLC0u8Wv3megyhv9tn7pL/9894cbb55f0fd72e1a490bcc427f5490/25_Q3_Website_Certifications_GlobalAnimalPartnership.svg",
+  certCSI: "https://images.ctfassets.net/1yr7azz9gqt1/4GtaD9fIhViE4tk49Zi5Sk/e45381aa90074e56023b3629c7dc71d9/25_Q3_Website_Certifications_CSI-RFM.svg",
+  certHumane: "https://images.ctfassets.net/1yr7azz9gqt1/1cj2NAiwABXH6MmOsIBKLr/6fcc361d6394a3a7ae13c94b1df57c64/25_Q3_Website_Certifications_CertifiedHumane.svg",
 } as const;
 
 export type ImageKey = keyof typeof IMAGES;

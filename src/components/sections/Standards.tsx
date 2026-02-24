@@ -2,6 +2,16 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { IMAGES } from "@/lib/images";
+
+const CERTS_DATA = [
+  { src: IMAGES.certUSDA, alt: "USDA Organic" },
+  { src: IMAGES.certRegenerativeOrganic, alt: "Regenerative Organic Certified" },
+  { src: IMAGES.certNonGMO, alt: "Non-GMO Project Verified" },
+  { src: IMAGES.certGAP, alt: "Global Animal Partnership" },
+  { src: IMAGES.certCSI, alt: "CSI Responsibly Fished & Managed" },
+  { src: IMAGES.certHumane, alt: "Certified Humane" },
+];
 
 const STANDARDS = [
   {
@@ -29,8 +39,6 @@ const STANDARDS = [
     heading: "Free of over 200 banned ingredients.",
   },
 ];
-
-const CERTS = ["USDA", "ROC", "Non-GMO", "GAP", "CH", "CSI-RFM"];
 
 export default function Standards() {
   return (
@@ -92,16 +100,19 @@ export default function Standards() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-6"
+          className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-10"
         >
-          {CERTS.map((cert) => (
+          {CERTS_DATA.map((cert) => (
             <div
-              key={cert}
-              className="flex h-16 w-16 items-center justify-center rounded-full border border-[#E5DDD4] bg-white shadow-sm"
+              key={cert.alt}
+              className="flex h-14 w-14 items-center justify-center sm:h-16 sm:w-16"
             >
-              <span className="text-[11px] font-bold text-[#1B4332]">
-                {cert}
-              </span>
+              <img
+                src={cert.src}
+                alt={cert.alt}
+                loading="lazy"
+                className="h-full w-full object-contain"
+              />
             </div>
           ))}
         </motion.div>
