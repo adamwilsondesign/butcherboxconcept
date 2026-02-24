@@ -17,7 +17,7 @@ function InlineImage({
   return (
     <button
       onClick={onClick}
-      className="group/img relative inline-block h-[72px] w-[120px] shrink-0 translate-y-[6px] overflow-hidden rounded-[1.5rem] shadow-sm transition-shadow duration-300 hover:shadow-md sm:h-[90px] sm:w-[150px] lg:h-[110px] lg:w-[180px]"
+      className="group/img relative inline-block h-[56px] w-[96px] shrink-0 translate-y-[4px] overflow-hidden rounded-[1.25rem] shadow-sm transition-shadow duration-300 hover:shadow-md sm:h-[68px] sm:w-[115px] lg:h-[80px] lg:w-[135px]"
     >
       <img
         src={src}
@@ -33,7 +33,7 @@ export default function ProteinCategories() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="overflow-hidden bg-[#FAF7F2] py-16 sm:py-20" id="proteins">
+    <section className="overflow-hidden bg-[#FAF7F2] py-12 sm:py-16" id="proteins">
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         {/* One flowing sentence with inline images */}
         <motion.div
@@ -46,7 +46,7 @@ export default function ProteinCategories() {
           {/* "Grass Fed Beef" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Beef" })}
-            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
           >
             Grass-Fed Beef
           </button>
@@ -61,7 +61,7 @@ export default function ProteinCategories() {
           {/* "Free Range Poultry" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Chicken" })}
-            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
           >
             Free-Range Poultry
           </button>
@@ -76,7 +76,7 @@ export default function ProteinCategories() {
           {/* "Crate Free Pork" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Pork" })}
-            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
           >
             Crate-Free Pork
           </button>
@@ -89,12 +89,12 @@ export default function ProteinCategories() {
           />
 
           {/* "& Wild Caught Seafood" */}
-          <span className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-5xl lg:text-6xl">
+          <span className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-4xl lg:text-5xl">
             &amp;
           </span>
           <button
             onClick={() => openSignup({ prefilterCategory: "Seafood" })}
-            className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
           >
             Wild-Caught Seafood
           </button>
@@ -107,7 +107,7 @@ export default function ProteinCategories() {
           />
 
           {/* "delivered right to your door!" */}
-          <span className="font-display text-4xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-5xl lg:text-6xl">
+          <span className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-4xl lg:text-5xl">
             Delivered Right to Your Door!
           </span>
         </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -17,12 +17,26 @@ const NAV_LINKS = [
 export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
   const { openSignup } = useSignup();
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   const topOffset = promoVisible ? 36 : 0;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 60);
+
+      // Show/hide based on scroll direction (only after scrolling past 100px)
+      if (currentY > 100) {
+        setVisible(currentY < lastScrollY.current || currentY < 60);
+      } else {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentY;
+    };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -35,17 +49,21 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
     };
   }, [mobileOpen]);
 
+  // Always show nav when mobile drawer is open
+  const navVisible = visible || mobileOpen;
+
   return (
     <>
-      {/* Main nav — 68px, transparent -> white on scroll */}
+      {/* Main nav — 68px, transparent -> white on scroll, hide/show on scroll direction */}
       <header
         className="fixed inset-x-0 z-50"
         style={{
           top: topOffset,
           backgroundColor: scrolled ? "#FFFFFF" : "transparent",
-          boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
+          boxShadow: scrolled && navVisible ? "0 1px 0 rgba(0,0,0,0.08)" : "none",
+          transform: navVisible ? "translateY(0)" : "translateY(-100%)",
           transition:
-            "background-color 300ms ease, box-shadow 300ms ease, top 300ms ease",
+            "background-color 300ms ease, box-shadow 300ms ease, top 300ms ease, transform 300ms ease",
         }}
       >
         <nav
