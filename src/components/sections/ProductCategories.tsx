@@ -25,7 +25,7 @@ export default function ProductCategories() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <SectionHeading heading="Premium Proteins, Your Way" />
+          <SectionHeading title="Premium Proteins, Your Way" />
         </motion.div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">

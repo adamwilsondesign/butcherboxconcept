@@ -87,7 +87,7 @@ export default function ForEveryTable() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <SectionHeading label="Shop by Protein" heading="For Every Table" />
+          <SectionHeading label="Shop by Protein" title="For Every Table" />
         </motion.div>
 
         {/* Filter tabs — sliding pill background */}

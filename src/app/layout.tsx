@@ -1,26 +1,27 @@
 import type { Metadata } from "next";
-import { DM_Sans, Cormorant_Garamond } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import { Inter, Libre_Baskerville } from "next/font/google";
+import ClientShell from "@/components/ClientShell";
 import Footer from "@/components/Footer";
 import { SignupProvider } from "@/components/signup/SignupFlow";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["400", "500"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600"],
 });
 
-const cormorant = Cormorant_Garamond({
+const libre = Libre_Baskerville({
   subsets: ["latin"],
-  variable: "--font-cormorant",
-  weight: ["400", "500", "600"],
+  variable: "--font-libre",
+  weight: ["400", "700"],
   style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "ButcherBox — Meat Delivery",
-  description: "Premium meat delivered to your door",
+  title: "ButcherBox — Premium Meat & Seafood Delivery",
+  description:
+    "100% grass-fed beef, free-range organic chicken, heritage pork & wild-caught seafood — shipped free to your door.",
 };
 
 export default function RootLayout({
@@ -31,11 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${dmSans.variable} ${cormorant.variable} font-sans antialiased bg-cream text-text-primary`}
+        className={`${inter.variable} ${libre.variable} font-sans antialiased bg-cream text-text-primary`}
       >
         <SignupProvider>
-          <Navbar />
-          <div className="pt-[104px]">{children}</div>
+          <ClientShell />
+          <div>{children}</div>
           <Footer />
         </SignupProvider>
       </body>

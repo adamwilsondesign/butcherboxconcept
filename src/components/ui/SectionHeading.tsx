@@ -1,24 +1,31 @@
 interface SectionHeadingProps {
-  heading: string;
+  title: string;
   label?: string;
+  subtitle?: string;
   className?: string;
 }
 
 export default function SectionHeading({
-  heading,
+  title,
   label,
+  subtitle,
   className = "",
 }: SectionHeadingProps) {
   return (
     <div className={`mx-auto max-w-2xl text-center ${className}`}>
       {label && (
-        <span className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#767676]">
+        <span className="text-sm font-semibold uppercase tracking-wider text-[#2D5E4A]">
           {label}
         </span>
       )}
-      <h2 className={`font-display text-[40px] font-semibold leading-tight tracking-heading text-[#2A2A2A] ${label ? "mt-4" : ""}`}>
-        {heading}
+      <h2 className="mt-4 font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
+        {title}
       </h2>
+      {subtitle && (
+        <p className="mt-4 text-[16px] leading-relaxed text-[#6B6B6B]">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }

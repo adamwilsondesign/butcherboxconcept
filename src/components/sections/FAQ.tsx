@@ -1,0 +1,139 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useSignup } from "@/components/signup/SignupFlow";
+
+const FAQS = [
+  {
+    q: "What sets ButcherBox apart from the competition?",
+    a: "ButcherBox is on a mission to bring better meat and seafood to every table. All of our meat and seafood is free from antibiotics and added hormones, and comes from partners we\u2019ve vetted for sustainability and animal welfare. We are the only B-Corp certified meat and seafood company with third-party animal welfare certifications for 100% of our products \u2014 beef, poultry, pork, seafood, and more. Our members get access to 100+ products ranging from thick-cut steaks to gluten-free chicken nuggets, all free of 200+ banned ingredients.",
+  },
+  {
+    q: "How much can I customize my box?",
+    a: "We offer a completely customizable subscription with two plan options. Choose between Essentials (6 products from 50+ core cuts) or Signature (6, 9, or 12 products from 100+ cuts including specialty items like ribeye, filet mignon, and salmon). You can change your selections every order, up to the night before it bills.",
+  },
+  {
+    q: "How much does ButcherBox cost?",
+    a: "Our Essentials Plan starts at $159 for 6 products. The Signature Plan starts at $179 (Medium, 6 products), $249 (Large, 9 products), or $319 (Extra-Large, 12 products). Shipping is always free, and you choose delivery every 2, 4, 6, or 8 weeks.",
+  },
+  {
+    q: "Can I cancel anytime?",
+    a: "Yes! If you decide ButcherBox isn\u2019t right for you, you can easily cancel your subscription at any time with no fees or penalties. You\u2019re always welcome to resubscribe if you change your mind.",
+  },
+  {
+    q: "Are your animals humanely raised?",
+    a: "Yes. We partner with people dedicated to doing the right thing. ButcherBox is the only B Corp certified meat and seafood brand to source exclusively from partners with third-party animal welfare certifications. Our farmers\u2019 methods are inspired by Dr. Temple Grandin, and facilities are routinely inspected and approved by the USDA or comparable agencies.",
+  },
+  {
+    q: "How does shipping and delivery work?",
+    a: "Your order ships within 1-3 days with free shipping. You\u2019ll receive tracking info via email. Orders arrive packed with dry ice and should be refrigerator-cold (below 40\u00B0F) when retrieved within 6-8 hours of delivery. All products can go straight into the freezer.",
+  },
+  {
+    q: "Do you offer a satisfaction guarantee?",
+    a: "Absolutely. Every order is backed by our 100% Satisfaction Guarantee. If you\u2019re unhappy with our service or products for any reason, reach out and we\u2019ll make it right.",
+  },
+];
+
+export default function FAQ() {
+  const { openSignup } = useSignup();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="bg-white py-20" id="faq">
+      <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center"
+        >
+          <h2 className="font-display text-[36px] font-bold leading-tight text-[#1A1A1A] sm:text-[44px]">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-3 text-[16px] text-[#6B6B6B]">
+            Everything you need to know about ButcherBox
+          </p>
+        </motion.div>
+
+        {/* Accordion */}
+        <div className="mt-12">
+          {FAQS.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={i} className="border-b border-[#E5DDD4]">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between py-5 text-left"
+                  aria-expanded={isOpen}
+                >
+                  <span className="pr-8 text-lg font-semibold text-[#1A1A1A]">
+                    {faq.q}
+                  </span>
+                  <motion.span
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="shrink-0"
+                  >
+                    <ChevronDown size={20} className="text-[#6B6B6B]" />
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-5 text-[15px] leading-relaxed text-[#6B6B6B]">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTA banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12 rounded-2xl bg-[#F5F0EB] p-8 text-center"
+        >
+          <p className="text-lg font-semibold text-[#1A1A1A]">
+            Still have questions?
+          </p>
+          <p className="mt-1 text-sm text-[#6B6B6B]">
+            Reach out anytime at{" "}
+            <a
+              href="tel:+18559818568"
+              className="text-[#2D5E4A] hover:underline"
+            >
+              855-981-8568
+            </a>
+          </p>
+          <motion.button
+            onClick={() => openSignup()}
+            whileHover={{
+              y: -2,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+            }}
+            whileTap={{ y: 0 }}
+            className="mt-5 rounded-pill bg-[#2D5E4A] px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-[#3A7D64]"
+          >
+            Get Started
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

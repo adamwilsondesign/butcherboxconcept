@@ -1,17 +1,18 @@
 export const colors = {
-  brandGreen: "#1B4332",
-  brandGreenHover: "#2D6A4F",
+  brandTeal: "#2D5E4A",
+  brandTealDark: "#243B35",
+  brandTealLight: "#3A7D64",
   accent: "#C8512B",
-  background: "#F8F4EF",
+  background: "#FAF7F2",
   surface: "#FFFFFF",
-  surfaceWarm: "#EDE8E1",
-  text: "#2A2A2A",
-  textMuted: "#767676",
-  border: "#EDE8E1",
+  surfaceWarm: "#F5F0EB",
+  text: "#1A1A1A",
+  textMuted: "#6B6B6B",
+  border: "#E5DDD4",
   starGold: "#D4A84B",
 } as const;
 
 export const fonts = {
-  heading: "'Cormorant Garamond', serif",
-  body: "'DM Sans', sans-serif",
+  heading: "'Libre Baskerville', serif",
+  body: "'Inter', sans-serif",
 } as const;

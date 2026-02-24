@@ -1,87 +1,166 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import {
+  Truck,
+  XCircle,
+  Shield,
+  Award,
+  Instagram,
+  Facebook,
+  Youtube,
+} from "lucide-react";
+import { useSignup } from "@/components/signup/SignupFlow";
 
-const LINKS = [
-  { label: "Gift Boxes", href: "#" },
-  { label: "Help Center", href: "#" },
-  { label: "Sourcing", href: "#" },
-  { label: "Recipes", href: "#" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "About", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Careers", href: "#" },
-] as const;
+const TRUST_BADGES = [
+  { icon: Truck, label: "Free Shipping" },
+  { icon: XCircle, label: "Cancel Anytime" },
+  { icon: Shield, label: "100% Satisfaction" },
+  { icon: Award, label: "B Corp Certified" },
+];
+
+const FOOTER_LINKS = {
+  Shop: ["Choose Your Plan", "Gift Boxes", "Store Locator"],
+  Learn: ["How It Works", "Our Sourcing", "Recipes", "FAQs"],
+  Company: ["Our Story", "B Corp", "Careers", "Press"],
+  Support: ["Contact Us", "Help Center", "Shipping Info", "Returns"],
+};
 
 const SOCIALS = [
-  { icon: Instagram, label: "Instagram", href: "#" },
-  { icon: Facebook, label: "Facebook", href: "#" },
-  { icon: Twitter, label: "Twitter", href: "#" },
-  { icon: Youtube, label: "YouTube", href: "#" },
-] as const;
+  { icon: Instagram, label: "Instagram" },
+  { icon: Facebook, label: "Facebook" },
+  { icon: Youtube, label: "YouTube" },
+];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
+  const { openSignup } = useSignup();
 
   return (
-    <footer className="bg-[#015870] text-white/80">
-      <div className="mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white">Get Tips &amp; Offers</h3>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">Recipes, deals, and sourcing stories — delivered to your inbox.</p>
-            <form onSubmit={(e) => { e.preventDefault(); setEmail(""); }} className="mt-5 flex">
-              <label className="sr-only" htmlFor="footer-email">Email address</label>
-              <input id="footer-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email" required className="min-w-0 flex-1 rounded-l-md border border-white/20 bg-white/10 px-4 py-2.5 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-[#C8512B] focus:bg-white/15" />
-              <button type="submit" className="flex items-center justify-center rounded-r-md bg-[#C8512B] px-4 text-white transition-colors hover:bg-[#C8512B]/90" aria-label="Subscribe">
-                <ArrowRight size={18} />
+    <footer>
+      {/* Curved top edge SVG */}
+      <div className="relative">
+        <svg
+          viewBox="0 0 1440 120"
+          className="-mb-1 block w-full"
+          preserveAspectRatio="none"
+          style={{ height: "80px" }}
+        >
+          <path
+            d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z"
+            fill="#243B35"
+          />
+        </svg>
+      </div>
+
+      {/* Footer body */}
+      <div className="bg-[#243B35] text-white">
+        {/* Top CTA */}
+        <div className="mx-auto max-w-7xl px-6 pt-12 sm:px-8 lg:px-12">
+          <div className="text-center">
+            <h2 className="font-display text-3xl font-bold text-white">
+              Ready to eat better?
+            </h2>
+            <p className="mt-3 text-[16px] text-white/70">
+              Join 400,000+ members and get premium protein delivered to your
+              door.
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={() => openSignup()}
+                className="rounded-pill bg-[#2D5E4A] px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-[#3A7D64]"
+              >
+                Get Started — Free Shipping
               </button>
-            </form>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white">Our Mission</h3>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">ButcherBox delivers 100% grass-fed beef, free-range organic chicken, heritage-breed pork, and wild-caught seafood directly to your door.</p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/70">
-              <span className="h-2 w-2 rounded-full bg-[#C8512B]" />
-              B Corp Certified
+              <button className="rounded-pill border border-white/30 px-8 py-3 text-[14px] font-semibold text-white transition-colors hover:bg-white/10">
+                Send a Gift
+              </button>
             </div>
-          </div>
 
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white">Explore</h3>
-            <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
-              {LINKS.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-sm text-white/60 transition-colors hover:text-white">{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white">Contact Us</h3>
-            <address className="mt-3 space-y-2 not-italic text-sm leading-relaxed text-white/60">
-              <p>Watertown, MA</p>
-              <p><a href="mailto:support@butcherbox.com" className="transition-colors hover:text-white">support@butcherbox.com</a></p>
-              <p><a href="tel:+18559811214" className="transition-colors hover:text-white">(855) 981-1214</a></p>
-            </address>
-            <div className="mt-5 flex gap-3">
-              {SOCIALS.map((social) => (
-                <a key={social.label} href={social.href} aria-label={social.label} className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/60 transition-all hover:bg-white/25 hover:text-white">
-                  <social.icon size={16} />
-                </a>
+            {/* Trust badges */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
+              {TRUST_BADGES.map((badge) => (
+                <div
+                  key={badge.label}
+                  className="flex items-center gap-1.5 text-xs text-white/60"
+                >
+                  <badge.icon size={14} />
+                  <span>{badge.label}</span>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-xs text-white/40">&copy; 2026 ButcherBox. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="text-xs text-white/40 transition-colors hover:text-white/70">Terms of Service</a>
-            <a href="#" className="text-xs text-white/40 transition-colors hover:text-white/70">Privacy Policy</a>
+        {/* Link grid */}
+        <div className="mx-auto mt-14 max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
+              <div key={heading}>
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-white">
+                  {heading}
+                </h4>
+                <ul className="mt-4 space-y-1.5">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-sm text-white/60 transition-colors hover:text-white"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mx-auto mt-8 max-w-7xl border-t border-white/10 px-6 pt-6 pb-8 sm:px-8 lg:px-12">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            {/* Left */}
+            <p className="text-xs text-white/40">
+              &copy; 2026 ButcherBox. All rights reserved.
+            </p>
+
+            {/* Center — social icons */}
+            <div className="flex gap-3">
+              {SOCIALS.map((social) => (
+                <a
+                  key={social.label}
+                  href="#"
+                  aria-label={social.label}
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-white/40 transition-colors hover:text-white"
+                >
+                  <social.icon size={16} />
+                </a>
+              ))}
+            </div>
+
+            {/* Right */}
+            <div className="flex gap-4">
+              <a
+                href="#"
+                className="text-xs text-white/40 transition-colors hover:text-white/70"
+              >
+                Privacy Policy
+              </a>
+              <span className="text-xs text-white/20">&middot;</span>
+              <a
+                href="#"
+                className="text-xs text-white/40 transition-colors hover:text-white/70"
+              >
+                Terms of Use
+              </a>
+              <span className="text-xs text-white/20">&middot;</span>
+              <a
+                href="#"
+                className="text-xs text-white/40 transition-colors hover:text-white/70"
+              >
+                Accessibility
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -71,7 +71,7 @@ export default function TrustBar() {
       <div className="mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
           <p className="mb-3 text-center text-[12px] font-medium uppercase tracking-[0.15em] text-[#1B4332]">As Seen In</p>
-          <SectionHeading heading="Trusted & Recognized" />
+          <SectionHeading title="Trusted & Recognized" />
         </motion.div>
 
         <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">

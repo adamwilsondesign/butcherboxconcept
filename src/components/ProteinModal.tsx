@@ -35,7 +35,6 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
 
   const handleSelect = (key: string) => {
     setSelected(key);
-    // Brief delay to show checkmark before closing
     setTimeout(() => {
       onSelect(key);
       setShow(false);
@@ -59,13 +58,10 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
           aria-modal="true"
           aria-label="Choose your protein preference"
         >
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={handleDismiss}
           />
-
-          {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -73,29 +69,24 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="relative w-full max-w-md rounded-card bg-white p-8 shadow-2xl"
           >
-            {/* Close button */}
             <button
               onClick={handleDismiss}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-[#767676] transition-colors hover:bg-[#F8F4EF] hover:text-[#2A2A2A]"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-[#6B6B6B] transition-colors hover:bg-[#FAF7F2] hover:text-[#1A1A1A]"
               aria-label="Close"
             >
               <X size={18} />
             </button>
-
-            {/* Header */}
             <div className="text-center">
-              <span className="text-[12px] font-medium uppercase tracking-[0.15em] text-[#767676]">
+              <span className="text-[12px] font-semibold uppercase tracking-[0.15em] text-[#6B6B6B]">
                 Personalize Your Experience
               </span>
-              <h3 className="mt-3 font-display text-[24px] font-semibold tracking-heading text-[#2A2A2A]">
+              <h3 className="mt-3 font-display text-[24px] font-bold text-[#1A1A1A]">
                 What do you love to cook?
               </h3>
-              <p className="mt-2 text-[14px] text-[#767676]">
+              <p className="mt-2 text-[14px] text-[#6B6B6B]">
                 We&apos;ll show you the best cuts for your kitchen.
               </p>
             </div>
-
-            {/* 2x2 Grid — hover lift + select checkmark */}
             <div className="mt-8 grid grid-cols-2 gap-3">
               {PROTEINS.map((protein) => {
                 const isSelected = selected === protein.key;
@@ -105,43 +96,45 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
                     onClick={() => handleSelect(protein.key)}
                     whileHover={{ y: -3 }}
                     whileTap={{ y: 0 }}
-                    transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    transition={{
+                      duration: 0.2,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
                     className={`group relative flex flex-col items-center gap-2 rounded-card border-2 bg-white p-5 transition-all duration-200 ${
                       isSelected
-                        ? "border-[#1B4332] bg-[#F8F4EF]"
-                        : "border-[#EDE8E1] hover:border-[#1B4332] hover:bg-[#F8F4EF]"
+                        ? "border-[#2D5E4A] bg-[#FAF7F2]"
+                        : "border-[#E5DDD4] hover:border-[#2D5E4A] hover:bg-[#FAF7F2]"
                     }`}
                   >
-                    {/* Green checkmark — scales in on select */}
                     <AnimatePresence>
                       {isSelected && (
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           exit={{ scale: 0 }}
-                          transition={{ duration: 0.25, ease: [0.175, 0.885, 0.32, 1.275] }}
-                          className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#1B4332]"
+                          transition={{
+                            duration: 0.25,
+                            ease: [0.175, 0.885, 0.32, 1.275],
+                          }}
+                          className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#2D5E4A]"
                         >
                           <Check size={12} className="text-white" />
                         </motion.span>
                       )}
                     </AnimatePresence>
-
                     <span className="text-[36px] transition-transform duration-200 group-hover:scale-110">
                       {protein.emoji}
                     </span>
-                    <span className="text-[14px] font-medium text-[#2A2A2A]">
+                    <span className="text-[14px] font-medium text-[#1A1A1A]">
                       {protein.label}
                     </span>
                   </motion.button>
                 );
               })}
             </div>
-
-            {/* Skip */}
             <button
               onClick={handleDismiss}
-              className="mt-5 w-full text-center text-[13px] text-[#767676] transition-colors hover:text-[#2A2A2A]"
+              className="mt-5 w-full text-center text-[13px] text-[#6B6B6B] transition-colors hover:text-[#1A1A1A]"
             >
               Skip for now
             </button>

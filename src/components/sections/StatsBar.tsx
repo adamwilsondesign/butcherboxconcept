@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface StatConfig {
@@ -10,13 +10,17 @@ interface StatConfig {
 }
 
 const STATS: StatConfig[] = [
-  { target: 400, suffix: "k+", label: "Active Members" },
-  { target: 1, suffix: "B+", label: "Meals Delivered" },
-  { target: 70, suffix: "k+", label: "5-Star Reviews" },
+  { target: 400, suffix: ",000+", label: "Subscribers" },
+  { target: 1, suffix: "B+", label: "Better Meals Sent" },
+  { target: 70, suffix: ",000+", label: "5-Star Reviews" },
 ];
 
-/* Count-up hook: animates from 0 → target over duration with easeOut */
-function useCountUp(target: number, duration: number, startDelay: number, trigger: boolean) {
+function useCountUp(
+  target: number,
+  duration: number,
+  startDelay: number,
+  trigger: boolean,
+) {
   const [value, setValue] = useState(0);
   const rafRef = useRef<number>(0);
 
@@ -32,7 +36,6 @@ function useCountUp(target: number, duration: number, startDelay: number, trigge
       }
       const elapsed = now - startTime;
       const t = Math.min(elapsed / duration, 1);
-      // easeOutCubic
       const eased = 1 - Math.pow(1 - t, 3);
       setValue(Math.round(eased * target));
 
@@ -56,8 +59,13 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
-      { threshold: 0.5 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.5 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -74,10 +82,11 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
       className="text-center"
     >
-      <p className="font-display text-[48px] font-semibold leading-none tracking-heading text-[#1B4332]">
-        {count}{stat.suffix}
+      <p className="font-display text-[48px] font-bold leading-none text-white">
+        {count}
+        {stat.suffix}
       </p>
-      <p className="mt-2 text-[14px] font-medium text-[#767676]">
+      <p className="mt-2 text-[14px] font-medium text-white/70">
         {stat.label}
       </p>
     </motion.div>
@@ -86,10 +95,15 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
 
 export default function StatsBar() {
   return (
-    <section className="bg-[#EDE8E1]">
+    <section className="bg-[#243B35]">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-6 py-16 sm:flex-row sm:gap-16 sm:px-8 lg:px-12">
         {STATS.map((stat, i) => (
-          <AnimatedStat key={stat.label} stat={stat} index={i} />
+          <React.Fragment key={stat.label}>
+            {i > 0 && (
+              <div className="hidden h-12 w-px bg-white/20 sm:block" />
+            )}
+            <AnimatedStat stat={stat} index={i} />
+          </React.Fragment>
         ))}
       </div>
     </section>
