@@ -84,7 +84,7 @@ export default function ProteinModal({ onSelect }: ProteinModalProps) {
                 </span>
                 <span className="block h-[2px] w-8 bg-[#2D6A4F]" />
               </div>
-              <h3 className="mt-3 font-display text-[24px] text-[#1A1A1A]">
+              <h3 className="mt-3 font-sans font-extrabold text-[24px] text-[#1A1A1A]">
                 What do you love to cook?
               </h3>
               <p className="mt-2 text-[14px] text-[#6B6B6B]">

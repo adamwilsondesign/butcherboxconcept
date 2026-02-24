@@ -68,7 +68,7 @@ export default function StepProducts({
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-2xl text-text-dark"
+        className="text-center font-sans font-bold text-2xl text-text-dark"
       >
         Choose Your Proteins
       </motion.h2>

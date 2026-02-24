@@ -108,7 +108,7 @@ export default function FAQ() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-16 rounded-2xl bg-[#FAF7F2] p-8 text-center sm:p-10"
         >
-          <p className="font-display text-xl text-[#1A1A1A] sm:text-2xl">
+          <p className="font-sans font-extrabold text-xl text-[#1A1A1A] sm:text-2xl">
             Still have questions?
           </p>
           <p className="mt-2 text-base text-[#6B6B6B]">

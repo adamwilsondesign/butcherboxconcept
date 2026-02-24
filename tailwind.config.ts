@@ -12,6 +12,8 @@ const config: Config = {
         "brand-green": "#1B4332",
         "brand-green-mid": "#2D6A4F",
         "brand-green-light": "#40916C",
+        "brand-teal": "#005A73",
+        "brand-teal-light": "#007A9A",
         cream: "#FAF7F2",
         surface: "#FFFFFF",
         "surface-warm": "#F5F0EB",
@@ -24,8 +26,7 @@ const config: Config = {
         background: "#FAF7F2",
       },
       fontFamily: {
-        display: ["var(--font-playfair)", "Georgia", "serif"],
-        serif: ["var(--font-playfair)", "Georgia", "serif"],
+        display: ["var(--font-inter)", "sans-serif"],
         sans: ["var(--font-inter)", "sans-serif"],
       },
       letterSpacing: {

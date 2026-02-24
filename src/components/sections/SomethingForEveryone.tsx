@@ -82,7 +82,7 @@ export default function SomethingForEveryone() {
               </div>
               {/* Text */}
               <div className="p-8 sm:p-10">
-                <h3 className="font-display text-xl text-[#1A1A1A] sm:text-2xl">
+                <h3 className="font-sans font-extrabold text-xl text-[#1A1A1A] sm:text-2xl">
                   {cat.name}
                 </h3>
                 <p className="mt-2 text-base leading-relaxed text-[#6B6B6B]">

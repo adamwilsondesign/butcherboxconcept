@@ -47,7 +47,7 @@ export default function OurStandards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="mt-4 font-display text-[40px] font-semibold leading-[1.15] tracking-heading text-[#2A2A2A]"
+              className="mt-4 font-sans font-extrabold text-[40px] font-semibold leading-[1.15] tracking-heading text-[#2A2A2A]"
             >
               We Know Where Every Cut Comes From
             </motion.h2>

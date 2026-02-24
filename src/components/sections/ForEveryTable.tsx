@@ -166,7 +166,7 @@ export default function ForEveryTable() {
                     <div className="p-4 sm:p-5">
                       <h4 className="text-[14px] font-medium text-[#2A2A2A] sm:text-[16px]">{product.name}</h4>
                       <div className="mt-2 flex items-baseline gap-2">
-                        <span className="font-display text-[20px] font-semibold tracking-heading text-[#1B4332]">${product.price}</span>
+                        <span className="font-sans font-extrabold text-[20px] font-semibold tracking-heading text-[#1B4332]">${product.price}</span>
                         <span className="text-[13px] text-[#767676] line-through">${product.originalPrice}</span>
                       </div>
                       <motion.button

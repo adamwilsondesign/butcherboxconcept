@@ -22,7 +22,7 @@ export default function PromoBar({
 
   return (
     <div
-      className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center overflow-hidden bg-[#1B4332]"
+      className="fixed inset-x-0 top-0 z-[60] flex h-9 items-center overflow-hidden bg-[#005A73]"
       role="banner"
     >
       {/* Scrolling marquee — 4x repeated for seamless loop */}

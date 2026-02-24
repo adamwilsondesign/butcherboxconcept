@@ -28,14 +28,14 @@ export default function SectionHeading({
       {label && (
         <p
           className={`mb-3 text-xs font-semibold uppercase tracking-[0.1em] sm:text-sm ${
-            light ? "text-white/70" : "text-[#2D6A4F]"
+            light ? "text-white/70" : "text-[#005A73]"
           }`}
         >
           {label}
         </p>
       )}
       <h2
-        className={`font-display text-3xl leading-tight tracking-subheading sm:text-4xl ${
+        className={`font-sans font-extrabold text-3xl leading-tight tracking-subheading sm:text-4xl ${
           light ? "text-white" : "text-[#1A1A1A]"
         }`}
       >

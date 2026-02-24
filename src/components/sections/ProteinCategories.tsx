@@ -17,7 +17,7 @@ function InlineImage({
   return (
     <button
       onClick={onClick}
-      className="group/img relative inline-block h-[56px] w-[96px] shrink-0 translate-y-[4px] overflow-hidden rounded-[1.25rem] shadow-sm transition-shadow duration-300 hover:shadow-md sm:h-[68px] sm:w-[115px] lg:h-[80px] lg:w-[135px]"
+      className="group/img relative inline-block h-[48px] w-[82px] shrink-0 translate-y-[3px] overflow-hidden rounded-[1rem] shadow-sm transition-shadow duration-300 hover:shadow-md sm:h-[60px] sm:w-[100px] lg:h-[72px] lg:w-[120px]"
     >
       <img
         src={src}
@@ -34,72 +34,68 @@ export default function ProteinCategories() {
 
   return (
     <section className="overflow-hidden bg-[#FAF7F2] py-12 sm:py-16" id="proteins">
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* One flowing sentence with inline images */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-center sm:gap-x-5 lg:gap-x-6"
+          className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center sm:gap-x-4 lg:gap-x-5"
         >
-          {/* "Grass Fed Beef" */}
+          {/* "Grass-Fed Beef" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Beef" })}
-            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
+            className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] transition-colors duration-300 hover:text-[#007A9A] sm:text-3xl lg:text-4xl"
           >
             Grass-Fed Beef
           </button>
 
-          {/* Beef image */}
           <InlineImage
             src={IMAGES.ribeye}
             alt="Grass-fed ribeye steaks"
             onClick={() => openSignup({ prefilterCategory: "Beef" })}
           />
 
-          {/* "Free Range Poultry" */}
+          {/* "Free-Range Poultry" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Chicken" })}
-            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
+            className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] transition-colors duration-300 hover:text-[#007A9A] sm:text-3xl lg:text-4xl"
           >
             Free-Range Poultry
           </button>
 
-          {/* Poultry image */}
           <InlineImage
             src={IMAGES.chickenBreast}
             alt="Free-range chicken breasts"
             onClick={() => openSignup({ prefilterCategory: "Chicken" })}
           />
 
-          {/* "Crate Free Pork" */}
+          {/* "Crate-Free Pork" */}
           <button
             onClick={() => openSignup({ prefilterCategory: "Pork" })}
-            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
+            className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] transition-colors duration-300 hover:text-[#007A9A] sm:text-3xl lg:text-4xl"
           >
             Crate-Free Pork
           </button>
 
-          {/* Pork image */}
           <InlineImage
             src={IMAGES.porkChops}
             alt="Crate-free pork chops"
             onClick={() => openSignup({ prefilterCategory: "Pork" })}
           />
 
-          {/* "& Wild Caught Seafood" */}
-          <span className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-4xl lg:text-5xl">
+          {/* "& Wild-Caught Seafood" */}
+          <span className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] sm:text-3xl lg:text-4xl">
             &amp;
           </span>
           <button
             onClick={() => openSignup({ prefilterCategory: "Seafood" })}
-            className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] transition-colors duration-300 hover:text-[#40916C] sm:text-4xl lg:text-5xl"
+            className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] transition-colors duration-300 hover:text-[#007A9A] sm:text-3xl lg:text-4xl"
           >
             Wild-Caught Seafood
           </button>
 
-          {/* Seafood image */}
           <InlineImage
             src={IMAGES.salmon}
             alt="Wild-caught sockeye salmon"
@@ -107,7 +103,7 @@ export default function ProteinCategories() {
           />
 
           {/* "delivered right to your door!" */}
-          <span className="font-display text-3xl uppercase leading-[1.1] tracking-tight text-[#1B4332] sm:text-4xl lg:text-5xl">
+          <span className="text-2xl font-extrabold leading-[1.2] tracking-tight text-[#005A73] sm:text-3xl lg:text-4xl">
             Delivered Right to Your Door!
           </span>
         </motion.div>
@@ -118,7 +114,7 @@ export default function ProteinCategories() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 flex justify-center"
+          className="mt-8 flex justify-center"
         >
           <button
             onClick={() => openSignup()}

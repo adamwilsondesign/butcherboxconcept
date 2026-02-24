@@ -86,7 +86,7 @@ export default function Standards() {
               {/* Text */}
               <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
                 <p className="text-sm font-medium text-white/80">{card.label}</p>
-                <h3 className="mt-2 font-display text-xl leading-snug text-white sm:text-2xl">
+                <h3 className="mt-2 font-sans font-extrabold text-xl leading-snug text-white sm:text-2xl">
                   {card.heading}
                 </h3>
               </div>

@@ -44,7 +44,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
         >
           <Check size={32} className="text-[#2D6A4F]" />
         </motion.div>
-        <h2 className="mt-5 font-serif text-3xl text-text-dark">Thank You!</h2>
+        <h2 className="mt-5 font-sans font-bold text-3xl text-text-dark">Thank You!</h2>
         <p className="mt-3 max-w-sm text-sm text-text-muted">
           Your order is confirmed. Check your email for details and tracking info.
         </p>
@@ -63,7 +63,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-2xl text-text-dark"
+        className="text-center font-sans font-bold text-2xl text-text-dark"
       >
         Review &amp; Checkout
       </motion.h2>

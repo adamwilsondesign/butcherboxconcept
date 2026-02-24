@@ -79,7 +79,7 @@ export default function HowItWorks() {
                 Step {step.number}
               </p>
 
-              <h3 className="mt-2 font-display text-xl text-[#1A1A1A] sm:text-2xl">
+              <h3 className="mt-2 font-sans font-extrabold text-xl text-[#1A1A1A] sm:text-2xl">
                 {step.title}
               </h3>
               <p

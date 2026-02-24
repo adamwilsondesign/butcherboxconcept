@@ -76,7 +76,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
             className="relative z-10"
             aria-label="ButcherBox home"
           >
-            <span className="font-display text-[18px] text-[#1B4332]">
+            <span className="font-sans font-extrabold text-[18px] text-[#005A73]">
               ButcherBox
             </span>
           </Link>

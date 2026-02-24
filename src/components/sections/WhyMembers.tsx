@@ -158,7 +158,7 @@ export default function WhyMembers() {
                 <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#40916C] opacity-0 transition-opacity duration-400 group-hover:opacity-100">
                   {card.label}
                 </span>
-                <h3 className="mt-1 font-display text-xl leading-snug text-white sm:text-2xl">
+                <h3 className="mt-1 font-sans font-extrabold text-xl leading-snug text-white sm:text-2xl">
                   {card.title}
                 </h3>
                 <p
@@ -181,7 +181,7 @@ export default function WhyMembers() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="text-center">
-              <h3 className="font-display text-3xl text-[#1A1A1A] sm:text-4xl">
+              <h3 className="font-sans font-extrabold text-3xl text-[#1A1A1A] sm:text-4xl">
                 ButcherBox vs Others
               </h3>
               <p

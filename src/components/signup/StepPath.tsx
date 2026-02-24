@@ -52,7 +52,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
       <motion.h2
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center font-serif text-xl text-text-dark"
+        className="text-center font-sans font-bold text-xl text-text-dark"
       >
         Choose Your Box
       </motion.h2>
@@ -92,7 +92,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
               )}
 
               <div className="flex items-baseline justify-between pr-8">
-                <h3 className="font-serif text-base text-text-dark">
+                <h3 className="font-sans font-bold text-base text-text-dark">
                   {plan.id === "medium" ? "Medium" : plan.id === "large" ? "Large" : "XL"} Box
                 </h3>
                 <span className="text-lg font-bold text-[#2D6A4F]">

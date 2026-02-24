@@ -25,7 +25,7 @@ export default function FeaturedCuts() {
       <div className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[#2D6A4F]">Real Ingredients. Unreal Taste.</p>
-          <h2 className="font-display text-5xl font-semibold leading-tight tracking-heading text-[#2A2A2A] sm:text-6xl">Level Up Your Dinner</h2>
+          <h2 className="font-sans font-extrabold text-5xl font-semibold leading-tight tracking-heading text-[#2A2A2A] sm:text-6xl">Level Up Your Dinner</h2>
         </motion.div>
 
         <div className="mt-16 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">

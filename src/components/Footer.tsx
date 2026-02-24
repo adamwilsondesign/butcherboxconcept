@@ -46,17 +46,17 @@ export default function Footer() {
         >
           <path
             d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z"
-            fill="#1B4332"
+            fill="#005A73"
           />
         </svg>
       </div>
 
       {/* Footer body */}
-      <div className="bg-[#1B4332] text-white">
+      <div className="bg-[#005A73] text-white">
         {/* Top CTA */}
         <div className="mx-auto max-w-7xl px-6 pt-16 sm:px-8 lg:px-12">
           <div className="text-center">
-            <h2 className="font-display text-3xl leading-tight text-white sm:text-4xl">
+            <h2 className="font-sans font-extrabold text-3xl leading-tight text-white sm:text-4xl">
               Ready to Eat Better?
             </h2>
             <p
@@ -70,11 +70,11 @@ export default function Footer() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <button
                 onClick={() => openSignup()}
-                className="rounded-lg bg-white px-8 py-3.5 text-base font-medium text-[#1B4332] transition-colors duration-200 hover:bg-white/90"
+                className="rounded-lg bg-white px-8 py-3.5 text-base font-medium text-[#005A73] transition-colors duration-200 hover:bg-white/90"
               >
                 Get Started Today
               </button>
-              <button className="rounded-lg border-2 border-white px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-white hover:text-[#1B4332]">
+              <button className="rounded-lg border-2 border-white px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-white hover:text-[#005A73]">
                 Send a Gift
               </button>
             </div>

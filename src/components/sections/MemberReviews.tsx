@@ -10,7 +10,7 @@ export default function MemberReviews() {
         <div className="relative flex flex-col items-center text-center">
           {/* Decorative quote mark — Cormorant 120px, absolute, subtle */}
           <span
-            className="pointer-events-none absolute -top-8 left-0 font-display text-[120px] font-semibold leading-none text-[#1B4332] select-none sm:-top-12 sm:left-4"
+            className="pointer-events-none absolute -top-8 left-0 font-sans font-extrabold text-[120px] font-semibold leading-none text-[#1B4332] select-none sm:-top-12 sm:left-4"
             style={{ opacity: 0.12 }}
             aria-hidden="true"
           >
@@ -38,7 +38,7 @@ export default function MemberReviews() {
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="mt-8"
           >
-            <p className="font-display text-[22px] font-normal italic leading-relaxed tracking-heading text-[#2A2A2A] sm:text-[28px] lg:text-[32px]">
+            <p className="font-sans font-extrabold text-[22px] font-normal italic leading-relaxed tracking-heading text-[#2A2A2A] sm:text-[28px] lg:text-[32px]">
               &ldquo;I was nervous about the subscription but cancelling is genuinely easy — and the quality makes it a no-brainer.&rdquo;
             </p>
           </motion.blockquote>

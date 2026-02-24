@@ -27,7 +27,7 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="mt-5 font-display text-[36px] font-semibold leading-tight tracking-heading text-white sm:text-[48px] lg:text-[56px]"
+            className="mt-5 font-sans font-extrabold text-[36px] font-semibold leading-tight tracking-heading text-white sm:text-[48px] lg:text-[56px]"
             style={{ textShadow: "0 2px 40px rgba(0,0,0,0.2)" }}
           >
             Ready to Taste the Difference?

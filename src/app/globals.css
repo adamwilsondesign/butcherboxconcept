@@ -14,13 +14,12 @@
     color: #1A1A1A;
   }
 
-  /* Typography — headings use Playfair Display 400 (regular, not bold) */
+  /* Typography — all text uses Inter (sans-serif) */
   h1, h2, h3, h4 {
-    font-family: var(--font-playfair), Georgia, serif;
-    font-weight: 400;
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 700;
   }
 
-  /* All body / UI text uses Inter */
   p, span, a, button, label, li {
     font-family: var(--font-inter), sans-serif;
   }
@@ -31,7 +30,7 @@
   }
 
   ::selection {
-    @apply bg-brand-green-mid text-white;
+    @apply bg-brand-teal text-white;
   }
 
   /* Scroll-margin for anchor links to clear fixed nav + promo bar */
@@ -49,7 +48,7 @@
   }
 }
 
-/* Marquee animation for PromoBar */
+/* Marquee animation for PromoBar — slow scroll */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -60,7 +59,7 @@
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
 }
 
 /* Fade-up animation utility */
