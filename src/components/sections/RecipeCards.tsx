@@ -167,19 +167,16 @@ export default function RecipeCards() {
 
   return (
     <>
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-[#FAF7F2] py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           {/* Header with scroll arrows */}
-          <div className="flex items-end justify-between">
-            <div className="max-w-2xl">
-              <SectionHeading
-                label="Inspiration for Every Night"
-                title="What Will You Make?"
-                className="text-left"
-              />
-            </div>
+          <div className="flex flex-col items-center">
+            <SectionHeading
+              label="Inspiration for Every Night"
+              title="What Will You Make?"
+            />
 
-            <div className="hidden gap-3 sm:flex">
+            <div className="mt-6 flex gap-3">
               <button
                 onClick={() => scroll("left")}
                 className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#E5DDD4] bg-white text-[#1B4332] transition-all hover:bg-[#2D6A4F] hover:text-white"
@@ -196,6 +193,7 @@ export default function RecipeCards() {
               </button>
             </div>
           </div>
+
 
           {/* Scrolling recipe cards — 4 visible at a time */}
           <div

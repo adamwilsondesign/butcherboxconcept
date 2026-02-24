@@ -6,8 +6,9 @@ import StatsBar from "@/components/sections/StatsBar";
 import ProteinCategories from "@/components/sections/ProteinCategories";
 import Standards from "@/components/sections/Standards";
 import RecipeCards from "@/components/sections/RecipeCards";
-import HowItWorks from "@/components/sections/HowItWorks";
 import WhyMembers from "@/components/sections/WhyMembers";
+import ProteinPicker from "@/components/sections/ProteinPicker";
+import HowItWorks from "@/components/sections/HowItWorks";
 import SeekingBetterWay from "@/components/sections/SeekingBetterWay";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
@@ -31,11 +32,14 @@ export default function Home() {
       {/* 4. Recipe Cards (scrolling row) */}
       <RecipeCards />
 
-      {/* 5. How It Works (3 steps) */}
-      <HowItWorks />
-
       {/* 5. Why 400,000+ Members Choose Us */}
       <WhyMembers />
+
+      {/* 6. Protein Picker */}
+      <ProteinPicker />
+
+      {/* 7. How It Works (3 steps) */}
+      <HowItWorks />
 
       {/* 6. Seeking a Better Way (brand story) */}
       <SeekingBetterWay />

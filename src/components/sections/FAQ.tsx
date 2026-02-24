@@ -100,34 +100,43 @@ export default function FAQ() {
           })}
         </div>
 
-        {/* CTA banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-16 rounded-2xl bg-[#FAF7F2] p-8 text-center sm:p-10"
-        >
-          <p className="font-sans font-extrabold text-xl text-[#1A1A1A] sm:text-2xl">
+      </div>
+
+      {/* Full-width CTA banner with image background */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="relative mt-16 overflow-hidden"
+      >
+        <img
+          src="https://www.vmcdn.ca/f/files/guelphtoday/spotlight-photos/jls-home-hardware/adobestock_228347985.jpeg"
+          alt="Family dinner"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#1B4332]/70" />
+        <div className="relative z-10 flex flex-col items-center px-6 py-20 text-center sm:py-24">
+          <p className="font-sans font-extrabold text-2xl text-white sm:text-3xl lg:text-4xl">
             Still have questions?
           </p>
-          <p className="mt-2 text-base text-[#6B6B6B]">
+          <p className="mt-3 text-base text-white/80 sm:text-lg">
             Reach out anytime at{" "}
             <a
               href="tel:+18559818568"
-              className="font-medium text-[#2D6A4F] hover:underline"
+              className="font-semibold text-white underline underline-offset-2 hover:no-underline"
             >
               855-981-8568
             </a>
           </p>
           <button
             onClick={() => openSignup()}
-            className="mt-6 rounded-lg bg-[#2D6A4F] px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
+            className="mt-8 rounded-lg bg-[#2D6A4F] px-10 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-[#1B4332]"
           >
-            Get Started
+            Get Started Today
           </button>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

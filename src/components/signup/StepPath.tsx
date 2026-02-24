@@ -19,7 +19,7 @@ const FREE_OFFERS = [
   {
     emoji: "🍔",
     title: "Free Ground Beef for a Year",
-    image: "https://images.unsplash.com/photo-1602473812169-ede22ec03f39?w=200&q=80",
+    image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&q=80",
   },
 ];
 
