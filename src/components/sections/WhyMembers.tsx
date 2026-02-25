@@ -30,7 +30,7 @@ export default function WhyMembers() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="bg-white py-24 sm:py-32" id="why-us">
+    <section className="bg-white py-12 sm:py-16" id="why-us">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <SectionHeading

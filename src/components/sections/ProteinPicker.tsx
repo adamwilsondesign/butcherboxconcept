@@ -72,7 +72,7 @@ export default function ProteinPicker() {
   const active = CATEGORIES[activeIdx];
 
   return (
-    <section className="bg-white py-24 sm:py-32">
+    <section className="bg-white py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <SectionHeading

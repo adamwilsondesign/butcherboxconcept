@@ -66,7 +66,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="bg-[#FAF7F2] py-24 sm:py-32" id="reviews">
+    <section className="bg-[#FAF7F2] py-12 sm:py-16" id="reviews">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header with scroll arrows */}
         <div className="flex items-end justify-between">

@@ -42,7 +42,7 @@ const STANDARDS = [
 
 export default function Standards() {
   return (
-    <section className="bg-white py-24 sm:py-32" id="standards">
+    <section className="bg-white py-12 sm:py-16" id="standards">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <SectionHeading

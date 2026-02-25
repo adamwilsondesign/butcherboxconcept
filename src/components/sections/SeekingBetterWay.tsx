@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function SeekingBetterWay() {
   return (
-    <section className="bg-[#005A73] py-24 sm:py-32" id="our-story">
+    <section className="bg-[#005A73] py-12 sm:py-16" id="our-story">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Left — Content */}

@@ -96,7 +96,7 @@ function AnimatedStat({ stat, index }: { stat: StatConfig; index: number }) {
 export default function StatsBar() {
   return (
     <section className="bg-[#005A73]">
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-6 py-16 sm:flex-row sm:gap-16 sm:px-8 lg:px-12">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-center gap-8 px-6 py-8 sm:flex-row sm:gap-16 sm:px-8 lg:px-12">
         {STATS.map((stat, i) => (
           <React.Fragment key={stat.label}>
             {i > 0 && (

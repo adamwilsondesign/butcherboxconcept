@@ -38,7 +38,7 @@ export default function ProteinCategories() {
   const { openSignup } = useSignup();
 
   return (
-    <section className="overflow-hidden bg-[#FAF7F2] py-12 sm:py-16" id="proteins">
+    <section className="overflow-hidden bg-[#FAF7F2] py-6 sm:py-8" id="proteins">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         {/* One flowing sentence with inline images — 3 visual lines */}
         <motion.div
