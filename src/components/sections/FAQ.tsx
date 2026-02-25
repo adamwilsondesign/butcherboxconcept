@@ -111,12 +111,12 @@ export default function FAQ() {
         className="relative mt-16 overflow-hidden"
       >
         <img
-          src="https://www.vmcdn.ca/f/files/guelphtoday/spotlight-photos/jls-home-hardware/adobestock_228347985.jpeg"
-          alt="Family dinner"
+          src="https://imgcms.patioheatandshade.com/site/common/patio/blog/PHS-blog04ofjuly-1.jpeg"
+          alt="Family barbecue celebration"
           className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
         <div className="absolute inset-0 bg-[#1B4332]/70" />
-        <div className="relative z-10 flex flex-col items-center px-6 pb-40 pt-20 text-center sm:pb-48 sm:pt-24">
+        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center justify-center px-6 pb-40 pt-20 text-center sm:pb-48 sm:pt-24">
           <p className="font-sans font-extrabold text-2xl text-white sm:text-3xl lg:text-4xl">
             Still have questions?
           </p>
@@ -131,7 +131,7 @@ export default function FAQ() {
           </p>
           <button
             onClick={() => openSignup()}
-            className="mt-8 rounded-lg bg-[#2D6A4F] px-10 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-[#1B4332]"
+            className="mt-8 rounded-lg border-2 border-white px-10 py-4 text-base font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-[#1B4332]"
           >
             Get Started Today
           </button>
