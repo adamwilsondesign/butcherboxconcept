@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Check, Pencil, X as XIcon, PartyPopper } from "lucide-react";
+import { Pencil, X as XIcon, PartyPopper } from "lucide-react";
 import type { CartItem, Plan } from "@/lib/products";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function StepReview({ plan, frequency, items, onUpdateItems, onBack, onClose }: Props) {
-  const [placed, setPlaced] = useState(false);
+  const router = useRouter();
 
   const subtotal = plan.price;
   const total = subtotal;
@@ -26,37 +26,6 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
 
   // Format frequency for display
   const freqDisplay = frequency.replace("Every ", "Every ").replace("Weeks", "Weeks");
-
-  if (placed) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center px-4 py-16 text-center"
-        role="status"
-        aria-live="polite"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2D6A4F]/10"
-        >
-          <Check size={32} className="text-[#2D6A4F]" />
-        </motion.div>
-        <h2 className="mt-5 font-sans font-bold text-3xl text-text-dark">Thank You!</h2>
-        <p className="mt-3 max-w-sm text-sm text-text-muted">
-          Your order is confirmed. Check your email for details and tracking info.
-        </p>
-        <button
-          onClick={onClose}
-          className="mt-6 rounded-lg bg-[#2D6A4F] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332]"
-        >
-          Return Home
-        </button>
-      </motion.div>
-    );
-  }
 
   return (
     <div className="flex w-full flex-col gap-6 px-4 pb-6">
@@ -144,7 +113,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
         transition={{ delay: 0.2 }}
       >
         <form
-          onSubmit={(e) => { e.preventDefault(); setPlaced(true); }}
+          onSubmit={(e) => { e.preventDefault(); onClose(); router.push("/checkout"); }}
           className="space-y-3"
           aria-label="Checkout form"
         >
@@ -193,7 +162,7 @@ export default function StepReview({ plan, frequency, items, onUpdateItems, onBa
             type="submit"
             className="mt-2 w-full rounded-lg bg-[#2D6A4F] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1B4332]"
           >
-            Place Order
+            Continue to Checkout
           </button>
 
           <button
