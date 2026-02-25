@@ -36,8 +36,8 @@ export default function Footer() {
 
   return (
     <footer>
-      {/* Curved top edge SVG */}
-      <div className="relative">
+      {/* Curved top edge SVG — overlaps banner above */}
+      <div className="relative -mt-24 sm:-mt-32">
         <svg
           viewBox="0 0 1440 120"
           className="-mb-1 block w-full"

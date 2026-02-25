@@ -102,7 +102,7 @@ export default function FAQ() {
 
       </div>
 
-      {/* Full-width CTA banner with image background */}
+      {/* Full-width CTA banner with image background — extends behind footer curve */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -113,10 +113,10 @@ export default function FAQ() {
         <img
           src="https://www.vmcdn.ca/f/files/guelphtoday/spotlight-photos/jls-home-hardware/adobestock_228347985.jpeg"
           alt="Family dinner"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
         <div className="absolute inset-0 bg-[#1B4332]/70" />
-        <div className="relative z-10 flex flex-col items-center px-6 py-20 text-center sm:py-24">
+        <div className="relative z-10 flex flex-col items-center px-6 pb-40 pt-20 text-center sm:pb-48 sm:pt-24">
           <p className="font-sans font-extrabold text-2xl text-white sm:text-3xl lg:text-4xl">
             Still have questions?
           </p>
