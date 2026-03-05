@@ -6,6 +6,7 @@ import StatsBar from "@/components/sections/StatsBar";
 import ProteinCategories from "@/components/sections/ProteinCategories";
 import Standards from "@/components/sections/Standards";
 import RecipeCards from "@/components/sections/RecipeCards";
+import CuratedBoxes from "@/components/sections/CuratedBoxes";
 import WhyMembers from "@/components/sections/WhyMembers";
 import ProteinPicker from "@/components/sections/ProteinPicker";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -32,7 +33,10 @@ export default function Home() {
       {/* 4. Recipe Cards (scrolling row) */}
       <RecipeCards />
 
-      {/* 5. Why 400,000+ Members Choose Us */}
+      {/* 5. Ready-Made Curated Boxes */}
+      <CuratedBoxes />
+
+      {/* 6. Why 400,000+ Members Choose Us */}
       <WhyMembers />
 
       {/* 6. Protein Picker */}

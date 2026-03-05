@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext, useCallback } from "react";
+import { useState, useEffect, useMemo, createContext, useContext, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
-import type { CartItem, Plan } from "@/lib/products";
+import { PLANS, ADDON_CATALOG, type CartItem, type Plan, type AddonItem, type SignupMode } from "@/lib/products";
 import StepPath from "./StepPath";
 import StepProducts from "./StepProducts";
 import StepReview from "./StepReview";
@@ -13,20 +13,30 @@ import StepReview from "./StepReview";
 interface SignupOptions {
   skipToStep?: number;
   prefilterCategory?: string;
+  mode?: SignupMode;
+  prebuiltItems?: CartItem[];
 }
 
 interface SignupCtx {
   open: (preset?: "subscribe" | "onetime") => void;
   openSignup: (options?: SignupOptions) => void;
-  closeSignup: () => void;
+  closeSignup: () => void;       // Full reset + close (checkout complete)
+  abandonSignup: () => void;     // Close without resetting (preserve cart)
+  resumeSignup: () => void;      // Re-open with preserved state
   isOpen: boolean;
+  hasCart: boolean;               // true if user has selected a plan
+  cartItemCount: number;          // total items in cart
 }
 
 const SignupContext = createContext<SignupCtx>({
   open: () => {},
   openSignup: () => {},
   closeSignup: () => {},
+  abandonSignup: () => {},
+  resumeSignup: () => {},
   isOpen: false,
+  hasCart: false,
+  cartItemCount: 0,
 });
 export const useSignup = () => useContext(SignupContext);
 
@@ -51,22 +61,26 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [frequency, setFrequency] = useState("Every Four Weeks");
   const [prefilterCategory, setPrefilterCategory] = useState<string | undefined>();
+  const [mode, setMode] = useState<SignupMode>("subscription");
+  const [addons, setAddons] = useState<AddonItem[]>([]);
 
   useEffect(() => {
     document.body.style.overflow = show ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [show]);
 
+  /* ── Derived cart state ── */
+  const hasCart = plan !== null;
+  const cartItemCount = useMemo(
+    () => items.reduce((sum, i) => sum + i.qty, 0),
+    [items],
+  );
+
   useEffect(() => {
     if (!show) return;
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setShow(false);
-        setStep(1);
-        setPlan(null);
-        setItems([]);
-        setFrequency("Every Four Weeks");
-        setPrefilterCategory(undefined);
+        setShow(false); // abandon — preserve state
       }
     };
     window.addEventListener("keydown", handleEsc);
@@ -79,6 +93,8 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
     setItems([]);
     setFrequency("Every Four Weeks");
     setPrefilterCategory(undefined);
+    setMode("subscription");
+    setAddons([]);
   }, []);
 
   const open = useCallback(() => {
@@ -88,6 +104,16 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
 
   const openSignup = useCallback((options?: SignupOptions) => {
     resetState();
+    if (options?.mode) {
+      setMode(options.mode);
+    }
+    if (options?.prebuiltItems && options.prebuiltItems.length > 0) {
+      setItems(options.prebuiltItems);
+      // Auto-select the smallest plan that fits the items
+      const totalQty = options.prebuiltItems.reduce((s, i) => s + i.qty, 0);
+      const matchingPlan = PLANS.find((p) => p.proteins >= totalQty) ?? PLANS[PLANS.length - 1];
+      setPlan(matchingPlan);
+    }
     if (options?.prefilterCategory) {
       setPrefilterCategory(options.prefilterCategory);
     }
@@ -97,13 +123,44 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
     setShow(true);
   }, [resetState]);
 
-  const close = useCallback(() => {
+  /* Close + full reset (checkout complete or explicit "start over") */
+  const closeSignup = useCallback(() => {
     setShow(false);
     resetState();
   }, [resetState]);
 
+  /* Close without reset — preserves plan, items, step for later resume */
+  const abandonSignup = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  /* Re-open the drawer at whatever step the user left off */
+  const resumeSignup = useCallback(() => {
+    setShow(true);
+  }, []);
+
+  /* Toggle an addon on/off */
+  const toggleAddon = useCallback((addon: AddonItem) => {
+    setAddons((prev) =>
+      prev.find((a) => a.id === addon.id)
+        ? prev.filter((a) => a.id !== addon.id)
+        : [...prev, addon],
+    );
+  }, []);
+
   return (
-    <SignupContext.Provider value={{ open, openSignup, closeSignup: close, isOpen: show }}>
+    <SignupContext.Provider
+      value={{
+        open,
+        openSignup,
+        closeSignup,
+        abandonSignup,
+        resumeSignup,
+        isOpen: show,
+        hasCart,
+        cartItemCount,
+      }}
+    >
       {children}
 
       <AnimatePresence>
@@ -117,7 +174,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm"
-              onClick={close}
+              onClick={abandonSignup}
               aria-hidden="true"
             />
 
@@ -178,7 +235,7 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
 
                 {/* Close */}
                 <button
-                  onClick={close}
+                  onClick={abandonSignup}
                   className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-[#2D6A4F]/5"
                   aria-label="Close signup"
                 >
@@ -201,8 +258,10 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                       <StepPath
                         selectedPlan={plan}
                         frequency={frequency}
+                        mode={mode}
                         onSelectPlan={setPlan}
                         onSelectFrequency={setFrequency}
+                        onSetMode={setMode}
                         onContinue={() => setStep(2)}
                       />
                     )}
@@ -224,9 +283,14 @@ export function SignupProvider({ children }: { children: React.ReactNode }) {
                         plan={plan}
                         frequency={frequency}
                         items={items}
+                        mode={mode}
+                        addons={addons}
+                        onToggleAddon={toggleAddon}
+                        addonCatalog={ADDON_CATALOG}
                         onUpdateItems={setItems}
                         onBack={() => setStep(2)}
-                        onClose={close}
+                        onChangePlan={() => setStep(1)}
+                        onClose={closeSignup}
                       />
                     )}
                   </motion.div>

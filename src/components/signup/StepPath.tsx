@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { PLANS, type Plan } from "@/lib/products";
+import { PLANS, type Plan, type SignupMode } from "@/lib/products";
 
 const FREE_OFFERS = [
   {
@@ -33,8 +33,10 @@ const FREQS = [
 interface Props {
   selectedPlan: Plan | null;
   frequency: string;
+  mode: SignupMode;
   onSelectPlan: (plan: Plan) => void;
   onSelectFrequency: (freq: string) => void;
+  onSetMode: (mode: SignupMode) => void;
   onContinue: () => void;
 }
 
@@ -47,11 +49,12 @@ const fadeUp = {
   }),
 };
 
-export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSelectFrequency, onContinue }: Props) {
+export default function StepPath({ selectedPlan, frequency, mode, onSelectPlan, onSelectFrequency, onSetMode, onContinue }: Props) {
   const [freqOpen, setFreqOpen] = useState(false);
   const [offerIdx, setOfferIdx] = useState(0);
   const freqRef = useRef<HTMLDivElement>(null);
 
+  const isOnetime = mode === "onetime";
   const offer = FREE_OFFERS[offerIdx];
   const prevOffer = () => setOfferIdx((i) => (i - 1 + FREE_OFFERS.length) % FREE_OFFERS.length);
   const nextOffer = () => setOfferIdx((i) => (i + 1) % FREE_OFFERS.length);
@@ -77,7 +80,7 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         animate={{ opacity: 1, y: 0 }}
         className="text-center font-sans font-bold text-xl text-text-dark"
       >
-        Choose Your Box
+        {isOnetime ? "Choose Your One-Time Box" : "Choose Your Box"}
       </motion.h2>
 
       {/* Plan cards — 2-column grid, left column spans 1 card, right column spans 2 */}
@@ -134,119 +137,135 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         })}
       </div>
 
-      {/* Frequency — compact inline dropdown */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.25 }}
-        className="mt-5"
-        ref={freqRef}
-      >
-        <div className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3">
-          <div>
-            <p className="text-xs font-medium text-text-muted">Delivery frequency</p>
-            <p className="text-sm font-semibold text-text-dark">{activeFreq.label}</p>
-          </div>
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setFreqOpen(!freqOpen)}
-              className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-[#2D6A4F] transition-colors hover:bg-[#2D6A4F]/5"
-            >
-              Change <ChevronDown size={14} className={`transition-transform ${freqOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {/* Dropdown */}
-            {freqOpen && (
-              <div className="absolute right-0 top-full z-10 mt-1 w-44 rounded-lg border border-border bg-white py-1 shadow-lg">
-                {FREQS.map((f) => (
-                  <button
-                    key={f.value}
-                    onClick={() => { onSelectFrequency(f.value); setFreqOpen(false); }}
-                    className={`flex w-full items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[#2D6A4F]/5 ${
-                      frequency === f.value ? "font-semibold text-[#2D6A4F]" : "text-text-dark"
-                    }`}
-                  >
-                    {f.label}
-                    {frequency === f.value && <Check size={14} className="text-[#2D6A4F]" />}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-        <p className="mt-1.5 text-center text-[11px] text-text-muted">
-          Pause or cancel anytime — free shipping always
-        </p>
-      </motion.div>
-
-      {/* Free offer CTA — cycles through 3 offers */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.28 }}
-        className="mt-5 overflow-hidden rounded-xl border border-[#2D6A4F]/20 bg-[#2D6A4F]/5"
-      >
-        <div className="flex items-center gap-3 px-3.5 py-3">
-          {/* Cycling image */}
-          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={offerIdx}
-                src={offer.image}
-                alt={offer.title}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </AnimatePresence>
-          </div>
-          <div className="flex-1 min-w-0">
-            {/* Title row with prev/next arrows */}
-            <div className="flex items-center gap-1">
-              <button onClick={prevOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Previous offer">
-                <ChevronLeft size={14} />
+      {/* Frequency — only for subscription mode */}
+      {!isOnetime && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="mt-5"
+          ref={freqRef}
+        >
+          <div className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3">
+            <div>
+              <p className="text-xs font-medium text-text-muted">Delivery frequency</p>
+              <p className="text-sm font-semibold text-text-dark">{activeFreq.label}</p>
+            </div>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setFreqOpen(!freqOpen)}
+                className="flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-[#2D6A4F] transition-colors hover:bg-[#2D6A4F]/5"
+              >
+                Change <ChevronDown size={14} className={`transition-transform ${freqOpen ? "rotate-180" : ""}`} />
               </button>
+
+              {/* Dropdown */}
+              {freqOpen && (
+                <div className="absolute right-0 top-full z-10 mt-1 w-44 rounded-lg border border-border bg-white py-1 shadow-lg">
+                  {FREQS.map((f) => (
+                    <button
+                      key={f.value}
+                      onClick={() => { onSelectFrequency(f.value); setFreqOpen(false); }}
+                      className={`flex w-full items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[#2D6A4F]/5 ${
+                        frequency === f.value ? "font-semibold text-[#2D6A4F]" : "text-text-dark"
+                      }`}
+                    >
+                      {f.label}
+                      {frequency === f.value && <Check size={14} className="text-[#2D6A4F]" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <p className="mt-1.5 text-center text-[11px] text-text-muted">
+            Pause or cancel anytime — free shipping always
+          </p>
+        </motion.div>
+      )}
+
+      {/* One-time mode disclaimer */}
+      {isOnetime && (
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="mt-4 text-center text-[11px] text-text-muted"
+        >
+          One-time purchase — free shipping included
+        </motion.p>
+      )}
+
+      {/* Free offer CTA — only for subscription mode */}
+      {!isOnetime && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.28 }}
+          className="mt-5 overflow-hidden rounded-xl border border-[#2D6A4F]/20 bg-[#2D6A4F]/5"
+        >
+          <div className="flex items-center gap-3 px-3.5 py-3">
+            {/* Cycling image */}
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
               <AnimatePresence mode="wait">
-                <motion.p
+                <motion.img
                   key={offerIdx}
-                  initial={{ opacity: 0, x: 8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -8 }}
+                  src={offer.image}
+                  alt={offer.title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex-1 text-xs font-bold text-[#1B4332] truncate"
-                >
-                  {offer.emoji} {offer.title}
-                </motion.p>
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
               </AnimatePresence>
-              <button onClick={nextOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Next offer">
-                <ChevronRight size={14} />
-              </button>
             </div>
-            {/* Dots indicator */}
-            <div className="mt-1 flex items-center gap-1">
-              {FREE_OFFERS.map((_, i) => (
-                <span key={i} className={`h-1 rounded-full transition-all duration-200 ${i === offerIdx ? "w-3 bg-[#2D6A4F]" : "w-1 bg-[#2D6A4F]/25"}`} />
-              ))}
-              <span className="ml-1 text-[10px] leading-snug text-[#1B4332]/70">
-                Enter email to claim your free offer.
-              </span>
-            </div>
-            <div className="mt-1.5 flex gap-1.5">
-              <input
-                type="email"
-                placeholder="you@email.com"
-                className="h-7 flex-1 min-w-0 rounded-md border border-[#2D6A4F]/20 bg-white px-2.5 text-[11px] text-text-dark placeholder:text-text-muted/50 focus:border-[#2D6A4F] focus:outline-none"
-              />
-              <button className="h-7 shrink-0 rounded-md bg-[#2D6A4F] px-3 text-[11px] font-semibold text-white transition-colors hover:bg-[#1B4332]">
-                Claim
-              </button>
+            <div className="flex-1 min-w-0">
+              {/* Title row with prev/next arrows */}
+              <div className="flex items-center gap-1">
+                <button onClick={prevOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Previous offer">
+                  <ChevronLeft size={14} />
+                </button>
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={offerIdx}
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex-1 text-xs font-bold text-[#1B4332] truncate"
+                  >
+                    {offer.emoji} {offer.title}
+                  </motion.p>
+                </AnimatePresence>
+                <button onClick={nextOffer} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#2D6A4F]/60 transition-colors hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]" aria-label="Next offer">
+                  <ChevronRight size={14} />
+                </button>
+              </div>
+              {/* Dots indicator */}
+              <div className="mt-1 flex items-center gap-1">
+                {FREE_OFFERS.map((_, i) => (
+                  <span key={i} className={`h-1 rounded-full transition-all duration-200 ${i === offerIdx ? "w-3 bg-[#2D6A4F]" : "w-1 bg-[#2D6A4F]/25"}`} />
+                ))}
+                <span className="ml-1 text-[10px] leading-snug text-[#1B4332]/70">
+                  Enter email to claim your free offer.
+                </span>
+              </div>
+              <div className="mt-1.5 flex gap-1.5">
+                <input
+                  type="email"
+                  placeholder="you@email.com"
+                  className="h-7 flex-1 min-w-0 rounded-md border border-[#2D6A4F]/20 bg-white px-2.5 text-[11px] text-text-dark placeholder:text-text-muted/50 focus:border-[#2D6A4F] focus:outline-none"
+                />
+                <button className="h-7 shrink-0 rounded-md bg-[#2D6A4F] px-3 text-[11px] font-semibold text-white transition-colors hover:bg-[#1B4332]">
+                  Claim
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      )}
 
       {/* Continue button */}
       <motion.div
@@ -262,9 +281,21 @@ export default function StepPath({ selectedPlan, frequency, onSelectPlan, onSele
         >
           Choose Proteins →
         </button>
-        <button className="text-xs font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline">
-          Or try a one-time box
-        </button>
+        {isOnetime ? (
+          <button
+            onClick={() => onSetMode("subscription")}
+            className="text-xs font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline"
+          >
+            Switch to subscription
+          </button>
+        ) : (
+          <button
+            onClick={() => onSetMode("onetime")}
+            className="text-xs font-medium text-[#2D6A4F] underline underline-offset-2 hover:no-underline"
+          >
+            Or try a one-time box
+          </button>
+        )}
       </motion.div>
     </div>
   );

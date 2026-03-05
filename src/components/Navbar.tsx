@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useSignup } from "@/components/signup/SignupFlow";
 
@@ -15,7 +15,7 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
-  const { openSignup } = useSignup();
+  const { openSignup, resumeSignup, hasCart, cartItemCount } = useSignup();
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -112,6 +112,29 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
             >
               Sign In
             </a>
+
+            {/* Cart icon — visible when user has an in-progress subscription */}
+            <AnimatePresence>
+              {hasCart && (
+                <motion.button
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                  onClick={() => resumeSignup()}
+                  className="relative flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#1B4332]/5"
+                  aria-label={`Resume subscription – ${cartItemCount} item${cartItemCount !== 1 ? "s" : ""} in box`}
+                >
+                  <ShoppingBag size={22} className="text-[#1B4332]" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#2D6A4F] text-[10px] font-bold text-white">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </motion.button>
+              )}
+            </AnimatePresence>
+
             <button
               onClick={() => openSignup()}
               className="rounded-lg bg-[#2D6A4F] px-6 py-2.5 text-[14px] font-medium text-white transition-colors duration-200 hover:bg-[#1B4332]"
@@ -120,14 +143,41 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#1B4332]/5 lg:hidden"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
+          {/* Mobile: cart + hamburger */}
+          <div className="flex items-center gap-1 lg:hidden">
+            {/* Mobile cart icon */}
+            <AnimatePresence>
+              {hasCart && (
+                <motion.button
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    resumeSignup();
+                  }}
+                  className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#1B4332]/5"
+                  aria-label={`Resume subscription – ${cartItemCount} item${cartItemCount !== 1 ? "s" : ""} in box`}
+                >
+                  <ShoppingBag size={22} className="text-[#1B4332]" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute right-0 top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#2D6A4F] text-[9px] font-bold text-white">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </motion.button>
+              )}
+            </AnimatePresence>
+
+            {/* Hamburger */}
+            <button
+              type="button"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors hover:bg-[#1B4332]/5"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen ? (
                 <motion.span
@@ -152,6 +202,7 @@ export default function Navbar({ promoVisible }: { promoVisible: boolean }) {
               )}
             </AnimatePresence>
           </button>
+          </div>
         </nav>
       </header>
 

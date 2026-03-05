@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Minus, Plus, AlertTriangle } from "lucide-react";
-import { PRODUCTS, type CartItem, type Plan } from "@/lib/products";
+import { Minus, Plus, AlertTriangle, ChevronUp, X as XIcon, ArrowUpRight } from "lucide-react";
+import { PRODUCTS, getUpgradeSavings, type CartItem, type Plan } from "@/lib/products";
 
 const FILTERS = ["All", "Beef", "Chicken", "Pork", "Seafood", "Ready to Cook"] as const;
 
@@ -27,6 +27,7 @@ export default function StepProducts({
   initialCategory,
 }: Props) {
   const [filter, setFilter] = useState<string>(initialCategory ?? "All");
+  const [boxOpen, setBoxOpen] = useState(false);
 
   useEffect(() => {
     if (initialCategory) setFilter(initialCategory);
@@ -62,6 +63,7 @@ export default function StepProducts({
   };
 
   const progressPct = Math.min((totalItems / maxItems) * 100, 100);
+  const upgrade = getUpgradeSavings(plan);
 
   return (
     <div className="flex w-full flex-col px-4">
@@ -90,6 +92,33 @@ export default function StepProducts({
           </button>
         </span>
       </motion.div>
+
+      {/* Persistent upgrade banner */}
+      {upgrade && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.12 }}
+          className="mt-3 rounded-xl bg-gradient-to-r from-[#2D6A4F]/5 to-[#005A73]/5 border border-[#2D6A4F]/15 px-4 py-3"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs font-bold text-[#1B4332]">
+                Upgrade to {upgrade.nextPlan.name.replace(" Signature Box", "")}
+              </p>
+              <p className="text-[11px] text-text-muted">
+                Get {upgrade.extraProteins} more proteins &amp; save {upgrade.savingsPerMeal}/meal
+              </p>
+            </div>
+            <button
+              onClick={onUpgrade}
+              className="flex shrink-0 items-center gap-1 rounded-lg bg-[#2D6A4F] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1B4332] transition-colors"
+            >
+              Upgrade <ArrowUpRight size={12} />
+            </button>
+          </div>
+        </motion.div>
+      )}
 
       {/* Box full banner */}
       <AnimatePresence>
@@ -230,13 +259,53 @@ export default function StepProducts({
         </AnimatePresence>
       </div>
 
-      {/* Sticky bottom bar with progress — sticks within the drawer scroll container */}
+      {/* Sticky bottom bar with progress + expandable "Your Box" summary */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
         className="sticky bottom-0 z-50 -mx-4 mt-4 border-t border-border bg-background backdrop-blur-sm"
       >
+        {/* Expandable "Your Box" summary panel */}
+        <AnimatePresence>
+          {boxOpen && items.length > 0 && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="overflow-hidden border-b border-border"
+            >
+              <div className="max-h-[240px] overflow-y-auto px-4 py-3">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-sm font-bold text-text-dark">Your Box</h4>
+                  <span className="text-xs text-text-muted">{totalItems}/{maxItems} proteins</span>
+                </div>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li key={item.id} className="flex items-center gap-2">
+                      <div className="h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+                        <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-text-dark truncate">{item.name}</p>
+                        <p className="text-[10px] text-text-muted">Qty: {item.qty}</p>
+                      </div>
+                      <button
+                        onClick={() => setQty(item.id, 0)}
+                        className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-warm text-text-muted hover:bg-red-50 hover:text-red-400 transition-colors"
+                        aria-label={`Remove ${item.name}`}
+                      >
+                        <XIcon size={10} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Progress bar */}
         <div className="h-1 w-full bg-border">
           <motion.div
@@ -255,9 +324,17 @@ export default function StepProducts({
           </button>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-text-muted">
-              {totalItems}/{maxItems} · <span className="font-bold text-[#2D6A4F]">${plan.price}</span>
-            </span>
+            {/* Tappable item count to toggle box summary */}
+            <button
+              onClick={() => items.length > 0 && setBoxOpen(!boxOpen)}
+              className="flex items-center gap-1 text-xs text-text-muted hover:text-text-dark transition-colors"
+              aria-label="Toggle box summary"
+            >
+              <ChevronUp size={12} className={`transition-transform duration-200 ${boxOpen ? "rotate-180" : ""}`} />
+              <span>{totalItems}/{maxItems}</span>
+              <span>·</span>
+              <span className="font-bold text-[#2D6A4F]">${plan.price}</span>
+            </button>
             <button
               onClick={onContinue}
               disabled={totalItems !== maxItems}

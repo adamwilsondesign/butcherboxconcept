@@ -47,3 +47,102 @@ export const PRODUCTS: Product[] = [
   { id: 14, name: "Wild Shrimp", weight: "1 lb", description: "Sweet, firm, incredibly versatile", category: "Seafood", sourceBadge: "Wild-Caught", image: IMAGES.lobster },
   { id: 15, name: "Steak Tips", weight: "1 lb", description: "Pre-marinated, dinner in 15 min", category: "Ready to Cook", sourceBadge: "Grass-Fed Marinated", image: IMAGES.barbacoa },
 ];
+
+/* ── Signup mode ── */
+
+export type SignupMode = "subscription" | "onetime";
+
+/* ── Add-on items (cross-sell) ── */
+
+export interface AddonItem {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  retailPrice: number;
+  offerPrice: number;
+}
+
+export const ADDON_CATALOG: AddonItem[] = [
+  {
+    id: "hexclad-knife-set",
+    name: "HexClad 6pc Damascus Steel Knife Set",
+    description: "67-layer Japanese Damascus steel, 60 Rockwell hardness. Limited edition.",
+    image: "https://hexclad.ca/cdn/shop/files/HexClad_7pcMasterSeriesJapaneseDamascusSteelKnifeSetWithKnifeBlock_BNKFKB07-ST-G10_Overhead_Black_1023_2.png?crop=center&height=1024&v=1753994714&width=1024",
+    retailPrice: 634,
+    offerPrice: 534,
+  },
+];
+
+/* ── Curated boxes ── */
+
+export interface CuratedBox {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  image: string;
+  items: { productId: number; qty: number }[];
+  planId: "medium" | "large" | "xl";
+}
+
+export const CURATED_BOXES: CuratedBox[] = [
+  {
+    id: "bbq",
+    name: "The BBQ Box",
+    tagline: "Fire up the grill",
+    description: "Everything you need for the ultimate backyard cookout.",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80",
+    items: [
+      { productId: 1, qty: 1 },
+      { productId: 2, qty: 1 },
+      { productId: 10, qty: 1 },
+      { productId: 15, qty: 1 },
+      { productId: 3, qty: 1 },
+      { productId: 9, qty: 1 },
+    ],
+    planId: "medium",
+  },
+  {
+    id: "seafood",
+    name: "The Seafood Box",
+    tagline: "Ocean to table",
+    description: "Wild-caught favorites for the seafood lover.",
+    image: "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=800&q=80",
+    items: [
+      { productId: 12, qty: 2 },
+      { productId: 13, qty: 2 },
+      { productId: 14, qty: 2 },
+    ],
+    planId: "medium",
+  },
+  {
+    id: "steak-lovers",
+    name: "Steak Lovers Box",
+    tagline: "Premium cuts only",
+    description: "Six premium steaks for the true carnivore.",
+    image: "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=800&q=80",
+    items: [
+      { productId: 1, qty: 2 },
+      { productId: 2, qty: 2 },
+      { productId: 4, qty: 2 },
+    ],
+    planId: "medium",
+  },
+];
+
+/* ── Upgrade savings helper ── */
+
+export function getUpgradeSavings(currentPlan: Plan): { nextPlan: Plan; savingsPerMeal: string; extraProteins: number } | null {
+  const idx = PLANS.findIndex((p) => p.id === currentPlan.id);
+  if (idx >= PLANS.length - 1) return null;
+  const next = PLANS[idx + 1];
+  const currentPerMeal = parseFloat(currentPlan.perMeal.replace(/[^0-9.]/g, ""));
+  const nextPerMeal = parseFloat(next.perMeal.replace(/[^0-9.]/g, ""));
+  const savings = (currentPerMeal - nextPerMeal).toFixed(2);
+  return {
+    nextPlan: next,
+    savingsPerMeal: `$${savings}`,
+    extraProteins: next.proteins - currentPlan.proteins,
+  };
+}

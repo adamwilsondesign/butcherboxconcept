@@ -74,7 +74,10 @@ export default function Footer() {
               >
                 Get Started Today
               </button>
-              <button className="rounded-lg border-2 border-white px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-white hover:text-[#005A73]">
+              <button
+                onClick={() => openSignup({ mode: "onetime" })}
+                className="rounded-lg border-2 border-white px-8 py-3.5 text-base font-medium text-white transition-colors duration-200 hover:bg-white hover:text-[#005A73]"
+              >
                 Send a Gift
               </button>
             </div>
@@ -105,12 +108,21 @@ export default function Footer() {
                 <ul className="mt-5 space-y-2">
                   {links.map((link) => (
                     <li key={link}>
-                      <a
-                        href="#"
-                        className="text-sm text-white/60 transition-colors hover:text-white"
-                      >
-                        {link}
-                      </a>
+                      {link === "Gift Boxes" ? (
+                        <button
+                          onClick={() => openSignup({ mode: "onetime" })}
+                          className="text-sm text-white/60 transition-colors hover:text-white"
+                        >
+                          {link}
+                        </button>
+                      ) : (
+                        <a
+                          href="#"
+                          className="text-sm text-white/60 transition-colors hover:text-white"
+                        >
+                          {link}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>
